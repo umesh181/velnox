@@ -70,36 +70,70 @@ export default function Nav() {
     }
   }, [open]);
 
+  // hamburger bars morph into an X when the menu is open
+  const bar =
+    'absolute left-[10px] right-[10px] h-[2px] transition-[transform,top,background] duration-[400ms] ease-brand';
+
   return (
     <>
-      <header className={`nav ${scrolled ? 'is-scrolled' : ''}`} ref={navRef}>
-        <a href="#top" className="nav__logo" aria-label="Velnox home">
-          Velnox<sup>®</sup>
+      <header
+        className={`fixed left-0 right-0 top-0 z-[100] flex h-nav -translate-y-full items-center justify-between px-gutter transition-[background,backdrop-filter] duration-[400ms] ${
+          scrolled
+            ? 'border-b border-line bg-[rgba(242,239,233,0.75)] backdrop-blur-[14px]'
+            : ''
+        }`}
+        ref={navRef}
+      >
+        <a
+          href="#top"
+          className="z-[102] text-[20px] font-bold uppercase tracking-[-0.03em]"
+          aria-label="Velnox home"
+        >
+          Velnox<sup className="text-[10px]">®</sup>
         </a>
-        <nav className="nav__links" aria-label="Primary">
+        <nav
+          className="flex gap-9 max-[900px]:hidden"
+          aria-label="Primary"
+        >
           {LINKS.map((l) => (
-            <a key={l.href} href={l.href}>
+            <a
+              key={l.href}
+              href={l.href}
+              className="relative py-1 text-[14px] font-medium after:absolute after:bottom-0 after:left-0 after:h-[1.5px] after:w-full after:origin-right after:scale-x-0 after:bg-ink after:transition-transform after:duration-[400ms] after:ease-brand after:content-[''] hover:after:origin-left hover:after:scale-x-100"
+            >
               {l.label}
             </a>
           ))}
         </nav>
-        <a href="#contact" className="btn-pill">
+        <a href="#contact" className="btn-pill max-[900px]:hidden">
           <span>Start a project</span>
         </a>
         <button
-          className={`nav__burger ${open ? 'is-open' : ''}`}
+          className="relative z-[102] hidden h-11 w-11 max-[900px]:block"
           onClick={() => setOpen((v) => !v)}
           aria-label="Toggle menu"
           aria-expanded={open}
         >
-          <i />
-          <i />
+          <i
+            className={`${bar} ${
+              open ? 'top-[21px] rotate-45 bg-bg' : 'top-[17px] bg-ink'
+            }`}
+          />
+          <i
+            className={`${bar} ${
+              open ? 'top-[21px] -rotate-45 bg-bg' : 'top-[25px] bg-ink'
+            }`}
+          />
         </button>
       </header>
 
-      <div className="menu-overlay" ref={overlayRef}>
+      {/* menu-overlay__link stays as a GSAP selector hook for the link reveal */}
+      <div
+        className="menu-overlay fixed inset-0 z-[101] flex flex-col justify-center bg-ink px-gutter text-bg [clip-path:inset(0_0_100%_0)] invisible"
+        ref={overlayRef}
+      >
         <button
-          className="menu-overlay__close"
+          className="absolute right-gutter top-4 grid h-12 w-12 place-items-center rounded-full border border-[rgba(242,239,233,0.35)] text-[18px] leading-none text-bg active:bg-[rgba(242,239,233,0.15)]"
           onClick={() => setOpen(false)}
           aria-label="Close menu"
         >
@@ -107,14 +141,18 @@ export default function Nav() {
         </button>
         <ul>
           {[...LINKS, { label: 'Contact', href: '#contact' }].map((l) => (
-            <li className="menu-overlay__link" key={l.href}>
-              <a href={l.href} onClick={() => setOpen(false)}>
+            <li className="menu-overlay__link block overflow-hidden" key={l.href}>
+              <a
+                href={l.href}
+                onClick={() => setOpen(false)}
+                className="inline-block text-[clamp(44px,10vw,80px)] font-bold uppercase leading-[1.15] tracking-[-0.03em] active:text-accent-soft"
+              >
                 {l.label}
               </a>
             </li>
           ))}
         </ul>
-        <div className="menu-overlay__foot">
+        <div className="absolute bottom-8 left-gutter right-gutter flex justify-between text-[13px] text-cream-55">
           <span>hello@velnox.studio</span>
           <span>© 2026 Velnox</span>
         </div>

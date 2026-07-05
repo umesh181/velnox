@@ -91,29 +91,39 @@ export default function About() {
   }, []);
 
   return (
-    <section className="section container" id="studio" ref={rootRef}>
-      <div className="section__head">
+    <section
+      className="mx-auto w-full px-gutter py-[clamp(90px,14vh,180px)]"
+      id="studio"
+      ref={rootRef}
+    >
+      <div className="mb-[clamp(48px,8vh,96px)] flex items-end justify-between gap-6">
         <p className="eyebrow">The Studio</p>
-        <span className="section__count">(01)</span>
+        <span className="text-[13px] tabular-nums text-ink-40 whitespace-nowrap">
+          (01)
+        </span>
       </div>
 
-      <p className="about__statement">
+      {/* about__statement + .word are GSAP scrub-reveal hooks */}
+      <p className="about__statement max-w-[20ch] text-[clamp(26px,4.2vw,64px)] font-medium leading-[1.22] tracking-[-0.025em]">
         {STATEMENT.map((w, i) => (
-          <span key={i} className="word">
+          <span key={i} className="word inline-block opacity-[0.14]">
             {w.t}
             {i < STATEMENT.length - 1 ? ' ' : ''}
           </span>
         ))}
       </p>
 
-      <div className="stats">
+      {/* stats / stat / stat__num are GSAP counter + reveal hooks */}
+      <div className="stats mt-[clamp(64px,10vh,120px)] grid grid-cols-4 gap-6 border-t border-line max-[900px]:grid-cols-2 max-[900px]:gap-x-6 max-[900px]:gap-y-10">
         {STATS.map((s) => (
-          <div className="stat" key={s.label}>
-            <div className="stat__num">
+          <div className="stat border-t-2 border-transparent pt-7" key={s.label}>
+            <div className="stat__num text-[clamp(44px,5.5vw,88px)] font-bold leading-none tracking-[-0.04em] tabular-nums">
               <span data-count={s.num}>0</span>
-              <span className="sym">{s.suffix}</span>
+              <span className="text-accent">{s.suffix}</span>
             </div>
-            <div className="stat__label">{s.label}</div>
+            <div className="mt-3 text-[13px] uppercase tracking-[0.12em] text-ink-60">
+              {s.label}
+            </div>
           </div>
         ))}
       </div>

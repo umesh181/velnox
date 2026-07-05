@@ -73,29 +73,39 @@ export default function Process() {
   }, []);
 
   return (
-    <section className="process section" id="process" ref={rootRef}>
-      <div className="container">
-        <div className="section__head">
+    <section
+      className="bg-bg-soft py-[clamp(90px,14vh,180px)]"
+      id="process"
+      ref={rootRef}
+    >
+      <div className="mx-auto w-full px-gutter">
+        <div className="mb-[clamp(48px,8vh,96px)] flex items-end justify-between gap-6">
           <div>
-            <p className="eyebrow" style={{ marginBottom: 24 }}>
-              How we work
-            </p>
-            <h2 className="section__title">
+            <p className="eyebrow mb-6">How we work</p>
+            <h2 className="section__title max-w-[14ch] text-[clamp(38px,6vw,92px)] font-bold uppercase leading-[1.02] tracking-[-0.04em]">
               From brief to brilliant
             </h2>
           </div>
-          <span className="section__count">(04)</span>
+          <span className="text-[13px] tabular-nums text-ink-40 whitespace-nowrap">
+            (04)
+          </span>
         </div>
 
-        <div className="process__wrap">
-          <div className="process__track">
+        {/* process__wrap / process__track / process-card are horizontal-pin GSAP hooks */}
+        <div className="process__wrap overflow-hidden">
+          <div className="process__track flex gap-[clamp(20px,3vw,40px)] will-change-transform max-[900px]:flex-col">
             {STEPS.map((s, i) => (
-              <div className="process-card" key={s.title}>
-                <span className="process-card__idx">
+              <div
+                className="process-card flex w-[clamp(300px,34vw,480px)] flex-none flex-col gap-[clamp(40px,8vh,120px)] rounded-card border border-line bg-bg p-[clamp(28px,3vw,44px)] max-[900px]:w-full max-[900px]:gap-8"
+                key={s.title}
+              >
+                <span className="text-[15px] font-semibold tabular-nums text-accent">
                   {String(i + 1).padStart(2, '0')} / 04
                 </span>
-                <h3 className="process-card__title">{s.title}</h3>
-                <p className="process-card__body">{s.body}</p>
+                <h3 className="text-[clamp(30px,3.4vw,52px)] font-bold uppercase leading-none tracking-[-0.03em]">
+                  {s.title}
+                </h3>
+                <p className="text-[15px] leading-[1.65] text-ink-60">{s.body}</p>
               </div>
             ))}
           </div>

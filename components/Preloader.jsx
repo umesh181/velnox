@@ -69,19 +69,35 @@ export default function Preloader() {
 
   if (done) return null;
 
+  const letter = 'inline-block translate-y-[110%]';
+
   return (
-    <div className="preloader" ref={rootRef}>
-      <div className="preloader__brand" aria-label="Velnox">
-        <span>V</span>
-        <span>E</span>
-        <span>L</span>
-        <span>N</span>
-        <span>O</span>
-        <span>X</span>
-        <span className="reg">®</span>
+    <div
+      className="fixed inset-0 z-[500] flex items-center justify-center bg-ink text-bg will-change-transform"
+      ref={rootRef}
+    >
+      {/* preloader__brand — GSAP selects the letter spans + .reg by class */}
+      <div
+        className="preloader__brand flex overflow-hidden pt-[0.08em] pr-[0.12em] text-[clamp(48px,10vw,140px)] font-bold uppercase leading-none tracking-[-0.04em]"
+        aria-label="Velnox"
+      >
+        <span className={letter}>V</span>
+        <span className={letter}>E</span>
+        <span className={letter}>L</span>
+        <span className={letter}>N</span>
+        <span className={letter}>O</span>
+        <span className={letter}>X</span>
+        <span className="reg inline-block self-start ml-[0.08em] mt-[0.28em] text-[0.3em] tracking-normal opacity-0">
+          ®
+        </span>
       </div>
-      <div className="preloader__tag">Digital Agency</div>
-      <div className="preloader__count" ref={countRef}>
+      <div className="absolute left-gutter bottom-[28px] text-[12px] uppercase tracking-[0.18em] text-cream-45">
+        Digital Agency
+      </div>
+      <div
+        className="absolute right-gutter bottom-[28px] text-[clamp(14px,1.6vw,20px)] tabular-nums text-[rgba(242,239,233,0.65)]"
+        ref={countRef}
+      >
         0%
       </div>
     </div>

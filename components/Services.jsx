@@ -160,39 +160,56 @@ export default function Services() {
   }, []);
 
   return (
-    <section className="services" id="services" ref={rootRef}>
-      <div className="section container">
-        <div className="section__head">
+    <section
+      className="services mx-[clamp(8px,1.2vw,20px)] rounded-[clamp(24px,4vw,48px)] bg-ink text-bg"
+      id="services"
+      ref={rootRef}
+    >
+      <div className="mx-auto w-full px-gutter py-[clamp(90px,14vh,180px)]">
+        <div className="mb-[clamp(48px,8vh,96px)] flex items-end justify-between gap-6">
           <div>
-            <p className="eyebrow" style={{ marginBottom: 24 }}>
-              What we do
-            </p>
-            <h2 className="section__title">
+            <p className="eyebrow mb-6 text-cream-55">What we do</p>
+            <h2 className="section__title max-w-[14ch] text-[clamp(38px,6vw,92px)] font-bold uppercase leading-[1.02] tracking-[-0.04em]">
               Every service your brand needs
             </h2>
           </div>
-          <span className="section__count">(02)</span>
+          <span className="text-[13px] tabular-nums text-cream-40 whitespace-nowrap">
+            (02)
+          </span>
         </div>
 
+        {/* services__list + service-row* are GSAP reveal / cursor-preview hooks */}
         <div className="services__list">
           {SERVICES.map((s, i) => (
-            <a href="#contact" className="service-row" key={s.title}>
-              <div className="service-row__bg" />
+            <a
+              href="#contact"
+              className="service-row group relative grid grid-cols-[80px_1fr_auto] items-center gap-6 overflow-hidden border-t border-[rgba(242,239,233,0.16)] py-[clamp(28px,4vh,44px)] last:border-b last:border-[rgba(242,239,233,0.16)] max-[900px]:grid-cols-[44px_1fr_auto] max-[900px]:gap-[14px]"
+              key={s.title}
+            >
+              <div className="service-row__bg absolute inset-0 origin-top scale-y-0 bg-accent" />
               <div
-                className="service-row__media"
+                className="service-row__media pointer-events-none absolute left-0 top-1/2 z-[2] grid aspect-[4/3] w-[clamp(220px,19vw,300px)] place-items-center overflow-hidden rounded-[14px] opacity-0 will-change-transform max-[900px]:hidden [@media(hover:none)]:hidden"
                 style={{ background: s.gradient }}
                 aria-hidden="true"
               >
-                <span>{s.title}</span>
+                <span className="text-[12px] font-semibold uppercase tracking-[0.2em] text-[rgba(255,255,255,0.92)]">
+                  {s.title}
+                </span>
               </div>
-              <span className="service-row__idx">
+              <span className="relative z-[1] text-[14px] tabular-nums text-cream-40 transition-colors duration-[400ms] group-hover:text-[rgba(255,255,255,0.85)]">
                 {String(i + 1).padStart(2, '0')}
               </span>
-              <span className="service-row__main">
-                <span className="service-row__title">{s.title}</span>
-                <span className="service-row__tags">{s.tags}</span>
+              <span className="relative z-[1] flex flex-col gap-[10px]">
+                <span className="text-[clamp(30px,4.6vw,68px)] font-bold uppercase leading-none tracking-[-0.03em] transition-transform duration-500 ease-brand group-hover:translate-x-4">
+                  {s.title}
+                </span>
+                <span className="text-[13px] tracking-[0.06em] text-[rgba(242,239,233,0.5)] transition-colors duration-[400ms] group-hover:text-[rgba(255,255,255,0.85)]">
+                  {s.tags}
+                </span>
               </span>
-              <span className="service-row__arrow">↗</span>
+              <span className="relative z-[1] grid h-[52px] w-[52px] place-items-center rounded-full border border-[rgba(242,239,233,0.25)] text-[20px] transition-[background,transform,border-color] duration-500 ease-brand group-hover:rotate-45 group-hover:border-white group-hover:bg-white group-hover:text-ink max-[900px]:h-10 max-[900px]:w-10 max-[900px]:text-[16px]">
+                ↗
+              </span>
             </a>
           ))}
         </div>

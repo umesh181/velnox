@@ -14,10 +14,10 @@ const ITEMS = [
 
 function Row() {
   return (
-    <span className="marquee__item">
+    <span className="inline-flex items-center gap-12 text-[clamp(18px,2.4vw,28px)] font-semibold uppercase tracking-[-0.02em]">
       {ITEMS.map((s) => (
-        <span key={s} className="marquee__pair">
-          {s} <span className="star"> ✦ </span>
+        <span key={s}>
+          {s} <span className="text-[0.8em] text-accent"> ✦ </span>
         </span>
       ))}
     </span>
@@ -40,8 +40,14 @@ export default function Marquee() {
   }, []);
 
   return (
-    <div className="marquee" aria-hidden="true">
-      <div className="marquee__track" ref={trackRef}>
+    <div
+      className="overflow-hidden whitespace-nowrap border-y border-line bg-bg py-[18px]"
+      aria-hidden="true"
+    >
+      <div
+        className="inline-flex items-center gap-12 pr-12 will-change-transform"
+        ref={trackRef}
+      >
         <Row />
         <Row />
         <Row />

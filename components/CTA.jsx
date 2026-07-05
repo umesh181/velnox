@@ -3,34 +3,9 @@
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import useMagnetic from './useMagnetic';
 
 gsap.registerPlugin(ScrollTrigger);
-
-function useMagnetic(ref, strength = 0.35) {
-  useEffect(() => {
-    const el = ref.current;
-    if (!el || window.matchMedia('(hover: none)').matches) return;
-
-    const xTo = gsap.quickTo(el, 'x', { duration: 0.6, ease: 'elastic.out(1, 0.4)' });
-    const yTo = gsap.quickTo(el, 'y', { duration: 0.6, ease: 'elastic.out(1, 0.4)' });
-
-    const onMove = (e) => {
-      const r = el.getBoundingClientRect();
-      xTo((e.clientX - (r.left + r.width / 2)) * strength);
-      yTo((e.clientY - (r.top + r.height / 2)) * strength);
-    };
-    const onLeave = () => {
-      xTo(0);
-      yTo(0);
-    };
-    el.addEventListener('mousemove', onMove);
-    el.addEventListener('mouseleave', onLeave);
-    return () => {
-      el.removeEventListener('mousemove', onMove);
-      el.removeEventListener('mouseleave', onLeave);
-    };
-  }, [ref, strength]);
-}
 
 export default function CTA() {
   const rootRef = useRef(null);
@@ -72,10 +47,18 @@ export default function CTA() {
   }, []);
 
   return (
-    <section className="cta container" id="contact" ref={rootRef}>
-      <div className="cta__ring" aria-hidden="true" />
-      <p className="eyebrow cta__eyebrow">Your move</p>
-      <h2 className="cta__title">
+    <section
+      className="relative mx-auto w-full overflow-hidden px-gutter py-[clamp(120px,20vh,240px)] text-center"
+      id="contact"
+      ref={rootRef}
+    >
+      {/* cta__ring / cta__title / cta__actions are GSAP scrub + reveal hooks */}
+      <div
+        className="cta__ring pointer-events-none absolute left-1/2 top-1/2 aspect-square w-[clamp(340px,44vw,640px)] -translate-x-1/2 -translate-y-1/2 rounded-full border border-line"
+        aria-hidden="true"
+      />
+      <p className="eyebrow mb-7 justify-center">Your move</p>
+      <h2 className="cta__title text-[clamp(48px,9vw,150px)] font-bold uppercase leading-[0.98] tracking-[-0.045em]">
         <span className="mask-line">
           <span>Let’s build</span>
         </span>
@@ -85,7 +68,7 @@ export default function CTA() {
           </span>
         </span>
       </h2>
-      <div className="cta__actions">
+      <div className="cta__actions mt-[clamp(36px,6vh,64px)] flex flex-wrap items-center justify-center gap-[18px]">
         <a href="mailto:hello@velnox.studio" className="btn-big" ref={magRef}>
           <span>hello@velnox.studio ↗</span>
         </a>

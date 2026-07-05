@@ -92,54 +92,68 @@ export default function Footer() {
     return () => ctx.revert();
   }, []);
 
+  const heading =
+    'mb-[18px] text-[12px] font-semibold uppercase tracking-[0.18em] text-cream-40';
+  const link =
+    "relative block w-fit py-[5px] text-[15px] text-[rgba(242,239,233,0.85)] after:absolute after:bottom-[2px] after:left-0 after:h-px after:w-full after:origin-right after:scale-x-0 after:bg-bg after:transition-transform after:duration-[400ms] after:ease-brand after:content-[''] hover:after:origin-left hover:after:scale-x-100";
+
   return (
-    <footer className="footer" ref={rootRef}>
-      <div className="footer__top">
+    <footer
+      className="relative overflow-hidden rounded-t-[clamp(24px,4vw,48px)] bg-ink px-gutter pt-[clamp(64px,10vh,120px)] text-bg"
+      ref={rootRef}
+    >
+      <div className="relative z-[1] grid grid-cols-[1.4fr_1fr_1fr_1fr] gap-10 pb-[clamp(48px,8vh,90px)] max-[900px]:grid-cols-2">
         <div>
-          <p className="footer__blurb">
+          <p className="max-w-[300px] text-[15px] leading-[1.6] text-[rgba(242,239,233,0.6)]">
             Velnox is a digital agency crafting websites, brands and products
             with precision — for teams that refuse to blend in.
           </p>
         </div>
-        <div className="footer__col">
-          <h5>Sitemap</h5>
-          <a href="#top">Home</a>
-          <a href="#work">Work</a>
-          <a href="#services">Services</a>
-          <a href="#studio">Studio</a>
-          <a href="#process">Process</a>
+        <div>
+          <h5 className={heading}>Sitemap</h5>
+          <a href="#top" className={link}>Home</a>
+          <a href="#work" className={link}>Work</a>
+          <a href="#services" className={link}>Services</a>
+          <a href="#studio" className={link}>Studio</a>
+          <a href="#process" className={link}>Process</a>
         </div>
-        <div className="footer__col">
-          <h5>Socials</h5>
-          <a href="#" target="_blank" rel="noreferrer">Instagram</a>
-          <a href="#" target="_blank" rel="noreferrer">LinkedIn</a>
-          <a href="#" target="_blank" rel="noreferrer">Twitter / X</a>
-          <a href="#" target="_blank" rel="noreferrer">Dribbble</a>
+        <div>
+          <h5 className={heading}>Socials</h5>
+          <a href="#" target="_blank" rel="noreferrer" className={link}>Instagram</a>
+          <a href="#" target="_blank" rel="noreferrer" className={link}>LinkedIn</a>
+          <a href="#" target="_blank" rel="noreferrer" className={link}>Twitter / X</a>
+          <a href="#" target="_blank" rel="noreferrer" className={link}>Dribbble</a>
         </div>
-        <div className="footer__col">
-          <h5>Contact</h5>
-          <a href="mailto:hello@velnox.studio">hello@velnox.studio</a>
-          <a href="#contact">Start a project</a>
+        <div>
+          <h5 className={heading}>Contact</h5>
+          <a href="mailto:hello@velnox.studio" className={link}>hello@velnox.studio</a>
+          <a href="#contact" className={link}>Start a project</a>
         </div>
       </div>
 
-      <div className="footer__bar">
+      <div className="relative z-[1] flex flex-wrap justify-between gap-4 border-t border-[rgba(242,239,233,0.15)] py-[22px] text-[13px] text-cream-45">
         <span>© 2026 Velnox. All rights reserved.</span>
         <span>Designed & built by Velnox</span>
       </div>
 
-      <div className="footer__mark" aria-hidden="true">
-        Velnox<span className="reg">®</span>
+      {/* footer__mark is a GSAP parallax hook */}
+      <div
+        className="footer__mark relative z-[1] mb-[-0.08em] whitespace-nowrap text-center text-[clamp(80px,17.5vw,300px)] font-bold uppercase leading-[0.76] tracking-[-0.04em] text-bg select-none"
+        aria-hidden="true"
+      >
+        Velnox<span className="align-super text-[0.18em]">®</span>
       </div>
 
-      <div className="footer__pop" aria-hidden="true">
+      <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden" aria-hidden="true">
         {POP_CARDS.map((c) => (
           <div
             key={c.id}
-            className="footer__pop-card"
+            className="footer__pop-card absolute bottom-[-240px] grid aspect-[3/2] w-[clamp(130px,13vw,210px)] place-items-center rounded-[12px] shadow-[0_18px_50px_rgba(0,0,0,0.45)] will-change-transform"
             style={{ background: c.gradient, left: c.left }}
           >
-            <span>{c.label}</span>
+            <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[rgba(255,255,255,0.9)]">
+              {c.label}
+            </span>
           </div>
         ))}
       </div>
