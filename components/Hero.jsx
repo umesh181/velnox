@@ -47,10 +47,10 @@ export default function Hero() {
     window.addEventListener('velnox:loaded', play, { once: true });
     const fallback = setTimeout(play, 4800);
 
-    // subtle parallax + fade on the WebGL orb so type stays the focus
+    // particle field falls away and fades as you scroll into the page
     const ctx = gsap.context(() => {
       gsap.to(root.querySelector('.hero__canvas'), {
-        yPercent: 18,
+        yPercent: 22,
         opacity: 0,
         ease: 'none',
         scrollTrigger: {
@@ -83,27 +83,28 @@ export default function Hero() {
             <span>We craft digital</span>
           </span>
           <span className="mask-line">
-            <span className="indent">experiences that</span>
+            <span>experiences that</span>
           </span>
           <span className="mask-line">
-            <span>move brands forward</span>
+            <span>
+              move brands <em className="accent">forward</em>
+            </span>
           </span>
         </h1>
 
-        <div className="hero__row">
-          <p className="hero__sub">
-            Velnox is a digital agency partnering with ambitious teams to
-            design, build and scale websites and products that win attention —
-            and keep it.
-          </p>
-          <div className="hero__cta">
-            <a href="#contact" className="btn-big">
-              <span>Start a project ↗</span>
-            </a>
-            <a href="#work" className="btn-outline">
-              <span>See our work</span>
-            </a>
-          </div>
+        <p className="hero__sub">
+          Velnox is a digital agency partnering with ambitious teams to design,
+          build and scale websites and products that win attention — and keep
+          it.
+        </p>
+
+        <div className="hero__cta">
+          <a href="#contact" className="btn-big">
+            <span>Start a project ↗</span>
+          </a>
+          <a href="#work" className="btn-outline">
+            <span>See our work</span>
+          </a>
         </div>
       </div>
 
