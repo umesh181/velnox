@@ -13,15 +13,15 @@ const STEPS = [
   },
   {
     title: 'Design',
-    body: 'High-fidelity, production-ready design in days — prototyped, validated, and stress-tested before a single line of code.',
+    body: 'High-fidelity, production-ready design in days - prototyped, validated, and stress-tested before a single line of code.',
   },
   {
     title: 'Build',
-    body: 'Clean, scalable code with performance budgets baked in. Reviewed, tested and staged — no black boxes, no surprises.',
+    body: 'Clean, scalable code with performance budgets baked in. Reviewed, tested and staged - no black boxes, no surprises.',
   },
   {
     title: 'Launch & Scale',
-    body: 'We ship it live, watch the metrics, and stay in it — iterating, optimising and growing the product as partners.',
+    body: 'We ship it live, watch the metrics, and stay in it - iterating, optimising and growing the product as partners.',
   },
 ];
 

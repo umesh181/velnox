@@ -2,6 +2,7 @@ import Preloader from '@/components/Preloader';
 import SmoothScroll from '@/components/SmoothScroll';
 import Nav from '@/components/Nav';
 import Hero from '@/components/Hero';
+import VideoSection from '@/components/VideoSection';
 import Marquee from '@/components/Marquee';
 import About from '@/components/About';
 import Services from '@/components/Services';
@@ -19,6 +20,7 @@ export default function Home() {
       <main>
         <Hero />
         <Marquee />
+        <VideoSection />
         <About />
         <Services />
         <Work />

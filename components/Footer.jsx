@@ -11,8 +11,8 @@ const GRADIENTS = [
   { label: 'Fernhaus', gradient: 'linear-gradient(135deg, #14231c, #3f6b4f)' },
   { label: 'Kinetiq', gradient: 'linear-gradient(135deg, #1a1a1a, #4a4a52)' },
   { label: 'Solace', gradient: 'linear-gradient(135deg, #c2410c, #f97316)' },
-  { label: 'Nimbus', gradient: 'linear-gradient(135deg, #0c4a6e, #0ea5e9)' },
-  { label: 'Oreum', gradient: 'linear-gradient(135deg, #4c1d95, #7c3aed)' },
+  { label: 'Sphoorthi', gradient: 'linear-gradient(135deg, #9ea09e, #8c8e8c)' },
+  { label: 'Sri Gowri', gradient: 'linear-gradient(135deg, #9a9da0, #838689)' },
 ];
 
 /* 12 confetti cards spread across the footer width */
@@ -106,7 +106,7 @@ export default function Footer() {
         <div>
           <p className="max-w-[300px] text-[15px] leading-[1.6] text-[rgba(242,239,233,0.6)]">
             Velnox is a digital agency crafting websites, brands and products
-            with precision — for teams that refuse to blend in.
+            with precision - for teams that refuse to blend in.
           </p>
         </div>
         <div>
