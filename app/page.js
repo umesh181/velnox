@@ -1,15 +1,15 @@
-import Preloader from '@/components/Preloader';
-import SmoothScroll from '@/components/SmoothScroll';
-import Nav from '@/components/Nav';
-import Hero from '@/components/Hero';
-import VideoSection from '@/components/VideoSection';
-import Marquee from '@/components/Marquee';
-import About from '@/components/About';
-import Services from '@/components/Services';
-import Work from '@/components/Work';
-import Process from '@/components/Process';
-import CTA from '@/components/CTA';
-import Footer from '@/components/Footer';
+import Preloader from '@/components/layout/Preloader';
+import SmoothScroll from '@/components/layout/SmoothScroll';
+import Nav from '@/components/layout/Nav';
+import Hero from '@/components/sections/Hero';
+import VideoSection from '@/components/sections/VideoSection';
+import Marquee from '@/components/sections/Marquee';
+import About from '@/components/sections/About';
+import Services from '@/components/sections/Services';
+import Work from '@/components/sections/Work';
+import Process from '@/components/sections/Process';
+import CTA from '@/components/sections/CTA';
+import Footer from '@/components/layout/Footer';
 
 export default function Home() {
   return (

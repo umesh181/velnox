@@ -3,27 +3,9 @@
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { PROCESS_STEPS } from '@/data/process-steps';
 
 gsap.registerPlugin(ScrollTrigger);
-
-const STEPS = [
-  {
-    title: 'Discover',
-    body: 'One sharp kickoff to lock scope, goals and success metrics. We ask the hard questions early so nothing surprises us later.',
-  },
-  {
-    title: 'Design',
-    body: 'High-fidelity, production-ready design in days - prototyped, validated, and stress-tested before a single line of code.',
-  },
-  {
-    title: 'Build',
-    body: 'Clean, scalable code with performance budgets baked in. Reviewed, tested and staged - no black boxes, no surprises.',
-  },
-  {
-    title: 'Launch & Scale',
-    body: 'We ship it live, watch the metrics, and stay in it - iterating, optimising and growing the product as partners.',
-  },
-];
 
 export default function Process() {
   const rootRef = useRef(null);
@@ -94,7 +76,7 @@ export default function Process() {
         {/* process__wrap / process__track / process-card are horizontal-pin GSAP hooks */}
         <div className="process__wrap overflow-hidden">
           <div className="process__track flex gap-[clamp(20px,3vw,40px)] will-change-transform max-[900px]:flex-col">
-            {STEPS.map((s, i) => (
+            {PROCESS_STEPS.map((s, i) => (
               <div
                 className="process-card flex w-[clamp(300px,34vw,480px)] flex-none flex-col gap-[clamp(40px,8vh,120px)] rounded-card border border-line bg-bg p-[clamp(28px,3vw,44px)] max-[900px]:w-full max-[900px]:gap-8"
                 key={s.title}

@@ -3,21 +3,13 @@
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { FOOTER_GRADIENTS } from '@/data/footer-gradients';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const GRADIENTS = [
-  { label: 'Auralis', gradient: 'linear-gradient(135deg, #3440f0, #8f9bff)' },
-  { label: 'Fernhaus', gradient: 'linear-gradient(135deg, #14231c, #3f6b4f)' },
-  { label: 'Kinetiq', gradient: 'linear-gradient(135deg, #1a1a1a, #4a4a52)' },
-  { label: 'Solace', gradient: 'linear-gradient(135deg, #c2410c, #f97316)' },
-  { label: 'Sphoorthi', gradient: 'linear-gradient(135deg, #9ea09e, #8c8e8c)' },
-  { label: 'Sri Gowri', gradient: 'linear-gradient(135deg, #9a9da0, #838689)' },
-];
-
 /* 12 confetti cards spread across the footer width */
 const POP_CARDS = Array.from({ length: 12 }, (_, i) => ({
-  ...GRADIENTS[i % GRADIENTS.length],
+  ...FOOTER_GRADIENTS[i % FOOTER_GRADIENTS.length],
   left: `${4 + (i * 88) / 11}%`,
   id: i,
 }));
@@ -106,7 +98,7 @@ export default function Footer() {
         <div>
           <p className="max-w-[300px] text-[15px] leading-[1.6] text-[rgba(242,239,233,0.6)]">
             Velnox is a digital agency crafting websites, brands and products
-            with precision - for teams that refuse to blend in.
+            with precision, for teams that refuse to blend in.
           </p>
         </div>
         <div>
@@ -119,10 +111,10 @@ export default function Footer() {
         </div>
         <div>
           <h5 className={heading}>Socials</h5>
-          <a href="#" target="_blank" rel="noreferrer" className={link}>Instagram</a>
-          <a href="#" target="_blank" rel="noreferrer" className={link}>LinkedIn</a>
-          <a href="#" target="_blank" rel="noreferrer" className={link}>Twitter / X</a>
-          <a href="#" target="_blank" rel="noreferrer" className={link}>Dribbble</a>
+          <a href="https://instagram.com" target="_blank" rel="noreferrer" className={link}>Instagram</a>
+          <a href="https://linkedin.com" target="_blank" rel="noreferrer" className={link}>LinkedIn</a>
+          <a href="https://x.com" target="_blank" rel="noreferrer" className={link}>Twitter / X</a>
+          <a href="https://dribbble.com" target="_blank" rel="noreferrer" className={link}>Dribbble</a>
         </div>
         <div>
           <h5 className={heading}>Contact</h5>

@@ -4,11 +4,13 @@ import { useEffect, useRef } from 'react';
 import dynamic from 'next/dynamic';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import useMagnetic from './useMagnetic';
+import useMagnetic from '@/hooks/useMagnetic';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const HeroCanvas = dynamic(() => import('./HeroCanvas'), { ssr: false });
+const HeroCanvas = dynamic(() => import('@/components/effects/HeroCanvas'), {
+  ssr: false,
+});
 
 export default function Hero() {
   const rootRef = useRef(null);
@@ -39,11 +41,12 @@ export default function Hero() {
           [root.querySelector('.hero__sub'), root.querySelector('.hero__cta')],
           { opacity: 1, duration: 0.9, stagger: 0.12, ease: 'power2.out' },
           '-=0.5'
+        )
+        .to(
+          root.querySelector('.hero__scroll'),
+          { opacity: 1, duration: 0.8 },
+          '-=0.4'
         );
-      const scrollEl = root.querySelector('.hero__scroll');
-      if (scrollEl) {
-        tl.to(scrollEl, { opacity: 1, duration: 0.8 }, '-=0.4');
-      }
     };
 
     window.addEventListener('velnox:loaded', play, { once: true });
@@ -84,7 +87,7 @@ export default function Hero() {
 
       <div className="relative z-[1] flex flex-col items-center">
         <p className="hero__eyebrow eyebrow mb-[clamp(20px,4vh,40px)] opacity-0">
-          Digital agency - Worldwide
+          Digital agency · Worldwide
         </p>
 
         <h1 className="hero__title max-w-[15ch] text-[clamp(40px,6.4vw,96px)] font-bold uppercase leading-[0.98] tracking-[-0.045em] max-[900px]:text-[clamp(40px,10.4vw,64px)] max-[900px]:leading-[1.02]">
@@ -95,15 +98,15 @@ export default function Hero() {
             <span>experiences that</span>
           </span>
           <span className="mask-line">
-            <span className="whitespace-nowrap">
-              move brands <span className="text-accent">forward</span>
+            <span>
+              move brands <em className="not-italic text-accent">forward</em>
             </span>
           </span>
         </h1>
 
         <p className="hero__sub mt-[clamp(20px,4vh,36px)] max-w-[460px] text-[clamp(15px,1.3vw,18px)] leading-[1.6] text-ink-60 opacity-0">
           Velnox is a digital agency partnering with ambitious teams to design,
-          build and scale websites and products that win attention - and keep
+          build and scale websites and products that win attention and keep
           it.
         </p>
 
@@ -121,6 +124,9 @@ export default function Hero() {
         </div>
       </div>
 
+      <div className="hero__scroll absolute bottom-[26px] left-1/2 z-[1] -translate-x-1/2 text-[11px] uppercase tracking-[0.22em] text-ink-40 opacity-0">
+        Scroll
+      </div>
     </section>
   );
 }

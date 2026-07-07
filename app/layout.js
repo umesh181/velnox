@@ -1,9 +1,9 @@
 import './globals.css';
 
 export const metadata = {
-  title: 'Velnox® - Digital Experiences That Move Brands Forward',
+  title: 'Velnox® | Digital Experiences That Move Brands Forward',
   description:
-    'Velnox is a digital agency crafting websites, brands and products with precision. Design, development, e-commerce and growth - under one roof.',
+    'Velnox is a digital agency crafting websites, brands and products with precision. Design, development, e-commerce and growth under one roof.',
 };
 
 export default function RootLayout({ children }) {
