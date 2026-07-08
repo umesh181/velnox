@@ -117,7 +117,9 @@ export default function Footer() {
         </div>
         <div>
           <h5 className={heading}>Contact</h5>
-          <a href="mailto:hello@velnox.studio" className={link}>hello@velnox.studio</a>
+          <a href="mailto:agencyvelnox@gmail.com" className={link}>agencyvelnox@gmail.com</a>
+          <a href="tel:+918121821738" className={link}>+91 81218 21738</a>
+          <a href="tel:+917995619431" className={link}>+91 79956 19431</a>
           <a href="#contact" className={link}>Start a project</a>
         </div>
       </div>

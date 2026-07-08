@@ -184,7 +184,7 @@ export default function Services() {
         <div className="mb-[clamp(48px,8vh,96px)] flex items-end justify-between gap-6">
           <div>
             <p className="eyebrow mb-6 text-cream-55">What we do</p>
-            <h2 className="section__title max-w-[14ch] text-[clamp(38px,6vw,92px)] font-bold uppercase leading-[1.02] tracking-[-0.04em]">
+            <h2 className="section__title max-w-[18ch] text-[clamp(32px,5vw,76px)] font-medium leading-[1.08] tracking-[-0.03em]">
               Every service your brand needs
             </h2>
           </div>

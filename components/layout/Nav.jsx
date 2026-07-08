@@ -153,7 +153,7 @@ export default function Nav() {
           ))}
         </ul>
         <div className="absolute bottom-8 left-gutter right-gutter flex justify-between text-[13px] text-cream-55">
-          <span>hello@velnox.studio</span>
+          <a href="mailto:agencyvelnox@gmail.com">agencyvelnox@gmail.com</a>
           <span>© 2026 Velnox</span>
         </div>
       </div>

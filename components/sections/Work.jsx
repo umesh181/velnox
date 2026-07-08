@@ -257,7 +257,7 @@ export default function Work() {
     >
       <div className="mb-[clamp(28px,4vh,48px)] flex items-end justify-between gap-6">
         <div>
-          <h2 className="section__title mb-6 max-w-[14ch] text-[clamp(38px,6vw,92px)] font-bold uppercase leading-[1.02] tracking-[-0.04em]">
+          <h2 className="section__title mb-6 max-w-[18ch] text-[clamp(32px,5vw,76px)] font-medium leading-[1.08] tracking-[-0.03em]">
             Projects with proof
           </h2>
           <p className="eyebrow">Selected work</p>
