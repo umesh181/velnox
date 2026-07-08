@@ -3,13 +3,12 @@
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { FOOTER_GRADIENTS } from '@/data/footer-gradients';
 
 gsap.registerPlugin(ScrollTrigger);
 
-/* 12 confetti cards spread across the footer width */
+/* 12 confetti cards with footer project images */
 const POP_CARDS = Array.from({ length: 12 }, (_, i) => ({
-  ...FOOTER_GRADIENTS[i % FOOTER_GRADIENTS.length],
+  image: `/images/footer_${(i % 10) + 1}.png`,
   left: `${4 + (i * 88) / 11}%`,
   id: i,
 }));
@@ -140,12 +139,16 @@ export default function Footer() {
         {POP_CARDS.map((c) => (
           <div
             key={c.id}
-            className="footer__pop-card absolute bottom-[-240px] grid aspect-[3/2] w-[clamp(130px,13vw,210px)] place-items-center rounded-[12px] shadow-[0_18px_50px_rgba(0,0,0,0.45)] will-change-transform"
-            style={{ background: c.gradient, left: c.left }}
+            className="footer__pop-card absolute bottom-[-240px] aspect-[3/2] w-[clamp(130px,13vw,210px)] overflow-hidden rounded-[12px] shadow-[0_18px_50px_rgba(0,0,0,0.45)] will-change-transform"
+            style={{ left: c.left }}
           >
-            <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[rgba(255,255,255,0.9)]">
-              {c.label}
-            </span>
+            <img
+              src={c.image}
+              alt=""
+              loading="lazy"
+              decoding="async"
+              className="h-full w-full object-cover"
+            />
           </div>
         ))}
       </div>

@@ -3,86 +3,156 @@
 import { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { PROJECTS, PROJECT_GRID_SPAN } from '@/data/projects';
+import { PROJECTS } from '@/data/projects';
 import WorkProjectModal from '@/components/sections/WorkProjectModal';
+import ScrambleText from '@/components/ui/ScrambleText';
+import { onSectionGoto, revealElements } from '@/lib/sectionReveal';
 
 gsap.registerPlugin(ScrollTrigger);
 
-function WorkCardMedia({ project }) {
-  const { mockups, gradient, mark, name, tags, size } = project;
+function WorkCardVisual({ project }) {
+  const { mockups, gradient } = project;
 
-  if (mockups?.single && size === 'b2') {
+  if (mockups?.laptop) {
     return (
-      <>
-        <div
-          className="absolute inset-x-0 top-0 bottom-[clamp(72px,18%,88px)] overflow-hidden"
-          style={{ background: gradient }}
-        >
+      <div
+        className="relative h-full w-full overflow-hidden rounded-card"
+        style={{ background: gradient }}
+      >
+        <div className="absolute inset-[7%] sm:inset-[9%]">
           <img
-            src={mockups.single}
-            alt={`${name} Mockup`}
+            src={mockups.laptop}
+            alt={`${project.name} laptop mockup`}
             loading="lazy"
             decoding="async"
-            className="h-full w-full object-contain object-top px-3 pt-3 transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+            className="work-card__img absolute left-[1%] top-[4%] h-auto w-[71%] object-contain drop-shadow-[0_32px_64px_rgba(17,56,47,0.14)]"
+          />
+          <img
+            src={mockups.mobile}
+            alt={`${project.name} mobile mockup`}
+            loading="lazy"
+            decoding="async"
+            className="work-card__img work-card__img--mobile absolute bottom-[2%] right-[1%] z-[2] h-auto w-[27%] object-contain drop-shadow-[0_36px_48px_rgba(17,56,47,0.18)]"
           />
         </div>
-        <div className="absolute inset-x-0 bottom-0 z-10 flex h-[clamp(72px,18%,88px)] flex-col justify-end bg-gradient-to-t from-black via-black/95 to-black/55 px-[22px] pb-[18px] pt-5">
-          <div className="flex items-end justify-between gap-4 text-white">
-            <span className="text-[clamp(16px,1.6vw,24px)] font-bold leading-tight tracking-[-0.02em]">
-              {name}
-            </span>
-            <span className="max-w-[46%] text-right text-[11px] leading-snug text-white/75">
-              {tags}
-            </span>
-          </div>
-        </div>
-      </>
+      </div>
     );
   }
 
   return (
-    <>
-      <div
-        className="absolute inset-[-8%] grid place-items-center will-change-transform transition-transform duration-700 [transition-timing-function:cubic-bezier(0.25,1,0.3,1)] group-hover:scale-[1.04]"
-        style={{ background: gradient }}
+    <div
+      className="relative h-full w-full overflow-hidden rounded-card bg-ink"
+      style={{ background: gradient }}
+    >
+      <img
+        src={mockups.single}
+        alt={`${project.name} mockup`}
+        loading="lazy"
+        decoding="async"
+        className="work-card__img absolute inset-0 h-full w-full object-contain object-top p-5 sm:p-8"
+      />
+    </div>
+  );
+}
+
+function WorkShowcaseItem({ project, index, imageRight, onCardClick }) {
+  const isExternal = !!project.url;
+  const hasMultipleOptions = project.mockups && project.url && project.designUrl;
+  const indexLabel = String(index + 1).padStart(2, '0');
+
+  const handleClick = (e) => {
+    if (hasMultipleOptions && onCardClick) {
+      e.preventDefault();
+      onCardClick(project);
+    }
+  };
+
+  return (
+    <article className="work-card group mb-[clamp(72px,10vh,112px)] last:mb-0">
+      <a
+        href={project.url || '#contact'}
+        target={isExternal && !hasMultipleOptions ? '_blank' : undefined}
+        rel={isExternal && !hasMultipleOptions ? 'noopener noreferrer' : undefined}
+        onClick={handleClick}
+        className="block"
       >
-        {mockups?.single ? (
-          <img
-            src={mockups.single}
-            alt={`${name} Mockup`}
-            loading="lazy"
-            decoding="async"
-            className="absolute inset-0 h-full w-full object-contain transition-transform duration-700 ease-out group-hover:scale-[1.04]"
-          />
-        ) : mockups?.laptop ? (
-          <div className="absolute inset-[8%] overflow-hidden">
-            <img
-              src={mockups.laptop}
-              alt={`${name} Laptop Mockup`}
-              className="absolute left-[4%] top-[10%] w-[68%] max-sm:w-[75%] max-sm:left-[2%] max-sm:top-[12%] h-auto object-contain transition-transform duration-700 ease-out group-hover:scale-[1.03] group-hover:-translate-y-1 drop-shadow-[0_15px_20px_rgba(0,0,0,0.15)]"
-            />
-            <img
-              src={mockups.mobile}
-              alt={`${name} Mobile Mockup`}
-              className="absolute right-[6%] bottom-[12%] max-sm:right-[4%] max-sm:bottom-[10%] w-[24%] max-sm:w-[28%] h-auto object-contain transition-transform duration-700 ease-out group-hover:scale-[1.05] group-hover:-translate-y-2 z-[2] drop-shadow-[0_20px_25px_rgba(0,0,0,0.3)]"
-            />
+        <div className="grid items-center gap-[clamp(28px,4vw,48px)] md:grid-cols-12">
+          <div
+            className={`relative md:col-span-7 ${
+              imageRight ? 'md:order-2 md:col-start-6' : 'md:col-start-1'
+            }`}
+          >
+            <div
+              className="work-card__frame relative aspect-[16/10] overflow-hidden rounded-card shadow-[0_18px_48px_rgba(20,20,18,0.06)]"
+              style={
+                project.theme === 'light'
+                  ? { background: project.gradient }
+                  : undefined
+              }
+            >
+              <div className="absolute inset-0 overflow-hidden rounded-card transition-transform duration-[1.1s] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.02]">
+                <WorkCardVisual project={project} />
+              </div>
+            </div>
           </div>
-        ) : (
-          <span className="text-[clamp(56px,7.5vw,130px)] font-bold uppercase tracking-[-0.05em] text-[rgba(255,255,255,0.9)] mix-blend-overlay">
-            {mark}
-          </span>
-        )}
-      </div>
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 z-[1] h-[40%] bg-gradient-to-t from-black/75 via-black/35 to-transparent" />
-      <div className="absolute bottom-[18px] left-[22px] right-[22px] z-[2] flex items-baseline justify-between gap-4 text-white">
-        <span className="text-[clamp(18px,1.8vw,26px)] font-bold tracking-[-0.02em]">
-          {name}
-        </span>
-        <span className="text-right text-[12px] text-[rgba(255,255,255,0.75)]">
-          {tags}
-        </span>
-      </div>
-    </>
+
+          <div
+            className={`flex flex-col justify-center md:col-span-5 ${
+              imageRight ? 'md:order-1 md:col-start-1' : 'md:col-start-8'
+            }`}
+          >
+            <div className="mb-6 flex items-end justify-between gap-6">
+              <span className="work-card__index relative inline-block leading-none">
+                <span
+                  className="block text-[clamp(52px,6vw,88px)] font-bold tracking-[-0.05em] text-ink/[0.08]"
+                  aria-hidden="true"
+                >
+                  {indexLabel}
+                </span>
+                <span
+                  className="work-card__index-fill absolute inset-0 block overflow-hidden text-[clamp(52px,6vw,88px)] font-bold tracking-[-0.05em] text-ink"
+                  aria-hidden="true"
+                >
+                  <span className="work-card__index-fill-inner block">{indexLabel}</span>
+                </span>
+                <span className="sr-only">{indexLabel}</span>
+              </span>
+              <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-ink-40">
+                {project.year || '2025'}
+              </span>
+            </div>
+
+            <p className="mb-4 text-[11px] font-semibold uppercase tracking-[0.16em] text-accent">
+              {project.tags}
+            </p>
+
+            <ScrambleText
+              text={project.name}
+              as="h3"
+              className="mb-5 text-[clamp(28px,3.6vw,48px)] font-bold uppercase leading-[1.02] tracking-[-0.035em]"
+            />
+
+            <p className="mb-8 max-w-[38ch] text-[clamp(15px,1.25vw,17px)] leading-[1.7] text-ink-60">
+              {project.description}
+            </p>
+
+            <span className="inline-flex items-center gap-3 text-[12px] font-semibold uppercase tracking-[0.16em]">
+              <span className="relative">
+                View project
+                <span className="absolute -bottom-1 left-0 h-px w-full origin-left scale-x-100 bg-ink transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-x-0" />
+                <span className="absolute -bottom-1 left-0 h-px w-full origin-right scale-x-0 bg-accent transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-x-100" />
+              </span>
+              <span
+                className="inline-block transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-x-1 group-hover:-translate-y-1"
+                aria-hidden="true"
+              >
+                ↗
+              </span>
+            </span>
+          </div>
+        </div>
+      </a>
+    </article>
   );
 }
 
@@ -95,18 +165,26 @@ export default function Work() {
     const root = rootRef.current;
     if (!root) return;
 
+    const off = onSectionGoto('work', () => {
+      revealElements([
+        root.querySelector('.section__title'),
+        root.querySelectorAll('.work-card'),
+      ]);
+    });
+
     const ctx = gsap.context(() => {
       gsap.from(root.querySelectorAll('.work-card'), {
-        y: 70,
+        y: 80,
         opacity: 0,
-        duration: 1,
-        stagger: 0.09,
+        duration: 1.1,
+        stagger: 0.14,
         ease: 'power3.out',
         scrollTrigger: {
-          trigger: root.querySelector('.work__grid'),
-          start: 'top 85%',
+          trigger: root.querySelector('.work__list'),
+          start: 'top 82%',
         },
       });
+
       gsap.from(root.querySelector('.section__title'), {
         y: 60,
         opacity: 0,
@@ -114,49 +192,45 @@ export default function Work() {
         ease: 'power3.out',
         scrollTrigger: { trigger: root, start: 'top 78%' },
       });
-    }, root);
 
-    const canHover =
-      window.matchMedia('(hover: hover)').matches && window.innerWidth > 900;
-    const cleanups = [];
-
-    if (canHover) {
       root.querySelectorAll('.work-card').forEach((card) => {
-        const media = card.querySelector('.work-card__media');
-        gsap.set(media, { transformPerspective: 900 });
-        const rxTo = gsap.quickTo(media, 'rotationX', {
-          duration: 0.5,
-          ease: 'power2',
-        });
-        const ryTo = gsap.quickTo(media, 'rotationY', {
-          duration: 0.5,
-          ease: 'power2',
-        });
+        const fill = card.querySelector('.work-card__index-fill');
+        if (!fill) return;
 
-        const onMove = (e) => {
-          const r = media.getBoundingClientRect();
-          const px = (e.clientX - r.left) / r.width;
-          const py = (e.clientY - r.top) / r.height;
-          rxTo((0.5 - py) * 10);
-          ryTo((px - 0.5) * 12);
-        };
-        const onLeave = () => {
-          rxTo(0);
-          ryTo(0);
-        };
-
-        card.addEventListener('mousemove', onMove);
-        card.addEventListener('mouseleave', onLeave);
-        cleanups.push(() => {
-          card.removeEventListener('mousemove', onMove);
-          card.removeEventListener('mouseleave', onLeave);
+        gsap.set(fill, { clipPath: 'inset(100% 0% 0% 0%)' });
+        gsap.to(fill, {
+          clipPath: 'inset(0% 0% 0% 0%)',
+          ease: 'none',
+          scrollTrigger: {
+            trigger: card,
+            start: 'top 78%',
+            end: 'top 38%',
+            scrub: 0.85,
+          },
         });
       });
-    }
+
+      root.querySelectorAll('.work-card__frame').forEach((frame) => {
+        gsap.fromTo(
+          frame,
+          { y: 24 },
+          {
+            y: -24,
+            ease: 'none',
+            scrollTrigger: {
+              trigger: frame,
+              start: 'top bottom',
+              end: 'bottom top',
+              scrub: 1.2,
+            },
+          }
+        );
+      });
+    }, root);
 
     return () => {
+      off();
       ctx.revert();
-      cleanups.forEach((fn) => fn());
     };
   }, []);
 
@@ -170,57 +244,44 @@ export default function Work() {
     }
   };
 
+  const handleCardClick = (project) => {
+    setActiveProject(project);
+    setViewingDesign(false);
+  };
+
   return (
     <section
-      className="mx-auto w-full px-gutter py-[clamp(90px,14vh,180px)]"
+      className="mx-auto w-full px-gutter pt-[clamp(90px,14vh,180px)] pb-[clamp(24px,4vh,40px)]"
       id="work"
       ref={rootRef}
     >
-      <div className="mb-[clamp(48px,8vh,96px)] flex items-end justify-between gap-6">
+      <div className="mb-[clamp(28px,4vh,48px)] flex items-end justify-between gap-6">
         <div>
-          <p className="eyebrow mb-6">Selected work</p>
-          <h2 className="section__title max-w-[14ch] text-[clamp(38px,6vw,92px)] font-bold uppercase leading-[1.02] tracking-[-0.04em]">
+          <h2 className="section__title mb-6 max-w-[14ch] text-[clamp(38px,6vw,92px)] font-bold uppercase leading-[1.02] tracking-[-0.04em]">
             Projects with proof
           </h2>
+          <p className="eyebrow">Selected work</p>
         </div>
         <span className="text-[13px] tabular-nums text-ink-40 whitespace-nowrap">
           (03)
         </span>
       </div>
 
-      <div className="work__grid grid grid-cols-12 auto-rows-[clamp(170px,26vh,260px)] gap-[clamp(14px,1.6vw,24px)] max-[780px]:auto-rows-auto">
-        {PROJECTS.map((p) => {
-          const isExternal = !!p.url;
-          const hasMultipleOptions = p.mockups && p.url;
-
-          const handleCardClick = (e) => {
-            if (hasMultipleOptions) {
-              e.preventDefault();
-              setActiveProject(p);
-              setViewingDesign(false);
-            }
-          };
-
-          return (
-            <a
-              href={p.url || '#contact'}
-              target={isExternal && !hasMultipleOptions ? '_blank' : undefined}
-              rel={isExternal && !hasMultipleOptions ? 'noopener noreferrer' : undefined}
-              onClick={handleCardClick}
-              className={`work-card group block [perspective:1000px] ${PROJECT_GRID_SPAN[p.size]} max-[780px]:col-[1/-1] max-[780px]:row-auto`}
-              key={p.name}
-            >
-              <div className="work-card__media relative h-full overflow-hidden rounded-card will-change-transform [transform-style:preserve-3d] max-[780px]:aspect-[4/3] max-[780px]:h-auto">
-                <WorkCardMedia project={p} />
-              </div>
-            </a>
-          );
-        })}
+      <div className="work__list mx-auto max-w-[min(1280px,100%)] px-[clamp(12px,3vw,48px)]">
+        {PROJECTS.map((project, index) => (
+          <WorkShowcaseItem
+            key={project.name}
+            project={project}
+            index={index}
+            imageRight={index % 2 === 1}
+            onCardClick={handleCardClick}
+          />
+        ))}
       </div>
 
-      <div className="mt-[clamp(56px,8vh,100px)] flex justify-center">
+      <div className="mt-[clamp(40px,6vh,64px)] flex justify-center">
         <a href="#contact" className="btn-outline">
-          <span>View all projects ↗</span>
+          <span>Start a project ↗</span>
         </a>
       </div>
 

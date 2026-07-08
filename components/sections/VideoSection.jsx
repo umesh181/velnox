@@ -30,21 +30,34 @@ export default function VideoSection() {
     };
 
     const ctx = gsap.context(() => {
+      const card = root.querySelector('.video-card');
+      if (!card) return;
+
+      gsap.set(card, { transformOrigin: 'center center' });
+
       gsap.fromTo(
-        root.querySelector('.video-card'),
+        card,
         {
-          scale: 0.92,
-          borderRadius: '48px',
+          scale: 0.9,
+          scaleX: 0.86,
+          opacity: 0.35,
+          y: 72,
+          borderRadius: '56px',
+          clipPath: 'inset(10% 8% round 56px)',
         },
         {
           scale: 1,
+          scaleX: 1,
+          opacity: 1,
+          y: 0,
           borderRadius: '24px',
-          ease: 'power1.out',
+          clipPath: 'inset(0% 0% round 24px)',
+          ease: 'power2.out',
           scrollTrigger: {
             trigger: root,
-            start: 'top 95%',
-            end: 'top 35%',
-            scrub: 1,
+            start: 'top 92%',
+            end: 'top 28%',
+            scrub: 1.15,
           },
         }
       );
@@ -87,21 +100,21 @@ export default function VideoSection() {
   return (
     <section
       ref={rootRef}
-      className="mx-auto w-full max-w-[1600px] px-gutter py-[clamp(24px,4vh,60px)]"
+      className="mx-auto w-full max-w-[1600px] px-gutter pt-[clamp(32px,5vh,56px)] pb-[clamp(40px,7vh,80px)]"
       id="showreel"
     >
       <div
         onClick={(e) => handlePlayPause(e)}
-        className="video-card group relative h-[clamp(550px,88vh,1050px)] w-full cursor-pointer overflow-hidden border border-line/10 bg-black shadow-2xl transition-all duration-500"
+        className="video-card group relative h-[clamp(560px,88vh,1080px)] w-full cursor-pointer overflow-hidden rounded-[24px] border border-line/10 bg-black shadow-2xl will-change-[transform,opacity,clip-path]"
       >
         <MediaVideo
           ref={videoRef}
-          className="h-full w-full object-cover transition-transform duration-[1.2s] cubic-bezier(0.16, 1, 0.3, 1) group-hover:scale-[1.03]"
+          className="h-full w-full object-cover object-center transition-transform duration-[1.2s] cubic-bezier(0.16, 1, 0.3, 1) group-hover:scale-[1.03]"
         />
 
-        <div className="absolute inset-0 bg-gradient-to-b from-black/25 via-transparent to-black/60 pointer-events-none z-[1]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/35 via-transparent to-black/20 pointer-events-none z-[1]" />
 
-        <div className="absolute top-5 left-5 right-16 z-[2] flex items-center gap-3 pointer-events-none sm:top-8 sm:left-8 sm:right-8">
+        <div className="absolute top-5 left-5 right-[4.5rem] z-[2] flex items-center gap-3 pointer-events-none sm:top-8 sm:left-8 sm:right-24">
           <span className="relative flex h-2.5 w-2.5 shrink-0">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
             <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-accent"></span>
@@ -130,23 +143,27 @@ export default function VideoSection() {
           )}
         </button>
 
-        <div className="absolute inset-x-0 bottom-0 z-[2] flex flex-col items-start gap-4 p-5 pb-6 pointer-events-none sm:flex-row sm:items-end sm:justify-between sm:p-8">
-          <div className="max-w-[34ch] text-white sm:max-w-[40ch]">
-            <p className="mb-2 text-[10px] font-semibold uppercase tracking-wider text-white/60 sm:text-xs">
-              Agency Showreel
-            </p>
-            <h4 className="text-[clamp(18px,5vw,36px)] font-bold uppercase leading-tight tracking-tight">
-              Crafting digital experiences that stand out
-            </h4>
-          </div>
+        <div className="absolute inset-x-0 bottom-0 z-[2] pointer-events-none">
+          <div className="bg-gradient-to-t from-black via-black/85 to-transparent px-5 pb-6 pt-20 sm:px-8 sm:pb-8 sm:pt-24">
+            <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between sm:gap-8">
+              <div className="min-w-0 max-w-full text-white sm:max-w-[min(52%,28rem)]">
+                <p className="mb-2 text-[10px] font-semibold uppercase tracking-wider text-white/60 sm:text-xs">
+                  Agency Showreel
+                </p>
+                <h4 className="text-[clamp(15px,2.8vw,30px)] font-bold uppercase leading-[1.12] tracking-tight text-balance">
+                  Crafting digital experiences that stand out
+                </h4>
+              </div>
 
-          <a
-            href="#services"
-            onClick={(e) => e.stopPropagation()}
-            className="btn-outline pointer-events-auto shrink-0 self-start rounded-full border-white/20 bg-black px-5 py-3 text-[10px] font-semibold uppercase tracking-wider text-white shadow-lg transition-all duration-300 select-none hover:bg-white hover:text-black sm:px-7 sm:py-[18px] sm:text-xs"
-          >
-            Explore Services →
-          </a>
+              <a
+                href="#services"
+                onClick={(e) => e.stopPropagation()}
+                className="btn-outline pointer-events-auto w-fit shrink-0 rounded-full border-white/20 bg-black/60 px-5 py-3 text-[10px] font-semibold uppercase tracking-wider text-white shadow-lg backdrop-blur-sm transition-all duration-300 select-none hover:bg-white hover:text-black sm:px-7 sm:py-[18px] sm:text-xs"
+              >
+                Explore Services →
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </section>

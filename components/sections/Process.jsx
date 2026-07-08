@@ -4,6 +4,7 @@ import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { PROCESS_STEPS } from '@/data/process-steps';
+import { onSectionGoto, revealElements } from '@/lib/sectionReveal';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -13,6 +14,10 @@ export default function Process() {
   useEffect(() => {
     const root = rootRef.current;
     if (!root) return;
+
+    const off = onSectionGoto('process', () => {
+      revealElements(root.querySelectorAll('.process-card'));
+    });
 
     const ctx = gsap.context(() => {
       const mm = gsap.matchMedia();
@@ -51,7 +56,10 @@ export default function Process() {
       });
     }, root);
 
-    return () => ctx.revert();
+    return () => {
+      off();
+      ctx.revert();
+    };
   }, []);
 
   return (

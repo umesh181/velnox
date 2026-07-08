@@ -1,9 +1,10 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import Lenis from 'lenis';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import ContactSplash from '@/components/layout/ContactSplash';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -18,6 +19,8 @@ function resolveHashTarget(href) {
 }
 
 export default function SmoothScroll({ children }) {
+  const splashRef = useRef(null);
+
   useEffect(() => {
     const lenis = new Lenis({
       lerp: 0.1,
@@ -31,7 +34,7 @@ export default function SmoothScroll({ children }) {
     gsap.ticker.add(raf);
     gsap.ticker.lagSmoothing(0);
 
-    const onClick = (e) => {
+    const onClick = async (e) => {
       const a = e.target.closest('a[href^="#"]');
       if (!a) return;
 
@@ -40,6 +43,12 @@ export default function SmoothScroll({ children }) {
       if (!target) return;
 
       e.preventDefault();
+
+      if (splashRef.current) {
+        await splashRef.current.play(href);
+        return;
+      }
+
       lenis.scrollTo(target, { offset: -60, duration: 1.4 });
     };
     document.addEventListener('click', onClick);
@@ -52,5 +61,10 @@ export default function SmoothScroll({ children }) {
     };
   }, []);
 
-  return children;
+  return (
+    <>
+      <ContactSplash ref={splashRef} />
+      {children}
+    </>
+  );
 }

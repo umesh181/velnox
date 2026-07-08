@@ -3,6 +3,7 @@
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { onSectionGoto, revealElements } from '@/lib/sectionReveal';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -11,26 +12,32 @@ const SERVICES = [
     title: 'Web Design',
     tags: 'UI/UX · Art direction · Design systems · Prototyping',
     gradient: 'linear-gradient(135deg, #3440f0 0%, #8f9bff 60%, #d8dcff 100%)',
+    image: '/images/web_design_service.png',
   },
   {
     title: 'Development',
     tags: 'Next.js · Headless CMS · Web apps · Performance',
     gradient: 'linear-gradient(135deg, #14231c 0%, #3f6b4f 60%, #a8c8a0 100%)',
+    image: '/images/dev_service.png',
   },
   {
-    title: 'Branding',
-    tags: 'Identity · Naming · Guidelines · Visual language',
+    title: 'App Design',
+    tags: 'Mobile UI · UX flows · Prototypes · Design systems',
     gradient: 'linear-gradient(135deg, #c2410c 0%, #f97316 60%, #fed7aa 100%)',
+    image: '/images/app_service.png',
+    
   },
   {
     title: 'E-Commerce',
     tags: 'Shopify · Conversion · Storefronts · Checkout UX',
     gradient: 'linear-gradient(135deg, #1a1a1a 0%, #4a4a52 60%, #b9b9c4 100%)',
+    image: '/images/commerce_serv.png',
   },
   {
     title: 'SEO & Growth',
     tags: 'Technical SEO · Analytics · CRO · Content strategy',
     gradient: 'linear-gradient(135deg, #4c1d95 0%, #7c3aed 60%, #ddd6fe 100%)',
+    image: '/images/seo_3d_image.png',
   },
 ];
 
@@ -40,6 +47,13 @@ export default function Services() {
   useEffect(() => {
     const root = rootRef.current;
     if (!root) return;
+
+    const off = onSectionGoto('services', () => {
+      revealElements([
+        root.querySelector('.section__title'),
+        root.querySelectorAll('.service-row'),
+      ]);
+    });
 
     const ctx = gsap.context(() => {
       gsap.from(root.querySelectorAll('.service-row'), {
@@ -154,6 +168,7 @@ export default function Services() {
     }
 
     return () => {
+      off();
       ctx.revert();
       cleanups.forEach((fn) => fn());
     };
@@ -181,20 +196,29 @@ export default function Services() {
         {/* services__list + service-row* are GSAP reveal / cursor-preview hooks */}
         <div className="services__list">
           {SERVICES.map((s, i) => (
-            <a
-              href="#contact"
-              className="service-row group relative grid grid-cols-[80px_1fr_auto] items-center gap-6 overflow-hidden border-t border-[rgba(242,239,233,0.16)] py-[clamp(28px,4vh,44px)] last:border-b last:border-[rgba(242,239,233,0.16)] max-[900px]:grid-cols-[44px_1fr_auto] max-[900px]:gap-[14px]"
+            <div
+              className="service-row group relative grid grid-cols-[80px_1fr] items-center gap-6 overflow-hidden border-t border-[rgba(242,239,233,0.16)] py-[clamp(56px,7.5vh,88px)] last:border-b last:border-[rgba(242,239,233,0.16)] max-[900px]:grid-cols-[44px_1fr] max-[900px]:gap-[14px]"
               key={s.title}
             >
               <div className="service-row__bg absolute inset-0 origin-top scale-y-0 bg-accent" />
               <div
-                className="service-row__media pointer-events-none absolute left-0 top-1/2 z-[2] grid aspect-[4/3] w-[clamp(220px,19vw,300px)] place-items-center overflow-hidden rounded-[14px] opacity-0 will-change-transform max-[900px]:hidden [@media(hover:none)]:hidden"
-                style={{ background: s.gradient }}
+                className="service-row__media pointer-events-none absolute left-0 top-1/2 z-[2] grid aspect-[4/3] w-[clamp(200px,17vw,270px)] place-items-center overflow-hidden rounded-[14px] opacity-0 will-change-transform max-[900px]:hidden [@media(hover:none)]:hidden"
+                style={s.image ? undefined : { background: s.gradient }}
                 aria-hidden="true"
               >
-                <span className="text-[12px] font-semibold uppercase tracking-[0.2em] text-[rgba(255,255,255,0.92)]">
-                  {s.title}
-                </span>
+                {s.image ? (
+                  <img
+                    src={s.image}
+                    alt=""
+                    loading="lazy"
+                    decoding="async"
+                    className="h-full w-full object-cover"
+                  />
+                ) : (
+                  <span className="text-[12px] font-semibold uppercase tracking-[0.2em] text-[rgba(255,255,255,0.92)]">
+                    {s.title}
+                  </span>
+                )}
               </div>
               <span className="relative z-[1] text-[14px] tabular-nums text-cream-40 transition-colors duration-[400ms] group-hover:text-[rgba(255,255,255,0.85)]">
                 {String(i + 1).padStart(2, '0')}
@@ -207,10 +231,7 @@ export default function Services() {
                   {s.tags}
                 </span>
               </span>
-              <span className="relative z-[1] grid h-[52px] w-[52px] place-items-center rounded-full border border-[rgba(242,239,233,0.25)] text-[20px] transition-[background,transform,border-color] duration-500 ease-brand group-hover:rotate-45 group-hover:border-white group-hover:bg-white group-hover:text-ink max-[900px]:h-10 max-[900px]:w-10 max-[900px]:text-[16px]">
-                ↗
-              </span>
-            </a>
+            </div>
           ))}
         </div>
       </div>
