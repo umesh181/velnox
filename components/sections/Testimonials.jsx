@@ -122,38 +122,52 @@ export default function Testimonials() {
           transition: color 0.4s ease;
         }
 
-        /* Hover */
-        .testi-card:hover .testi-card__img {
-          opacity: 1;
-        }
-        .testi-card:hover .testi-card__overlay {
-          opacity: 1;
-        }
-        .testi-card:hover .testi-card__quote {
-          opacity: 0;
-          transform: translateY(-12px);
-        }
-        .testi-card:hover .testi-card__avatar {
-          opacity: 0;
-          transform: translateY(-8px);
-        }
-        .testi-card:hover .testi-card__name {
-          color: #ffffff !important;
-        }
-        .testi-card:hover .testi-card__role {
-          color: rgba(255,255,255,0.65) !important;
+        /* Hover — desktop only (touch tap was leaving black letterbox gaps) */
+        @media (hover: hover) and (pointer: fine) {
+          .testi-card:hover .testi-card__img {
+            opacity: 1;
+          }
+          .testi-card:hover .testi-card__overlay {
+            opacity: 1;
+          }
+          .testi-card:hover .testi-card__quote {
+            opacity: 0;
+            transform: translateY(-12px);
+          }
+          .testi-card:hover .testi-card__avatar {
+            opacity: 0;
+            transform: translateY(-8px);
+          }
+          .testi-card:hover .testi-card__name {
+            color: #ffffff !important;
+          }
+          .testi-card:hover .testi-card__role {
+            color: rgba(255,255,255,0.65) !important;
+          }
         }
 
-        @media (max-width: 768px) {
+        @media (max-width: 900px) {
           .testi-grid {
             flex-direction: column;
+            gap: 14px;
           }
           .testi-card {
             width: 100%;
+            min-height: 0 !important;
+            padding: 24px 22px 18px;
           }
-          .testi-card__img {
-            object-fit: contain !important;
-            background-color: #141412;
+          .testi-card__img,
+          .testi-card__overlay {
+            display: none;
+          }
+          .testi-card__avatar {
+            margin-bottom: 18px;
+          }
+          .testi-card__bottom {
+            margin-top: 18px;
+          }
+          .testi-card__name {
+            white-space: normal;
           }
         }
       `}</style>
@@ -161,7 +175,7 @@ export default function Testimonials() {
       <section
         ref={rootRef}
         id="testimonials"
-        className="w-full px-gutter pt-[clamp(60px,9vh,120px)] pb-[clamp(80px,12vh,160px)] max-[900px]:pt-[40px] max-[900px]:pb-[48px]"
+        className="w-full bg-bg px-gutter pt-[clamp(60px,9vh,120px)] pb-[clamp(80px,12vh,160px)] max-[900px]:pt-[40px] max-[900px]:pb-[40px]"
       >
         {/* Header */}
         <div className="mb-[clamp(40px,6vh,72px)] max-[900px]:mb-8">
@@ -178,8 +192,7 @@ export default function Testimonials() {
           {TESTIMONIALS.map((t, i) => (
             <div
               key={i}
-              className="testi-card flex-1 min-w-0 bg-white rounded-[20px] pt-8 px-8 pb-5 flex flex-col justify-between"
-              style={{ minHeight: '310px' }}
+              className="testi-card flex-1 min-w-0 bg-white rounded-[20px] flex flex-col justify-between border border-line/60"
             >
               {/* Hover bg image */}
               <img src={t.avatar} alt="" aria-hidden="true" className="testi-card__img" style={{ objectPosition: t.bgPosition || 'center top' }} />

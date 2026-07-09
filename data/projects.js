@@ -13,8 +13,8 @@ export const PROJECTS = [
     designUrl:
       'https://www.figma.com/design/ypOC4RlHSaATp7YSPYvGVg/Untitled?node-id=0-1&p=f&t=JnV8xrq9hbMJQRxr-0',
     mockups: {
-      laptop: '/images/pratej_webmock.png',
-      mobile: '/images/mobile_mockup.png',
+      single: '/images/pratej_lifestyle.png',
+      cover: true,
     },
   },
   {

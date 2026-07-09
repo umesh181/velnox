@@ -102,7 +102,7 @@ export default function Hero() {
 
         <p className="hero__sub mt-[clamp(20px,4vh,36px)] max-w-[520px] text-[clamp(15px,1.3vw,18px)] leading-[1.6] text-ink-60 opacity-0">
           Velnox is a full-service digital agency for web design, website
-          development, app design, mobile apps, e-commerce, and SEO — partnering
+          development, app design, mobile apps, e-commerce, and SEO, partnering
           with ambitious teams worldwide to build products that win attention
           and rank.
         </p>

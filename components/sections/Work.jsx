@@ -48,7 +48,11 @@ function WorkCardVisual({ project }) {
         alt={`${project.name} mockup`}
         loading="lazy"
         decoding="async"
-        className="work-card__img absolute inset-0 h-full w-full object-contain object-top p-5 sm:p-8"
+        className={`work-card__img absolute inset-0 h-full w-full ${
+          mockups.cover
+            ? 'object-cover object-center'
+            : 'object-contain object-top p-5 sm:p-8'
+        }`}
       />
     </div>
   );

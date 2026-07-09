@@ -10,7 +10,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function FAQ() {
   const rootRef = useRef(null);
-  const [openIndex, setOpenIndex] = useState(0);
+  const [openIndex, setOpenIndex] = useState(-1);
 
   useEffect(() => {
     const root = rootRef.current;
