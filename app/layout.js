@@ -77,6 +77,9 @@ export const metadata = {
     shortcut: '/icon.svg',
   },
   manifest: '/manifest.webmanifest',
+  ...(SITE.googleSiteVerification
+    ? { verification: { google: SITE.googleSiteVerification } }
+    : {}),
 };
 
 export const viewport = {
