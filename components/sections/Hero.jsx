@@ -41,8 +41,13 @@ export default function Hero() {
         )
         .to(
           [root.querySelector('.hero__sub'), root.querySelector('.hero__cta')],
-          { opacity: 1, duration: 0.9, stagger: 0.12, ease: 'power2.out' },
+          { opacity: 1, duration: 0.6, stagger: 0.12, ease: 'power2.out' },
           '-=0.5'
+        )
+        .to(
+          root.querySelector('.hero__scroll'),
+          { opacity: 1, duration: 0.8 },
+          '-=0.4'
         );
     };
 
@@ -75,7 +80,7 @@ export default function Hero() {
 
   return (
     <section
-      className="relative flex min-h-[100svh] flex-col items-center justify-center overflow-hidden px-gutter pt-[calc(var(--spacing-nav)+24px)] pb-[60px] max-[900px]:pb-10 text-center"
+      className="relative flex min-h-[100svh] flex-col items-center justify-center overflow-hidden px-gutter pt-[calc(var(--spacing-nav)+24px)] pb-[60px] text-center"
       id="top"
       ref={rootRef}
     >
@@ -90,11 +95,16 @@ export default function Hero() {
 
         <h1 className="hero__title max-w-[20ch] text-[clamp(40px,6.4vw,96px)] font-bold uppercase leading-[0.98] tracking-[-0.045em] max-[900px]:text-[clamp(40px,10.4vw,64px)] max-[900px]:leading-[1.02]">
           <span className="mask-line">
-            <span>Velnox builds digital</span>
+            <span>We builds digital</span>
+          </span>
+          <span className="mask-line">
+            <span>experiences that</span>
+          </span>
+          <span className="mask-line">
+            <span>move brands</span>
           </span>
           <span className="mask-line">
             <span>
-              experiences that move brands{' '}
               <em className="not-italic text-accent">forward</em>
             </span>
           </span>

@@ -8,7 +8,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 /* 12 confetti cards with footer project images */
 const POP_CARDS = Array.from({ length: 12 }, (_, i) => ({
-  image: `/images/footer_${(i % 10) + 1}.png`,
+  image: `/images/footer_${(i % 10) + 1}.webp`,
   left: `${4 + (i * 88) / 11}%`,
   id: i,
 }));

@@ -23,11 +23,18 @@ export default function HeroCanvas() {
     camera.position.set(0, 4.2, 9);
     camera.lookAt(0, -1, 0);
 
-    const renderer = new THREE.WebGLRenderer({
-      antialias: !isMobile,
-      alpha: true,
-      powerPreference: 'high-performance',
-    });
+    let renderer;
+    try {
+      renderer = new THREE.WebGLRenderer({
+        antialias: !isMobile,
+        alpha: true,
+        powerPreference: 'high-performance',
+      });
+    } catch {
+      // No WebGL available (unsupported browser/device, GPU disabled, etc.) —
+      // skip the particle field entirely rather than crashing the page.
+      return;
+    }
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, isMobile ? 1.25 : 2));
     renderer.setSize(mount.clientWidth, mount.clientHeight);
     mount.appendChild(renderer.domElement);
@@ -85,12 +92,16 @@ export default function HeroCanvas() {
     window.addEventListener('resize', onResize);
 
     const clock = new THREE.Clock();
-    let rafId;
-    let running = true;
+    let rafId = null;
+    let pageVisible = document.visibilityState === 'visible';
+    let inView = true; // observer reports actual state before first paint
     let frame = 0;
 
     const tick = () => {
-      if (!running) return;
+      if (!pageVisible || !inView) {
+        rafId = null;
+        return;
+      }
       frame += 1;
       const t = clock.getElapsedTime();
 
@@ -119,22 +130,44 @@ export default function HeroCanvas() {
       renderer.render(scene, camera);
       rafId = requestAnimationFrame(tick);
     };
+
+    // Starts the loop only if it isn't already running and both gates are open.
+    const resume = () => {
+      if (rafId !== null || !pageVisible || !inView) return;
+      clock.start();
+      tick();
+    };
+    const pause = () => {
+      if (rafId !== null) cancelAnimationFrame(rafId);
+      rafId = null;
+    };
+
     tick();
 
     const onVisibility = () => {
-      running = document.visibilityState === 'visible';
-      if (running) {
-        clock.start();
-        tick();
-      } else {
-        cancelAnimationFrame(rafId);
-      }
+      pageVisible = document.visibilityState === 'visible';
+      if (pageVisible) resume();
+      else pause();
     };
     document.addEventListener('visibilitychange', onVisibility);
 
+    // Stop rendering once the hero has scrolled out of view — this canvas
+    // otherwise renders forever for the whole session, even far down the page.
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        inView = entry.isIntersecting;
+        if (inView) resume();
+        else pause();
+      },
+      { threshold: 0 }
+    );
+    observer.observe(mount);
+
     return () => {
-      running = false;
-      cancelAnimationFrame(rafId);
+      pageVisible = false;
+      inView = false;
+      pause();
+      observer.disconnect();
       document.removeEventListener('visibilitychange', onVisibility);
       window.removeEventListener('mousemove', onMouse);
       window.removeEventListener('resize', onResize);

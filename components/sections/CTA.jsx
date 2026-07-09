@@ -68,9 +68,26 @@ export default function CTA() {
   const calInitialized = useRef(false);
 
   useEffect(() => {
-    if (calInitialized.current) return;
-    calInitialized.current = true;
-    initCalEmbed();
+    const root = rootRef.current;
+    if (!root || calInitialized.current) return;
+
+    // Defer loading the Cal.com embed (its script + iframe) until this section
+    // is about to be scrolled into view, instead of on page mount. A heavy
+    // off-screen iframe sitting dormant for a while gets deprioritized by the
+    // browser, then has to "catch up" right as it crosses into the viewport —
+    // that catch-up work is what was showing up as scroll jank at this section.
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (!entries[0].isIntersecting || calInitialized.current) return;
+        calInitialized.current = true;
+        initCalEmbed();
+        observer.disconnect();
+      },
+      { rootMargin: '800px 0px' }
+    );
+    observer.observe(root);
+
+    return () => observer.disconnect();
   }, []);
 
   useEffect(() => {

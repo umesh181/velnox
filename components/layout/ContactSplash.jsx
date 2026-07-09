@@ -57,15 +57,11 @@ const ContactSplash = forwardRef(function ContactSplash(_, ref) {
         }
 
         playingRef.current = true;
-        const letters = root.querySelectorAll('.contact-splash__brand span:not(.reg)');
-        const reg = root.querySelector('.contact-splash__brand .reg');
         const counter = { v: 0 };
 
         lenis?.stop();
 
-        gsap.set(root, { yPercent: 0, autoAlpha: 1, pointerEvents: 'auto' });
-        gsap.set(letters, { y: '110%' });
-        gsap.set(reg, { opacity: 0 });
+        gsap.set(root, { yPercent: 100, autoAlpha: 1, pointerEvents: 'auto' });
         if (countRef.current) countRef.current.textContent = '0%';
 
         const finishScroll = () => scrollToSection(targetHrefRef.current, lenis);
@@ -80,52 +76,29 @@ const ContactSplash = forwardRef(function ContactSplash(_, ref) {
           },
         });
 
-        tl.to(letters, {
-          y: 0,
-          duration: 0.35,
-          stagger: 0.02,
-          ease: 'power3.out',
+        tl.to(root, {
+          yPercent: 0,
+          duration: 0.5,
+          ease: 'power3.inOut',
         })
-          .to(
-            counter,
-            {
-              v: 100,
-              duration: 0.55,
-              ease: 'power2.out',
-              onUpdate: () => {
-                if (countRef.current) {
-                  countRef.current.textContent = `${Math.round(counter.v)}%`;
-                }
-              },
+          .to(counter, {
+            v: 100,
+            duration: 0.55,
+            ease: 'power2.out',
+            onUpdate: () => {
+              if (countRef.current) {
+                countRef.current.textContent = `${Math.round(counter.v)}%`;
+              }
             },
-            '<'
-          )
-          .to(reg, { opacity: 1, duration: 0.2, ease: 'power2.out' }, '<0.2')
-          .to(reg, { opacity: 0, duration: 0.15 }, '>0.25')
+          })
           .call(finishScroll)
-          .to(
-            letters,
-            {
-              y: '-110%',
-              duration: 0.35,
-              stagger: 0.02,
-              ease: 'power3.in',
-            },
-            '<'
-          )
-          .to(
-            root,
-            {
-              yPercent: -100,
-              duration: 0.5,
-              ease: 'power3.inOut',
-            },
-            '-=0.2'
-          );
+          .to(root, {
+            yPercent: -100,
+            duration: 0.5,
+            ease: 'power3.inOut',
+          }, '-=0.2');
       }),
   }));
-
-  const letter = 'inline-block translate-y-[110%]';
 
   return (
     <div
@@ -134,16 +107,11 @@ const ContactSplash = forwardRef(function ContactSplash(_, ref) {
       aria-hidden="true"
     >
       <div
-        className="contact-splash__brand flex overflow-hidden pt-[0.08em] pr-[0.12em] text-[clamp(48px,10vw,140px)] font-bold uppercase leading-none tracking-[-0.04em]"
+        className="contact-splash__brand flex pt-[0.08em] pr-[0.12em] text-[clamp(48px,10vw,140px)] font-bold uppercase leading-none tracking-[-0.04em]"
         aria-label="Velnox"
       >
-        <span className={letter}>V</span>
-        <span className={letter}>E</span>
-        <span className={letter}>L</span>
-        <span className={letter}>N</span>
-        <span className={letter}>O</span>
-        <span className={letter}>X</span>
-        <span className="reg inline-block self-start ml-[0.08em] mt-[0.28em] text-[0.3em] tracking-normal opacity-0">
+        Velnox
+        <span className="ml-[0.08em] mt-[0.28em] self-start text-[0.3em] tracking-normal">
           ®
         </span>
       </div>

@@ -9,6 +9,21 @@ import { onSectionGoto, revealElements } from '@/lib/sectionReveal';
 
 gsap.registerPlugin(ScrollTrigger);
 
+/* Bento grid placement — grid-column / grid-row per project's `size` key
+   (see data/projects.js). Same 6-slot layout/order as main; only the first
+   3 slots (b1, s1, s2) are filled with real projects for now — s3/b2/s4
+   stay reserved as empty placeholders until more work is added. */
+const SPAN = {
+  b1: 'col-[1/8] row-[1/3]',
+  s1: 'col-[8/13] row-[1/2]',
+  s2: 'col-[8/13] row-[2/3]',
+  s3: 'col-[1/6] row-[3/4]',
+  b2: 'col-[6/13] row-[3/5]',
+  s4: 'col-[1/6] row-[4/5]',
+};
+
+const PLACEHOLDER_SLOTS = ['s3', 'b2', 's4'];
+
 function WorkCardVisual({ project }) {
   const { mockups, gradient } = project;
 
@@ -39,10 +54,7 @@ function WorkCardVisual({ project }) {
   }
 
   return (
-    <div
-      className="relative h-full w-full overflow-hidden rounded-card bg-ink"
-      style={{ background: gradient }}
-    >
+    <div className="relative h-full w-full overflow-hidden rounded-card bg-ink" style={{ background: gradient }}>
       <img
         src={mockups.single}
         alt={`${project.name} mockup`}
@@ -58,10 +70,19 @@ function WorkCardVisual({ project }) {
   );
 }
 
-function WorkShowcaseItem({ project, index, imageRight, onCardClick }) {
+function WorkPlaceholderCard({ size }) {
+  return (
+    <div
+      aria-hidden="true"
+      className={`work-card__placeholder rounded-card border border-dashed border-line/60 bg-ink/[0.03] ${SPAN[size]} max-[900px]:hidden`}
+    />
+  );
+}
+
+function WorkGridCard({ project, index, onCardClick }) {
   const isExternal = !!project.url;
   const hasMultipleOptions = project.mockups && project.url && project.designUrl;
-  const indexLabel = String(index + 1).padStart(2, '0');
+  const badgePathId = `work-badge-path-${index}`;
 
   const handleClick = (e) => {
     if (hasMultipleOptions && onCardClick) {
@@ -71,77 +92,63 @@ function WorkShowcaseItem({ project, index, imageRight, onCardClick }) {
   };
 
   return (
-    <article className="work-card group mb-[clamp(72px,10vh,112px)] max-[900px]:mb-10 last:mb-0">
-      <a
-        href={project.url || '#contact'}
-        target={isExternal && !hasMultipleOptions ? '_blank' : undefined}
-        rel={isExternal && !hasMultipleOptions ? 'noopener noreferrer' : undefined}
-        onClick={handleClick}
-        className="block"
-      >
-        <div className="grid items-center gap-[clamp(28px,4vw,48px)] md:grid-cols-12">
-          <div
-            className={`relative md:col-span-7 ${
-              imageRight ? 'md:order-2 md:col-start-6' : 'md:col-start-1'
-            }`}
-          >
-            <div
-              className="work-card__frame relative aspect-[16/10] overflow-hidden rounded-card shadow-[0_18px_48px_rgba(20,20,18,0.06)]"
-              style={
-                project.theme === 'light'
-                  ? { background: project.gradient }
-                  : undefined
-              }
-            >
-              <div className="absolute inset-0 overflow-hidden rounded-card transition-transform duration-[1.1s] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.02]">
-                <WorkCardVisual project={project} />
-              </div>
-            </div>
+    <a
+      href={project.url || '#contact'}
+      target={isExternal && !hasMultipleOptions ? '_blank' : undefined}
+      rel={isExternal && !hasMultipleOptions ? 'noopener noreferrer' : undefined}
+      onClick={handleClick}
+      className={`work-card group block [perspective:1000px] ${SPAN[project.size]} max-[900px]:col-[1/-1] max-[900px]:row-auto`}
+    >
+      {/* Rounding + clipping live on this static frame, never the transformed
+          layer below — clip-masking a 3D-rotated element flashes square
+          corners for a frame before the mask catches up. */}
+      <div className="work-card__frame relative h-full overflow-hidden rounded-card max-[900px]:aspect-[4/3] max-[900px]:h-auto">
+        <div className="work-card__media absolute inset-0 will-change-transform [transform-style:preserve-3d]">
+          <div className="absolute inset-0 transition-transform duration-700 [transition-timing-function:cubic-bezier(0.25,1,0.3,1)] group-hover:scale-[1.04]">
+            <WorkCardVisual project={project} />
           </div>
+        </div>
 
-          <div
-            className={`flex flex-col justify-center md:col-span-5 ${
-              imageRight ? 'md:order-1 md:col-start-1' : 'md:col-start-8'
-            }`}
-          >
-            <div className="mb-6 flex items-end justify-between gap-6">
-              <span className="text-[clamp(52px,6vw,88px)] font-bold tracking-[-0.05em] text-ink/[0.16] leading-none">
-                {indexLabel}
-              </span>
-              <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-ink-40">
-                {project.year || '2025'}
-              </span>
-            </div>
-
-            <p className="mb-4 text-[11px] font-semibold uppercase tracking-[0.16em] text-accent">
-              {project.tags}
-            </p>
-
-            <h3 className="mb-5 text-[clamp(28px,3.6vw,48px)] font-bold uppercase leading-[1.02] tracking-[-0.035em]">
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 z-[2] bg-gradient-to-t from-black/80 via-black/30 to-transparent px-[22px] pb-[18px] pt-16">
+          <div className="flex items-end justify-between gap-4 text-white">
+            <span className="text-[clamp(18px,1.8vw,26px)] font-bold tracking-[-0.02em]">
               {project.name}
-            </h3>
-
-            <p className="mb-8 max-w-[38ch] text-[clamp(15px,1.25vw,17px)] leading-[1.7] text-ink-60">
-              {project.description}
-            </p>
-
-            <span className="inline-flex items-center gap-3 text-[12px] font-semibold uppercase tracking-[0.16em]">
-              <span className="relative">
-                View project
-                <span className="absolute -bottom-1 left-0 h-px w-full origin-left scale-x-100 bg-ink transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-x-0" />
-                <span className="absolute -bottom-1 left-0 h-px w-full origin-right scale-x-0 bg-accent transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-x-100" />
-              </span>
-              <span
-                className="inline-block transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-x-1 group-hover:-translate-y-1"
-                aria-hidden="true"
-              >
-                ↗
-              </span>
+            </span>
+            <span className="text-right text-[12px] text-[rgba(255,255,255,0.75)]">
+              {project.tags}
             </span>
           </div>
         </div>
-      </a>
-    </article>
+
+        {/* center badge — spinning "VIEW PROJECT" ring + arrow, fixed in place */}
+        <div className="work-card__badge pointer-events-none absolute inset-0 z-[3] grid place-items-center opacity-0 transition-opacity duration-300 group-hover:opacity-100 max-[900px]:hidden [@media(hover:none)]:hidden">
+          <div className="relative grid h-[104px] w-[104px] place-items-center">
+            <div className="absolute inset-0 rounded-full bg-black/70 backdrop-blur-[2px]" />
+            <svg viewBox="0 0 100 100" className="work-card__badge-spin absolute inset-0 h-full w-full">
+              <defs>
+                <path id={badgePathId} d="M 50,50 m -36,0 a 36,36 0 1,1 72,0 a 36,36 0 1,1 -72,0" />
+              </defs>
+              <text fontSize="8.2" fill="white" letterSpacing="2.5" className="font-semibold uppercase">
+                <textPath href={`#${badgePathId}`}>View Project • View Project •</textPath>
+              </text>
+            </svg>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              fill="none"
+              stroke="white"
+              strokeWidth="2"
+              viewBox="0 0 24 24"
+              className="relative"
+              aria-hidden="true"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" d="M7 17L17 7M7 7h10v10" />
+            </svg>
+          </div>
+        </div>
+      </div>
+    </a>
   );
 }
 
@@ -163,17 +170,16 @@ export default function Work() {
 
     const ctx = gsap.context(() => {
       gsap.from(root.querySelectorAll('.work-card'), {
-        y: 80,
+        y: 70,
         opacity: 0,
-        duration: 1.1,
-        stagger: 0.14,
+        duration: 1,
+        stagger: 0.09,
         ease: 'power3.out',
         scrollTrigger: {
-          trigger: root.querySelector('.work__list'),
-          start: 'top 82%',
+          trigger: root.querySelector('.work__grid'),
+          start: 'top 85%',
         },
       });
-
       gsap.from(root.querySelector('.section__title'), {
         y: 60,
         opacity: 0,
@@ -181,29 +187,51 @@ export default function Work() {
         ease: 'power3.out',
         scrollTrigger: { trigger: root, start: 'top 78%' },
       });
-
-
-      root.querySelectorAll('.work-card__frame').forEach((frame) => {
-        gsap.fromTo(
-          frame,
-          { y: 24 },
-          {
-            y: -24,
-            ease: 'none',
-            scrollTrigger: {
-              trigger: frame,
-              start: 'top bottom',
-              end: 'bottom top',
-              scrub: 1.2,
-            },
-          }
-        );
-      });
     }, root);
+
+    // ---- 3D tilt on hover (bento-card bend, desktop only) ----
+    const canHover =
+      window.matchMedia('(hover: hover)').matches && window.innerWidth > 900;
+    const cleanups = [];
+
+    if (canHover) {
+      root.querySelectorAll('.work-card').forEach((card) => {
+        const media = card.querySelector('.work-card__media');
+        gsap.set(media, { transformPerspective: 900 });
+        const rxTo = gsap.quickTo(media, 'rotationX', {
+          duration: 0.5,
+          ease: 'power2',
+        });
+        const ryTo = gsap.quickTo(media, 'rotationY', {
+          duration: 0.5,
+          ease: 'power2',
+        });
+
+        const onMove = (e) => {
+          const r = media.getBoundingClientRect();
+          const px = (e.clientX - r.left) / r.width;
+          const py = (e.clientY - r.top) / r.height;
+          rxTo((0.5 - py) * 10);
+          ryTo((px - 0.5) * 12);
+        };
+        const onLeave = () => {
+          rxTo(0);
+          ryTo(0);
+        };
+
+        card.addEventListener('mousemove', onMove);
+        card.addEventListener('mouseleave', onLeave);
+        cleanups.push(() => {
+          card.removeEventListener('mousemove', onMove);
+          card.removeEventListener('mouseleave', onLeave);
+        });
+      });
+    }
 
     return () => {
       off();
       ctx.revert();
+      cleanups.forEach((fn) => fn());
     };
   }, []);
 
@@ -240,16 +268,22 @@ export default function Work() {
         </span>
       </div>
 
-      <div className="work__list mx-auto max-w-[min(1280px,100%)] px-[clamp(12px,3vw,48px)]">
+      {/* work__grid + work-card + work-card__media are GSAP reveal / 3D-tilt hooks */}
+      <div className="work__grid mx-auto grid max-w-[min(1280px,100%)] grid-cols-12 auto-rows-[clamp(170px,26vh,260px)] gap-[clamp(14px,1.6vw,24px)] max-[900px]:auto-rows-auto">
         {PROJECTS.map((project, index) => (
-          <WorkShowcaseItem
+          <WorkGridCard
             key={project.name}
             project={project}
             index={index}
-            imageRight={index % 2 === 1}
             onCardClick={handleCardClick}
           />
         ))}
+        {/* Reserved bento slots (s3, b2, s4) for future projects — commented
+            out for now since they're empty; uncomment when more work lands.
+        {PLACEHOLDER_SLOTS.map((size) => (
+          <WorkPlaceholderCard key={size} size={size} />
+        ))}
+        */}
       </div>
 
       <div className="mt-[clamp(40px,6vh,64px)] flex justify-center">

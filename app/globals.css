@@ -121,6 +121,19 @@
     will-change: transform;
   }
 
+  @keyframes work-badge-spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  .work-card__badge-spin {
+    animation: work-badge-spin 9s linear infinite;
+  }
+
   /* small uppercase label with an accent dot */
   .eyebrow {
     display: flex;

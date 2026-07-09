@@ -102,10 +102,14 @@ export default function FAQ() {
                 id={panelId}
                 role="region"
                 aria-labelledby={buttonId}
-                hidden={!isOpen}
-                className="pb-[clamp(22px,3vh,32px)] text-[clamp(15px,1.2vw,17px)] leading-[1.7] text-ink-60"
+                className="grid transition-[grid-template-rows] duration-[450ms] ease-brand"
+                style={{ gridTemplateRows: isOpen ? '1fr' : '0fr' }}
               >
-                {item.answer}
+                <div className="overflow-hidden">
+                  <p className="pb-[clamp(22px,3vh,32px)] text-[clamp(15px,1.2vw,17px)] leading-[1.7] text-ink-60">
+                    {item.answer}
+                  </p>
+                </div>
               </div>
             </article>
           );

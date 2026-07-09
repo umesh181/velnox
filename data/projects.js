@@ -12,8 +12,9 @@ export const PROJECTS = [
     url: 'https://www.pratejdentalcare.com',
     designUrl:
       'https://www.figma.com/design/ypOC4RlHSaATp7YSPYvGVg/Untitled?node-id=0-1&p=f&t=JnV8xrq9hbMJQRxr-0',
+    size: 'b1',
     mockups: {
-      single: '/images/pratej_lifestyle.png',
+      single: '/images/pratej_lifestyle.webp',
       cover: true,
     },
   },
@@ -27,8 +28,9 @@ export const PROJECTS = [
     gradient: 'linear-gradient(155deg, #1a1816 0%, #3d3935 48%, #8a8680 100%)',
     theme: 'dark',
     url: 'https://www.sphoorthiinteriors.com',
+    size: 's1',
     mockups: {
-      single: '/images/updated_sphoorthi.png',
+      single: '/images/updated_sphoorthi.webp',
     },
   },
   {
@@ -41,8 +43,9 @@ export const PROJECTS = [
     gradient: 'linear-gradient(155deg, #14283a 0%, #2f5573 52%, #8eb4cc 100%)',
     theme: 'dark',
     url: 'https://www.srigowridentalcare.com',
+    size: 's2',
     mockups: {
-      single: '/images/srigowri_mockup.jpg',
+      single: '/images/srigowri_mockup.webp',
     },
   },
 ];

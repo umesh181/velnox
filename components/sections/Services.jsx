@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { onSectionGoto, revealElements } from '@/lib/sectionReveal';
@@ -9,41 +9,39 @@ gsap.registerPlugin(ScrollTrigger);
 
 const SERVICES = [
   {
-    title: 'Web Design',
-    tags: 'UI/UX · Art direction · Design systems · Prototyping',
+    title: 'Web Development',
+    tags: 'ERP Solutions · CRM · Web Apps · Landing Pages',
     gradient: 'linear-gradient(135deg, #3440f0 0%, #8f9bff 60%, #d8dcff 100%)',
-    image: '/images/web_design_service.png',
+    image: '/images/dev_service.webp',
   },
   {
-    title: 'Development',
-    tags: 'Next.js · Headless CMS · Web apps · Performance',
+    title: 'Mobile Applications',
+    tags: 'Android · iOS · Cross-Platform · Business Apps',
     gradient: 'linear-gradient(135deg, #14231c 0%, #3f6b4f 60%, #a8c8a0 100%)',
-    image: '/images/dev_service.png',
+    image: '/images/app_service.webp',
   },
   {
-    title: 'App Design',
-    tags: 'Mobile UI · UX flows · Prototypes · Design systems',
+    title: 'UI/UX Design',
+    tags: 'Wireframes · Prototypes · Design Systems · User Experience',
     gradient: 'linear-gradient(135deg, #c2410c 0%, #f97316 60%, #fed7aa 100%)',
-    image: '/images/app_service.png',
-    
+    image: '/images/web_design_service.webp',
   },
   {
-    title: 'E-Commerce',
-    tags: 'Shopify · Conversion · Storefronts · Checkout UX',
+    title: 'AI & Automations',
+    tags: 'AI Chatbots · AI Agents · Custom AI Apps',
     gradient: 'linear-gradient(135deg, #1a1a1a 0%, #4a4a52 60%, #b9b9c4 100%)',
-    image: '/images/commerce_serv.png',
+    image: '/images/commerce_serv.webp',
   },
   {
-    title: 'SEO & Growth',
-    tags: 'Technical SEO · Analytics · CRO · Content strategy',
+    title: 'Digital Marketing',
+    tags: 'SEO · Social Media · Google Ads · Performance Marketing',
     gradient: 'linear-gradient(135deg, #4c1d95 0%, #7c3aed 60%, #ddd6fe 100%)',
-    image: '/images/seo_3d_image.png',
+    image: '/images/seo_3d_image_thumb.webp',
   },
 ];
 
 export default function Services() {
   const rootRef = useRef(null);
-  const [activeRow, setActiveRow] = useState(-1);
 
   useEffect(() => {
     const root = rootRef.current;
@@ -197,33 +195,24 @@ export default function Services() {
         {/* services__list + service-row* are GSAP reveal / cursor-preview hooks */}
         <div className="services__list">
           {SERVICES.map((s, i) => (
-            <div
-              className="service-row group relative grid grid-cols-[80px_1fr] items-center gap-6 overflow-hidden border-t border-[rgba(242,239,233,0.16)] py-[clamp(36px,5vh,54px)] max-[900px]:py-6 last:border-b last:border-[rgba(242,239,233,0.16)] max-[900px]:grid-cols-[44px_1fr] max-[900px]:gap-[14px] cursor-pointer"
+            <a
+              href="#contact"
+              className="service-row group relative z-0 hover:z-30 grid grid-cols-[80px_1fr_auto] items-center gap-6 border-t border-[rgba(242,239,233,0.16)] py-[clamp(28px,4vh,44px)] last:border-b last:border-[rgba(242,239,233,0.16)] max-[900px]:grid-cols-[44px_1fr_auto] max-[900px]:gap-[14px]"
               key={s.title}
-              role="button"
-              tabIndex={0}
-              onClick={() => {
-                setActiveRow(activeRow === i ? -1 : i);
-              }}
-              onKeyDown={(e) => {
-                if (e.key === 'Enter' || e.key === ' ') {
-                  setActiveRow(activeRow === i ? -1 : i);
-                }
-              }}
             >
               <div className="service-row__bg absolute inset-0 origin-top scale-y-0 bg-accent" />
               <div
-                className="service-row__media pointer-events-none absolute left-0 top-1/2 z-[2] grid aspect-[4/3] w-[clamp(200px,17vw,270px)] place-items-center overflow-hidden rounded-[14px] opacity-0 will-change-transform max-[900px]:hidden [@media(hover:none)]:hidden"
-                style={s.image ? undefined : { background: s.gradient }}
+                className="service-row__media pointer-events-none absolute left-0 top-1/2 z-[2] grid w-[clamp(220px,19vw,300px)] place-items-center rounded-[14px] opacity-0 will-change-transform max-[900px]:hidden [@media(hover:none)]:hidden"
+                style={s.image ? undefined : { background: s.gradient, aspectRatio: '4 / 3' }}
                 aria-hidden="true"
               >
                 {s.image ? (
                   <img
                     src={s.image}
-                    alt={`${s.title} service by Velnox digital agency`}
+                    alt=""
                     loading="lazy"
                     decoding="async"
-                    className="absolute left-1/2 top-1/2 h-[80%] w-[80%] -translate-x-1/2 -translate-y-1/2 object-contain"
+                    className="block w-full h-auto object-contain rounded-[14px]"
                   />
                 ) : (
                   <span className="text-[12px] font-semibold uppercase tracking-[0.2em] text-[rgba(255,255,255,0.92)]">
@@ -243,34 +232,7 @@ export default function Services() {
                 </span>
               </span>
 
-              {/* Mobile inline preview */}
-              <div
-                className="hidden max-[900px]:block overflow-hidden transition-all duration-[400ms] ease-brand"
-                style={{
-                  gridColumn: '2',
-                  maxHeight: activeRow === i ? '220px' : '0px',
-                  opacity: activeRow === i ? 1 : 0,
-                  marginTop: activeRow === i ? '12px' : '0px',
-                }}
-              >
-                <div
-                  className="relative aspect-[16/10] w-full max-w-[280px] rounded-lg overflow-hidden border border-[rgba(242,239,233,0.12)]"
-                  style={s.image ? undefined : { background: s.gradient }}
-                >
-                  {s.image ? (
-                    <img
-                      src={s.image}
-                      alt={s.title}
-                      className="absolute left-1/2 top-1/2 h-[80%] w-[80%] -translate-x-1/2 -translate-y-1/2 object-contain"
-                    />
-                  ) : (
-                    <div className="absolute inset-0 flex items-center justify-center text-[11px] font-semibold uppercase tracking-[0.2em] text-cream-55">
-                      {s.title}
-                    </div>
-                  )}
-                </div>
-              </div>
-            </div>
+            </a>
           ))}
         </div>
       </div>
