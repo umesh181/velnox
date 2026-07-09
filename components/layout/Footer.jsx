@@ -90,7 +90,7 @@ export default function Footer() {
 
   return (
     <footer
-      className="relative overflow-hidden rounded-t-[clamp(24px,4vw,48px)] bg-ink px-gutter pt-[clamp(64px,10vh,120px)] text-bg"
+      className="relative overflow-hidden rounded-t-[clamp(24px,4vw,48px)] bg-ink px-gutter pt-[clamp(64px,10vh,120px)] max-[900px]:pt-12 text-bg"
       ref={rootRef}
     >
       <div className="relative z-[1] grid grid-cols-[1.4fr_1fr_1fr_1fr] gap-10 pb-[clamp(48px,8vh,90px)] max-[900px]:grid-cols-2">

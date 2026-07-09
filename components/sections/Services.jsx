@@ -181,8 +181,8 @@ export default function Services() {
       id="services"
       ref={rootRef}
     >
-      <div className="mx-auto w-full px-gutter py-[clamp(90px,14vh,180px)]">
-        <div className="mb-[clamp(48px,8vh,96px)] flex items-end justify-between gap-6">
+      <div className="mx-auto w-full px-gutter py-[clamp(90px,14vh,180px)] max-[900px]:py-[48px]">
+        <div className="mb-[clamp(48px,8vh,96px)] max-[900px]:mb-8 flex items-end justify-between gap-6">
           <div>
             <p className="eyebrow mb-6 text-cream-55">Expertise</p>
             <h2 className="section__title max-w-[18ch] text-[clamp(32px,5vw,76px)] font-medium leading-[1.08] tracking-[-0.03em]">
@@ -198,7 +198,7 @@ export default function Services() {
         <div className="services__list">
           {SERVICES.map((s, i) => (
             <div
-              className="service-row group relative grid grid-cols-[80px_1fr] items-center gap-6 overflow-hidden border-t border-[rgba(242,239,233,0.16)] py-[clamp(36px,5vh,54px)] last:border-b last:border-[rgba(242,239,233,0.16)] max-[900px]:grid-cols-[44px_1fr] max-[900px]:gap-[14px] cursor-pointer"
+              className="service-row group relative grid grid-cols-[80px_1fr] items-center gap-6 overflow-hidden border-t border-[rgba(242,239,233,0.16)] py-[clamp(36px,5vh,54px)] max-[900px]:py-6 last:border-b last:border-[rgba(242,239,233,0.16)] max-[900px]:grid-cols-[44px_1fr] max-[900px]:gap-[14px] cursor-pointer"
               key={s.title}
               role="button"
               tabIndex={0}

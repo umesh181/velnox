@@ -100,12 +100,12 @@ export default function VideoSection() {
   return (
     <section
       ref={rootRef}
-      className="mx-auto w-full max-w-[1600px] px-gutter pt-[clamp(32px,5vh,56px)] pb-[clamp(40px,7vh,80px)]"
+      className="mx-auto w-full max-w-[1600px] px-gutter pt-[clamp(32px,5vh,56px)] pb-[clamp(40px,7vh,80px)] max-[900px]:pt-6 max-[900px]:pb-8"
       id="showreel"
     >
       <div
         onClick={(e) => handlePlayPause(e)}
-        className="video-card group relative h-[clamp(560px,88vh,1080px)] w-full cursor-pointer overflow-hidden rounded-[24px] border border-line/10 bg-black shadow-2xl will-change-[transform,opacity,clip-path]"
+        className="video-card group relative h-[clamp(560px,88vh,1080px)] max-[900px]:h-[clamp(340px,58vh,480px)] w-full cursor-pointer overflow-hidden rounded-[24px] border border-line/10 bg-black shadow-2xl will-change-[transform,opacity,clip-path]"
       >
         <MediaVideo
           ref={videoRef}

@@ -161,10 +161,10 @@ export default function Testimonials() {
       <section
         ref={rootRef}
         id="testimonials"
-        className="w-full px-gutter pt-[clamp(60px,9vh,120px)] pb-[clamp(80px,12vh,160px)]"
+        className="w-full px-gutter pt-[clamp(60px,9vh,120px)] pb-[clamp(80px,12vh,160px)] max-[900px]:pt-[40px] max-[900px]:pb-[48px]"
       >
         {/* Header */}
-        <div className="mb-[clamp(40px,6vh,72px)]">
+        <div className="mb-[clamp(40px,6vh,72px)] max-[900px]:mb-8">
           <p className="testimonials__eyebrow eyebrow mb-5">Testimonials</p>
           <h2 className="testimonials__heading text-[clamp(32px,5vw,76px)] font-medium leading-[1.08] tracking-[-0.03em]">
             Don&rsquo;t take our word for it!

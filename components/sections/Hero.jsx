@@ -71,7 +71,7 @@ export default function Hero() {
 
   return (
     <section
-      className="relative flex min-h-[100svh] flex-col items-center justify-center overflow-hidden px-gutter pt-[calc(var(--spacing-nav)+24px)] pb-[60px] text-center"
+      className="relative flex min-h-[100svh] flex-col items-center justify-center overflow-hidden px-gutter pt-[calc(var(--spacing-nav)+24px)] pb-[60px] max-[900px]:pb-10 text-center"
       id="top"
       ref={rootRef}
     >

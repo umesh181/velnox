@@ -67,11 +67,11 @@ export default function About() {
 
   return (
     <section
-      className="mx-auto w-full px-gutter pt-[clamp(28px,4vh,48px)] pb-[clamp(90px,14vh,180px)]"
+      className="mx-auto w-full px-gutter pt-[clamp(28px,4vh,48px)] pb-[clamp(90px,14vh,180px)] max-[900px]:pb-[40px]"
       id="studio"
       ref={rootRef}
     >
-      <div className="mb-[clamp(28px,4vh,48px)] flex items-end justify-between gap-6">
+      <div className="mb-[clamp(28px,4vh,48px)] max-[900px]:mb-6 flex items-end justify-between gap-6">
         <p className="eyebrow">About</p>
         <span className="text-[13px] tabular-nums text-ink-40 whitespace-nowrap">
           (01)

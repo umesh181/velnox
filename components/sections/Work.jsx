@@ -67,7 +67,7 @@ function WorkShowcaseItem({ project, index, imageRight, onCardClick }) {
   };
 
   return (
-    <article className="work-card group mb-[clamp(72px,10vh,112px)] last:mb-0">
+    <article className="work-card group mb-[clamp(72px,10vh,112px)] max-[900px]:mb-10 last:mb-0">
       <a
         href={project.url || '#contact'}
         target={isExternal && !hasMultipleOptions ? '_blank' : undefined}
@@ -220,11 +220,11 @@ export default function Work() {
 
   return (
     <section
-      className="mx-auto w-full px-gutter pt-[clamp(90px,14vh,180px)] pb-[clamp(24px,4vh,40px)]"
+      className="mx-auto w-full px-gutter pt-[clamp(90px,14vh,180px)] pb-[clamp(24px,4vh,40px)] max-[900px]:pt-[48px] max-[900px]:pb-6"
       id="work"
       ref={rootRef}
     >
-      <div className="mb-[clamp(28px,4vh,48px)] flex items-end justify-between gap-6">
+      <div className="mb-[clamp(28px,4vh,48px)] max-[900px]:mb-6 flex items-end justify-between gap-6">
         <div>
           <h2 className="section__title mb-6 max-w-[18ch] text-[clamp(32px,5vw,76px)] font-medium leading-[1.08] tracking-[-0.03em]">
             Projects with proof

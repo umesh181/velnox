@@ -64,12 +64,12 @@ export default function Process() {
 
   return (
     <section
-      className="bg-bg-soft py-[clamp(90px,14vh,180px)]"
+      className="bg-bg-soft py-[clamp(90px,14vh,180px)] max-[900px]:py-[48px]"
       id="process"
       ref={rootRef}
     >
       <div className="mx-auto w-full px-gutter">
-        <div className="mb-[clamp(48px,8vh,96px)] flex items-end justify-between gap-6">
+        <div className="mb-[clamp(48px,8vh,96px)] max-[900px]:mb-8 flex items-end justify-between gap-6">
           <div>
             <p className="eyebrow mb-6">Approach</p>
             <h2 className="section__title max-w-[18ch] text-[clamp(32px,5vw,76px)] font-medium leading-[1.08] tracking-[-0.03em]">

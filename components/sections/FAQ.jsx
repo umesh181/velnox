@@ -49,12 +49,12 @@ export default function FAQ() {
 
   return (
     <section
-      className="mx-auto w-full px-gutter pt-[clamp(30px,4vh,60px)] pb-[clamp(90px,14vh,180px)]"
+      className="mx-auto w-full px-gutter pt-[clamp(30px,4vh,60px)] pb-[clamp(90px,14vh,180px)] max-[900px]:pt-8 max-[900px]:pb-[48px]"
       id="faq"
       ref={rootRef}
       aria-labelledby="faq-heading"
     >
-      <div className="mb-[clamp(48px,8vh,96px)] flex items-end justify-between gap-6">
+      <div className="mb-[clamp(48px,8vh,96px)] max-[900px]:mb-8 flex items-end justify-between gap-6">
         <div>
           <p className="eyebrow mb-6">FAQ</p>
           <h2
