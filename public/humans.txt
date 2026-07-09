@@ -1,0 +1,12 @@
+/* TEAM */
+Agency: Velnox Digital Agency
+Site: https://velnox.work
+Contact: agencyvelnox@gmail.com
+Location: Worldwide (remote)
+
+/* THANKS */
+Next.js, React, GSAP, Tailwind CSS, Three.js
+
+/* SITE */
+Last update: 2026/07/09
+Standards: HTML5, CSS3, JSON-LD, WCAG, llms.txt

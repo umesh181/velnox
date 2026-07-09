@@ -9,8 +9,21 @@ import Services from '@/components/sections/Services';
 import Work from '@/components/sections/Work';
 import Process from '@/components/sections/Process';
 import Testimonials from '@/components/sections/Testimonials';
+import FAQ from '@/components/sections/FAQ';
 import CTA from '@/components/sections/CTA';
 import Footer from '@/components/layout/Footer';
+import { DEFAULT_DESCRIPTION, SITE } from '@/lib/seo/config';
+
+export const metadata = {
+  title: `${SITE.name}® | Web Design, App Development & SEO Agency`,
+  description: DEFAULT_DESCRIPTION,
+  alternates: { canonical: '/' },
+  openGraph: {
+    title: `${SITE.name}® | Web Design, App Development & SEO Agency`,
+    description: DEFAULT_DESCRIPTION,
+    url: SITE.url,
+  },
+};
 
 export default function Home() {
   return (
@@ -18,7 +31,7 @@ export default function Home() {
       <Preloader />
       <div className="noise" aria-hidden="true" />
       <Nav />
-      <main>
+      <main id="main-content">
         <Hero />
         <Marquee />
         <VideoSection />
@@ -27,6 +40,7 @@ export default function Home() {
         <Work />
         <Process />
         <Testimonials />
+        <FAQ />
         <CTA />
       </main>
       <Footer />

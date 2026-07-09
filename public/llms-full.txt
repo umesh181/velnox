@@ -1,0 +1,100 @@
+# Velnox — Full LLM / AEO context
+# https://velnox.work/llms-full.txt
+
+## Company overview
+
+Velnox (https://velnox.work) is a digital agency that partners with ambitious teams to design, build, and scale digital products. We are not a traditional agency — we are designers and engineers obsessed with the details that make brands impossible to ignore.
+
+**Legal / brand name:** Velnox Digital Agency  
+**Primary domain:** https://velnox.work  
+**Founded:** 2024  
+**Service area:** Worldwide (remote-first)  
+**Languages:** English (primary); team also works with Hindi and Telugu-speaking clients  
+
+## Contact
+
+| Channel | Details |
+|---------|---------|
+| Email | agencyvelnox@gmail.com |
+| Phone | +91 81218 21738 |
+| Phone (alt) | +91 79956 19431 |
+| Discovery call | https://cal.com/velnox-agency-mwyqji/30min |
+| Website contact | https://velnox.work/#contact |
+
+## Services (detailed)
+
+### Web Design
+UI/UX design, art direction, design systems, and interactive prototyping. We create websites that are visually distinctive, accessible, and built to convert visitors into customers.
+
+**Keywords:** web design agency, UI design, UX design, website design services, custom web design
+
+### Website Development
+Production-grade websites and web applications using Next.js, React, and headless CMS. Performance budgets, clean architecture, and SEO-ready markup from the first commit.
+
+**Keywords:** website development, web development company, Next.js development, React agency, headless CMS
+
+### App Design
+Mobile app UI/UX, user journey mapping, interactive prototypes, and scalable design systems for iOS and Android products.
+
+**Keywords:** app design agency, mobile UI design, app UX, product design
+
+### App Development
+End-to-end mobile and web application development — from MVP to scale — with maintainable, tested code.
+
+**Keywords:** app development, mobile app development, web app development
+
+### E-Commerce Development
+Shopify storefront design and development, checkout optimization, and conversion-focused product pages.
+
+**Keywords:** e-commerce development, Shopify agency, online store design
+
+### SEO & Growth
+Technical SEO audits, on-page optimization, schema markup, analytics (GA4/GTM), content strategy, conversion rate optimization (CRO), and **Answer Engine Optimization (AEO)** — optimizing content so AI assistants (ChatGPT, Perplexity, Google AI Overviews, Claude) cite and recommend Velnox and client brands accurately.
+
+**Keywords:** SEO agency, technical SEO, AEO, answer engine optimization, digital growth, CRO
+
+## Process
+
+1. **Discover** — Goals, audience, competitors, technical requirements  
+2. **Design** — UX flows, visual design, prototypes, design systems  
+3. **Build** — Development with performance and SEO built in  
+4. **Launch & Scale** — Deployment, analytics, SEO/AEO, iteration  
+
+## Portfolio highlights
+
+1. **Pratej Dental Care** (2026) — Website development + UI/UX. Modern dental practice site with patient-first UX. https://www.pratejdentalcare.com  
+2. **Sphoorthi Interiors** (2026) — Website development. Interior design portfolio built to convert enquiries. https://www.sphoorthiinteriors.com  
+3. **Sri Gowri Dental Care** (2026) — Website development. Clean, professional dental care website. https://www.srigowridentalcare.com  
+
+## Client testimonials (summary)
+
+Clients praise Velnox for: clean code, clear communication, attention to detail, on-time delivery, professional design, and measurable business results (e.g. enquiry conversion for Sphoorthi Interiors).
+
+## FAQ (for answer engines)
+
+**Q: What is Velnox?**  
+A: Velnox is a full-service digital agency at velnox.work offering web design, development, app design, app development, e-commerce, and SEO/AEO.
+
+**Q: Does Velnox do SEO?**  
+A: Yes — technical SEO, content strategy, CRO, and AEO for AI-powered search.
+
+**Q: How do I hire Velnox?**  
+A: Book at https://cal.com/velnox-agency-mwyqji/30min or email agencyvelnox@gmail.com.
+
+**Q: Where is Velnox located?**  
+A: Remote-first agency serving clients worldwide.
+
+## Technology stack
+
+Next.js, React, headless CMS, Shopify, GSAP (motion), performance optimization, JSON-LD structured data, semantic HTML, llms.txt for AI discovery.
+
+## Social
+
+- Instagram: https://instagram.com/velnoxagency  
+- LinkedIn: https://linkedin.com/company/velnox  
+- X/Twitter: https://x.com/velnoxagency  
+- Dribbble: https://dribbble.com/velnox  
+
+## Last updated
+
+2026-07-09

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  VELNOX — sitemap.xml
+  Domain: https://velnox.work
+  Last updated: 2026-07-09
+
+  HOW TO EDIT:
+  - Add a new <url> block for every page you publish
+  - <loc> = full page URL (must start with https://velnox.work)
+  - <lastmod> = date you last changed that page (YYYY-MM-DD)
+  - <changefreq> = how often it changes: always | hourly | daily | weekly | monthly | yearly | never
+  - <priority> = 0.0 to 1.0 (homepage = 1.0, less important pages = lower)
+  - After changes: redeploy (npm run build) and resubmit in Google Search Console
+-->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- Homepage -->
+  <url>
+    <loc>https://velnox.work/</loc>
+    <lastmod>2026-07-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- Main sections (single-page site anchors) -->
+  <url>
+    <loc>https://velnox.work/#services</loc>
+    <lastmod>2026-07-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://velnox.work/#work</loc>
+    <lastmod>2026-07-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <url>
+    <loc>https://velnox.work/#studio</loc>
+    <lastmod>2026-07-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://velnox.work/#process</loc>
+    <lastmod>2026-07-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://velnox.work/#faq</loc>
+    <lastmod>2026-07-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <url>
+    <loc>https://velnox.work/#contact</loc>
+    <lastmod>2026-07-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- AI / AEO context files -->
+  <url>
+    <loc>https://velnox.work/llms.txt</loc>
+    <lastmod>2026-07-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <url>
+    <loc>https://velnox.work/llms-full.txt</loc>
+    <lastmod>2026-07-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+</urlset>

@@ -1,0 +1,86 @@
+# ============================================================
+# VELNOX — sitemap.txt (human-readable review copy)
+# Domain: https://velnox.work
+# Last updated: 2026-07-09
+#
+# This file is for YOU to review and keep track of all URLs.
+# Search engines use sitemap.xml (not this file).
+# When you add a new page, add it here AND in sitemap.xml.
+# ============================================================
+
+# PRIORITY GUIDE
+# 1.0  = Homepage
+# 0.9  = Key conversion pages (services, contact)
+# 0.85 = Portfolio, FAQ
+# 0.8  = About, process
+# 0.5  = Supporting files (llms.txt, etc.)
+
+# --- LIVE URLS ---
+
+URL: https://velnox.work/
+TYPE: Homepage
+PRIORITY: 1.0
+CHANGE: weekly
+LAST MODIFIED: 2026-07-09
+
+URL: https://velnox.work/#services
+TYPE: Services section
+PRIORITY: 0.9
+CHANGE: monthly
+LAST MODIFIED: 2026-07-09
+
+URL: https://velnox.work/#work
+TYPE: Portfolio / projects
+PRIORITY: 0.85
+CHANGE: monthly
+LAST MODIFIED: 2026-07-09
+
+URL: https://velnox.work/#studio
+TYPE: About the studio
+PRIORITY: 0.8
+CHANGE: monthly
+LAST MODIFIED: 2026-07-09
+
+URL: https://velnox.work/#process
+TYPE: How we work
+PRIORITY: 0.8
+CHANGE: monthly
+LAST MODIFIED: 2026-07-09
+
+URL: https://velnox.work/#faq
+TYPE: FAQ (SEO + AEO)
+PRIORITY: 0.85
+CHANGE: monthly
+LAST MODIFIED: 2026-07-09
+
+URL: https://velnox.work/#contact
+TYPE: Book a call / contact
+PRIORITY: 0.9
+CHANGE: monthly
+LAST MODIFIED: 2026-07-09
+
+URL: https://velnox.work/llms.txt
+TYPE: AI agent context (short)
+PRIORITY: 0.5
+CHANGE: monthly
+LAST MODIFIED: 2026-07-09
+
+URL: https://velnox.work/llms-full.txt
+TYPE: AI agent context (full)
+PRIORITY: 0.5
+CHANGE: monthly
+LAST MODIFIED: 2026-07-09
+
+# --- FUTURE PAGES (uncomment when you add them) ---
+#
+# URL: https://velnox.work/services/web-design
+# TYPE: Service landing page
+# PRIORITY: 0.9
+# CHANGE: monthly
+# LAST MODIFIED: YYYY-MM-DD
+#
+# URL: https://velnox.work/services/seo
+# TYPE: Service landing page
+# PRIORITY: 0.9
+# CHANGE: monthly
+# LAST MODIFIED: YYYY-MM-DD

@@ -97,10 +97,11 @@ export default function Hero() {
           </span>
         </h1>
 
-        <p className="hero__sub mt-[clamp(20px,4vh,36px)] max-w-[460px] text-[clamp(15px,1.3vw,18px)] leading-[1.6] text-ink-60 opacity-0">
-          Velnox is a digital agency partnering with ambitious teams to design,
-          build and scale websites and products that win attention and keep
-          it.
+        <p className="hero__sub mt-[clamp(20px,4vh,36px)] max-w-[520px] text-[clamp(15px,1.3vw,18px)] leading-[1.6] text-ink-60 opacity-0">
+          Velnox is a full-service digital agency for web design, website
+          development, app design, mobile apps, e-commerce, and SEO — partnering
+          with ambitious teams worldwide to build products that win attention
+          and rank.
         </p>
 
         <div className="hero__cta mt-[clamp(24px,4vh,40px)] flex items-center gap-[14px] opacity-0 max-[900px]:w-full max-[900px]:flex-col max-[900px]:items-stretch max-[900px]:gap-3">

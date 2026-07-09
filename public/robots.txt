@@ -1,0 +1,51 @@
+# ============================================================
+# VELNOX — robots.txt
+# Domain: https://velnox.work
+# Last updated: 2026-07-09
+#
+# HOW TO EDIT:
+# - Allow/Disallow controls what search engines can crawl
+# - User-agent: * = all bots (Google, Bing, etc.)
+# - Sitemap line must point to your live sitemap URL
+# - After changes: redeploy the site (npm run build)
+# ============================================================
+
+# --- All search engines (Google, Bing, DuckDuckGo, etc.) ---
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /_next/
+
+# --- OpenAI / ChatGPT ---
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+# --- Google AI training & AI Overviews ---
+User-agent: Google-Extended
+Allow: /
+
+# --- Perplexity ---
+User-agent: PerplexityBot
+Allow: /
+
+# --- Anthropic / Claude ---
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+# --- Apple Intelligence ---
+User-agent: Applebot-Extended
+Allow: /
+
+# --- Cohere ---
+User-agent: cohere-ai
+Allow: /
+
+# --- Site identity & sitemap (required for SEO) ---
+Host: https://velnox.work
+Sitemap: https://velnox.work/sitemap.xml

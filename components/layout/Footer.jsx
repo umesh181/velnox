@@ -107,6 +107,7 @@ export default function Footer() {
           <a href="#services" className={link}>Expertise</a>
           <a href="#studio" className={link}>About</a>
           <a href="#process" className={link}>Approach</a>
+          <a href="#faq" className={link}>FAQ</a>
         </div>
         <div>
           <h5 className={heading}>Socials</h5>

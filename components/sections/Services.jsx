@@ -209,7 +209,7 @@ export default function Services() {
                 {s.image ? (
                   <img
                     src={s.image}
-                    alt=""
+                    alt={`${s.title} service by Velnox digital agency`}
                     loading="lazy"
                     decoding="async"
                     className="absolute left-1/2 top-1/2 h-[80%] w-[80%] -translate-x-1/2 -translate-y-1/2 object-contain"
