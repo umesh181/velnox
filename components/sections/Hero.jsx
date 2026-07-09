@@ -5,6 +5,7 @@ import dynamic from 'next/dynamic';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import useMagnetic from '@/hooks/useMagnetic';
+import { isTouchDevice } from '@/lib/perf';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -21,6 +22,7 @@ export default function Hero() {
     const root = rootRef.current;
     if (!root) return;
 
+    const mobile = isTouchDevice();
     const lines = root.querySelectorAll('.hero__title .mask-line > span');
     gsap.set(lines, { y: '110%' });
 
@@ -28,8 +30,8 @@ export default function Hero() {
       const tl = gsap.timeline();
       tl.to(lines, {
         y: 0,
-        duration: 1.2,
-        stagger: 0.09,
+        duration: mobile ? 0.85 : 1.2,
+        stagger: mobile ? 0.06 : 0.09,
         ease: 'power4.out',
       })
         .to(
@@ -45,11 +47,13 @@ export default function Hero() {
     };
 
     window.addEventListener('velnox:loaded', play, { once: true });
-    const fallback = setTimeout(play, 4800);
+    const fallback = setTimeout(play, mobile ? 2200 : 4800);
 
-    // particle field falls away and fades as you scroll into the page
     const ctx = gsap.context(() => {
-      gsap.to(root.querySelector('.hero__canvas'), {
+      const canvas = root.querySelector('.hero__canvas');
+      if (!canvas) return;
+
+      gsap.to(canvas, {
         yPercent: 22,
         opacity: 0,
         ease: 'none',
@@ -57,7 +61,7 @@ export default function Hero() {
           trigger: root,
           start: 'top top',
           end: 'bottom top',
-          scrub: true,
+          scrub: mobile ? 0.6 : true,
         },
       });
     }, root);
@@ -75,7 +79,6 @@ export default function Hero() {
       id="top"
       ref={rootRef}
     >
-      {/* hero__canvas — GSAP scrubs this on scroll; three.js mounts a <canvas> inside */}
       <div className="hero__canvas absolute inset-0 z-0 [&_canvas]:block [&_canvas]:h-full [&_canvas]:w-full">
         <HeroCanvas />
       </div>

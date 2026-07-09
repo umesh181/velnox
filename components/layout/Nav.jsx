@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
+import { isTouchDevice } from '@/lib/perf';
 
 const LINKS = [
   { label: 'About', href: '#studio' },
@@ -27,7 +28,7 @@ export default function Nav() {
       });
     };
     window.addEventListener('velnox:loaded', show, { once: true });
-    const fallback = setTimeout(show, 4500);
+    const fallback = setTimeout(show, isTouchDevice() ? 2400 : 4500);
     return () => {
       window.removeEventListener('velnox:loaded', show);
       clearTimeout(fallback);

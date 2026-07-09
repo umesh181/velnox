@@ -30,11 +30,14 @@ export default function Marquee() {
   useEffect(() => {
     const track = trackRef.current;
     if (!track) return;
+
+    const mobile = window.innerWidth < 900;
     const tween = gsap.to(track, {
       xPercent: -50,
-      duration: 28,
+      duration: mobile ? 32 : 28,
       ease: 'none',
       repeat: -1,
+      force3D: true,
     });
     return () => tween.kill();
   }, []);

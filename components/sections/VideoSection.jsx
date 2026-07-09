@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import MediaVideo from '@/components/ui/MediaVideo';
+import { isTouchDevice } from '@/lib/perf';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -16,12 +17,12 @@ export default function VideoSection() {
     const root = rootRef.current;
     if (!root) return;
 
+    const mobile = isTouchDevice();
+
     const playVideo = () => {
       const video = videoRef.current;
       if (!video || !isPlaying) return;
-      if (video.readyState < 2) {
-        video.load();
-      }
+      if (video.readyState < 2) video.load();
       void video.play().catch(() => {});
     };
 
@@ -33,34 +34,53 @@ export default function VideoSection() {
       const card = root.querySelector('.video-card');
       if (!card) return;
 
-      gsap.set(card, { transformOrigin: 'center center' });
+      gsap.set(card, { transformOrigin: 'center center', force3D: true });
 
-      gsap.fromTo(
-        card,
-        {
-          scale: 0.9,
-          scaleX: 0.86,
-          opacity: 0.35,
-          y: 72,
-          borderRadius: '56px',
-          clipPath: 'inset(10% 8% round 56px)',
-        },
-        {
-          scale: 1,
-          scaleX: 1,
-          opacity: 1,
-          y: 0,
-          borderRadius: '24px',
-          clipPath: 'inset(0% 0% round 24px)',
-          ease: 'power2.out',
-          scrollTrigger: {
-            trigger: root,
-            start: 'top 92%',
-            end: 'top 28%',
-            scrub: 1.15,
+      if (mobile) {
+        gsap.fromTo(
+          card,
+          { scale: 0.92, opacity: 0.35, y: 56 },
+          {
+            scale: 1,
+            opacity: 1,
+            y: 0,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: root,
+              start: 'top 92%',
+              end: 'top 35%',
+              scrub: 0.5,
+            },
+          }
+        );
+      } else {
+        gsap.fromTo(
+          card,
+          {
+            scale: 0.9,
+            scaleX: 0.86,
+            opacity: 0.35,
+            y: 72,
+            borderRadius: '56px',
+            clipPath: 'inset(10% 8% round 56px)',
           },
-        }
-      );
+          {
+            scale: 1,
+            scaleX: 1,
+            opacity: 1,
+            y: 0,
+            borderRadius: '24px',
+            clipPath: 'inset(0% 0% round 24px)',
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: root,
+              start: 'top 92%',
+              end: 'top 28%',
+              scrub: 1.15,
+            },
+          }
+        );
+      }
 
       ScrollTrigger.create({
         trigger: root,
@@ -89,10 +109,7 @@ export default function VideoSection() {
       return;
     }
 
-    if (video.readyState < 2) {
-      video.load();
-    }
-
+    if (video.readyState < 2) video.load();
     void video.play().catch(() => {});
     setIsPlaying(true);
   };
@@ -105,7 +122,7 @@ export default function VideoSection() {
     >
       <div
         onClick={(e) => handlePlayPause(e)}
-        className="video-card group relative h-[clamp(560px,88vh,1080px)] max-[900px]:h-[clamp(340px,58vh,480px)] w-full cursor-pointer overflow-hidden rounded-[24px] border border-line/10 bg-black shadow-2xl will-change-[transform,opacity,clip-path]"
+        className="video-card group relative h-[clamp(560px,88vh,1080px)] max-[900px]:h-[clamp(340px,58vh,480px)] w-full cursor-pointer overflow-hidden rounded-[24px] border border-line/10 bg-black shadow-2xl will-change-[transform,opacity]"
       >
         <MediaVideo
           ref={videoRef}

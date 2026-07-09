@@ -3,13 +3,6 @@
 import { useEffect, useRef } from 'react';
 import * as THREE from 'three';
 
-/*
-  Hero WebGL: an ocean of particles rippling in slow waves beneath the
-  headline. Muted warm-grey dots with occasional electric-blue sparks,
-  camera sways gently toward the cursor. Pauses when the tab is hidden,
-  respects prefers-reduced-motion, lighter grid on mobile.
-*/
-
 export default function HeroCanvas() {
   const mountRef = useRef(null);
 
@@ -17,9 +10,7 @@ export default function HeroCanvas() {
     const mount = mountRef.current;
     if (!mount) return;
 
-    const reduced = window.matchMedia(
-      '(prefers-reduced-motion: reduce)'
-    ).matches;
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const isMobile = window.innerWidth < 900;
 
     const scene = new THREE.Scene();
@@ -33,23 +24,22 @@ export default function HeroCanvas() {
     camera.lookAt(0, -1, 0);
 
     const renderer = new THREE.WebGLRenderer({
-      antialias: true,
+      antialias: !isMobile,
       alpha: true,
       powerPreference: 'high-performance',
     });
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, isMobile ? 1.5 : 2));
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, isMobile ? 1.25 : 2));
     renderer.setSize(mount.clientWidth, mount.clientHeight);
     mount.appendChild(renderer.domElement);
 
-    // particle grid
-    const COLS = isMobile ? 90 : 130;
-    const ROWS = isMobile ? 42 : 60;
+    const COLS = isMobile ? 56 : 130;
+    const ROWS = isMobile ? 28 : 60;
     const W = 30;
     const D = 16;
     const count = COLS * ROWS;
     const positions = new Float32Array(count * 3);
     const colors = new Float32Array(count * 3);
-    const ink = new THREE.Color('#8a877f'); // muted so the type stays king
+    const ink = new THREE.Color('#8a877f');
     const accent = new THREE.Color('#3440f0');
 
     let i3 = 0;
@@ -70,7 +60,7 @@ export default function HeroCanvas() {
     geo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
     geo.setAttribute('color', new THREE.BufferAttribute(colors, 3));
     const mat = new THREE.PointsMaterial({
-      size: 0.045,
+      size: isMobile ? 0.05 : 0.045,
       vertexColors: true,
       transparent: true,
       opacity: 0.8,
@@ -82,6 +72,7 @@ export default function HeroCanvas() {
     let mouseX = 0;
     let mouseY = 0;
     const onMouse = (e) => {
+      if (isMobile) return;
       mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
       mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
     };
@@ -96,11 +87,14 @@ export default function HeroCanvas() {
     const clock = new THREE.Clock();
     let rafId;
     let running = true;
+    let frame = 0;
 
     const tick = () => {
       if (!running) return;
+      frame += 1;
       const t = clock.getElapsedTime();
-      if (!reduced) {
+
+      if (!reduced && (!isMobile || frame % 2 === 0)) {
         const pos = geo.attributes.position.array;
         let j = 0;
         for (let r = 0; r < ROWS; r++) {
@@ -114,11 +108,14 @@ export default function HeroCanvas() {
           }
         }
         geo.attributes.position.needsUpdate = true;
-        points.rotation.z = mouseX * 0.03;
-        camera.position.x += (mouseX * 0.8 - camera.position.x) * 0.04;
-        camera.position.y += (4.2 + mouseY * 0.5 - camera.position.y) * 0.04;
-        camera.lookAt(0, -1, 0);
+        if (!isMobile) {
+          points.rotation.z = mouseX * 0.03;
+          camera.position.x += (mouseX * 0.8 - camera.position.x) * 0.04;
+          camera.position.y += (4.2 + mouseY * 0.5 - camera.position.y) * 0.04;
+          camera.lookAt(0, -1, 0);
+        }
       }
+
       renderer.render(scene, camera);
       rafId = requestAnimationFrame(tick);
     };

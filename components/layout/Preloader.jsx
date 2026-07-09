@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
+import { isTouchDevice } from '@/lib/perf';
 
 export default function Preloader() {
   const rootRef = useRef(null);
@@ -12,32 +13,33 @@ export default function Preloader() {
     const root = rootRef.current;
     if (!root) return;
 
+    const mobile = isTouchDevice();
     window.__lenis?.stop();
 
     const letters = root.querySelectorAll('.preloader__brand span:not(.reg)');
     const reg = root.querySelector('.preloader__brand .reg');
     const counter = { v: 0 };
 
-    const tl = gsap.timeline({
-      onComplete: () => {
-        window.__lenis?.start();
-        window.dispatchEvent(new CustomEvent('velnox:loaded'));
-        setDone(true);
-      },
-    });
+    const finish = () => {
+      window.__lenis?.start();
+      window.dispatchEvent(new CustomEvent('velnox:loaded'));
+      setDone(true);
+    };
+
+    const tl = gsap.timeline({ onComplete: finish });
 
     tl.to(letters, {
       y: 0,
-      duration: 0.9,
-      stagger: 0.055,
+      duration: mobile ? 0.55 : 0.9,
+      stagger: mobile ? 0.035 : 0.055,
       ease: 'power4.out',
-      delay: 0.2,
+      delay: mobile ? 0.1 : 0.2,
     })
       .to(
         counter,
         {
           v: 100,
-          duration: 1.6,
+          duration: mobile ? 0.9 : 1.6,
           ease: 'power2.inOut',
           onUpdate: () => {
             if (countRef.current)
@@ -47,18 +49,22 @@ export default function Preloader() {
         '<'
       )
       .to(reg, { opacity: 1, duration: 0.5, ease: 'power2.out' }, '<0.5')
-      .to(reg, { opacity: 0, duration: 0.3 }, '>0.9')
-      .to(letters, {
-        y: '-110%',
-        duration: 0.7,
-        stagger: 0.04,
-        ease: 'power3.in',
-      }, '<')
+      .to(reg, { opacity: 0, duration: 0.3 }, mobile ? '>0.5' : '>0.9')
+      .to(
+        letters,
+        {
+          y: '-110%',
+          duration: mobile ? 0.45 : 0.7,
+          stagger: mobile ? 0.03 : 0.04,
+          ease: 'power3.in',
+        },
+        '<'
+      )
       .to(
         root,
         {
           yPercent: -100,
-          duration: 0.9,
+          duration: mobile ? 0.6 : 0.9,
           ease: 'power4.inOut',
         },
         '-=0.35'
@@ -76,7 +82,6 @@ export default function Preloader() {
       className="fixed inset-0 z-[500] flex items-center justify-center bg-ink text-bg will-change-transform"
       ref={rootRef}
     >
-      {/* preloader__brand — GSAP selects the letter spans + .reg by class */}
       <div
         className="preloader__brand flex overflow-hidden pt-[0.08em] pr-[0.12em] text-[clamp(48px,10vw,140px)] font-bold uppercase leading-none tracking-[-0.04em]"
         aria-label="Velnox"

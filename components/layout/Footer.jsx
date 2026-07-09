@@ -28,39 +28,28 @@ export default function Footer() {
         scrollTrigger: { trigger: root, start: 'top 65%' },
       });
 
-      // confetti burst: cards launch upward inside the footer (behind the
-      // text), arc like confetti, and fall back below the bottom edge
       const cards = root.querySelectorAll('.footer__pop-card');
       const rand = gsap.utils.random;
+      const mobile = window.innerWidth < 901;
 
       const buildBurst = () => {
         const h = root.offsetHeight;
         const tl = gsap.timeline();
         cards.forEach((card, i) => {
-          const delay = rand(0, 0.35);
-          // every third card is a "big pop" that reaches the top of the footer;
-          // the rest fill the middle — like natural confetti
-          const peak =
-            i % 3 === 0
+          const delay = rand(0, mobile ? 0.2 : 0.35);
+          const peak = mobile
+            ? rand(h * 0.35, h * 0.75)
+            : i % 3 === 0
               ? rand(h * 1.0, h * 1.25)
               : rand(h * 0.45, h * 0.95);
-          // higher pops travel a bit longer — feels physical
           const up = 0.45 + (peak / h) * 0.4;
           const down = up * rand(1.15, 1.35);
-          const drift = rand(-180, 180);
-          const spin = rand(-360, 360);
+          const drift = rand(mobile ? -90 : -180, mobile ? 90 : 180);
+          const spin = rand(mobile ? -180 : -360, mobile ? 180 : 360);
 
-          tl.set(card, { y: 0, x: 0, rotation: rand(-30, 30) }, 0)
-            .to(
-              card,
-              { y: -peak, duration: up, ease: 'power2.out' },
-              delay
-            )
-            .to(
-              card,
-              { y: 60, duration: down, ease: 'power2.in' },
-              delay + up
-            )
+          tl.set(card, { y: 0, x: 0, rotation: rand(-30, 30), force3D: true }, 0)
+            .to(card, { y: -peak, duration: up, ease: 'power2.out' }, delay)
+            .to(card, { y: 60, duration: down, ease: 'power2.in' }, delay + up)
             .to(
               card,
               { x: drift, rotation: `+=${spin}`, duration: up + down, ease: 'none' },
@@ -73,10 +62,11 @@ export default function Footer() {
       let burst;
       ScrollTrigger.create({
         trigger: root,
-        start: 'top 55%', // fires as the footer fills the viewport
+        start: 'top 55%',
+        once: true,
         onEnter: () => {
           burst?.kill();
-          burst = buildBurst(); // fresh randomness every entry
+          burst = buildBurst();
         },
       });
     }, root);

@@ -5,6 +5,7 @@ import Lenis from 'lenis';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import ContactSplash from '@/components/layout/ContactSplash';
+import { isTouchDevice } from '@/lib/perf';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -22,17 +23,21 @@ export default function SmoothScroll({ children }) {
   const splashRef = useRef(null);
 
   useEffect(() => {
+    const touch = isTouchDevice();
+
     const lenis = new Lenis({
-      lerp: 0.1,
+      lerp: touch ? 0.12 : 0.1,
       smoothWheel: true,
+      smoothTouch: false,
+      touchMultiplier: 1,
     });
     window.__lenis = lenis;
 
-    lenis.on('scroll', () => ScrollTrigger.update());
+    lenis.on('scroll', ScrollTrigger.update);
 
     const raf = (time) => lenis.raf(time * 1000);
     gsap.ticker.add(raf);
-    gsap.ticker.lagSmoothing(0);
+    if (!touch) gsap.ticker.lagSmoothing(0);
 
     const onClick = async (e) => {
       const a = e.target.closest('a[href^="#"]');
@@ -49,8 +54,9 @@ export default function SmoothScroll({ children }) {
         return;
       }
 
-      lenis.scrollTo(target, { offset: -60, duration: 1.4 });
+      lenis.scrollTo(target, { offset: -60, duration: touch ? 1 : 1.4 });
     };
+
     document.addEventListener('click', onClick);
 
     return () => {
