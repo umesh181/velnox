@@ -74,6 +74,45 @@ export default function CTA() {
   }, []);
 
   useEffect(() => {
+    const calRoot = document.getElementById('my-cal-inline-30min');
+    if (!calRoot) return;
+
+    const isolateCalScroll = () => {
+      calRoot.setAttribute('data-lenis-prevent', 'true');
+      calRoot.style.overscrollBehavior = 'contain';
+
+      const iframe = calRoot.querySelector('iframe');
+      if (iframe) {
+        iframe.setAttribute('data-lenis-prevent', 'true');
+      }
+    };
+
+    isolateCalScroll();
+    const observer = new MutationObserver(isolateCalScroll);
+    observer.observe(calRoot, { childList: true, subtree: true });
+
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const wrap = document.querySelector('.cta__cal-wrap');
+    if (!wrap) return;
+
+    const pausePageScroll = () => window.__lenis?.stop();
+    const resumePageScroll = () => window.__lenis?.start();
+
+    wrap.addEventListener('touchstart', pausePageScroll, { passive: true });
+    wrap.addEventListener('touchend', resumePageScroll, { passive: true });
+    wrap.addEventListener('touchcancel', resumePageScroll, { passive: true });
+
+    return () => {
+      wrap.removeEventListener('touchstart', pausePageScroll);
+      wrap.removeEventListener('touchend', resumePageScroll);
+      wrap.removeEventListener('touchcancel', resumePageScroll);
+    };
+  }, []);
+
+  useEffect(() => {
     const root = rootRef.current;
     if (!root) return;
 
@@ -116,10 +155,15 @@ export default function CTA() {
     >
       <p className="eyebrow mb-5 justify-center">Your move</p>
       <div
-        id="my-cal-inline-30min"
-        className="cta__cal mx-auto w-full max-w-4xl"
-        style={{ width: '100%', height: '100%', overflow: 'scroll', minHeight: '480px' }}
-      />
+        className="cta__cal-wrap mx-auto w-full max-w-4xl"
+        data-lenis-prevent="true"
+      >
+        <div
+          id="my-cal-inline-30min"
+          className="cta__cal w-full min-h-[480px] overscroll-contain [touch-action:pan-y]"
+          data-lenis-prevent="true"
+        />
+      </div>
       <div className="cta__actions mt-[clamp(24px,4vh,40px)] flex flex-wrap items-center justify-center gap-[18px]">
         <a href="#work" className="btn-outline">
           <span>Browse work first</span>

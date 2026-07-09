@@ -237,4 +237,11 @@
     display: block;
     will-change: transform;
   }
+
+  /* Cal.com embed — keep slot scrolling inside the widget, not the page */
+  .cta__cal-wrap,
+  .cta__cal,
+  .cta__cal iframe {
+    overscroll-behavior: contain;
+  }
 }
