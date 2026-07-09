@@ -14,7 +14,7 @@ const TESTIMONIALS = [
   {
     avatar: '/images/star_test.webp',
     quote:
-      '"Great experience working with ARAVIND. They did a solid job building my website - the code is clean, the site is functional, and they were easy to communicate with throughout the development process. Very happy with the outcome and would work with them again."',
+      '"Great experience working with the Velnox team. They did a solid job building my website - the code is clean, the site is functional, and they were easy to communicate with throughout the development process. Very happy with the outcome and would work with them again."',
     name: 'Dr. Manjunatha Reddy',
     title: 'Orthodontist & Aligner Expert',
     avatarPosition: 'center 20%',
@@ -23,7 +23,7 @@ const TESTIMONIALS = [
   {
     avatar: '/images/pratej_test.webp',
     quote:
-      '"A wonderful experience working with Mr.Aravind. He was attentive to every detail I mentioned, communicated clearly throughout the project, and delivered a professional, well-designed website that exceeded my expectations. I highly recommend their services."',
+      '"A wonderful experience working with the Velnox team. They were attentive to every detail I mentioned, communicated clearly throughout the project, and delivered a professional, well-designed website that exceeded my expectations. I highly recommend their services."',
     name: 'Dr. K Pratej Kiran',
     title: 'Pediatric Dentist & Root Canal Specialist',
     avatarPosition: 'center top',
@@ -32,7 +32,7 @@ const TESTIMONIALS = [
   {
     avatar: '/images/sphoorthi_test.jpeg',
     quote:
-      '"Highly impressed with Aravind and the team! They built a stunning, high-performance portfolio website for Sphoorthi Interiors. The layout is elegant, it presents our design work beautifully, and it has already started converting enquiries. Very professional, responsive, and highly recommended!"',
+      '"Highly impressed with the Velnox team! They built a stunning, high-performance portfolio website for Sphoorthi Interiors. The layout is elegant, it presents our design work beautifully, and it has already started converting enquiries. Very professional, responsive, and highly recommended!"',
     name: 'Venkateshwarlu Kompelli',
     title: 'Interior Designer · Sphoorthi Interiors',
     avatarPosition: 'center top',
@@ -41,7 +41,7 @@ const TESTIMONIALS = [
   {
     avatar: '/images/gowri_test.webp',
     quote:
-      '"Excellent service by Mr. Aravind! The whole team was very professional, responsive, and delivered a clean, modern website exactly as requested. They understood my requirements well, completed the project on time, and provided great support throughout. Highly recommended for anyone looking for reliable and quality website development."',
+      '"Excellent service by the Velnox team! The whole team was very professional, responsive, and delivered a clean, modern website exactly as requested. They understood my requirements well, completed the project on time, and provided great support throughout. Highly recommended for anyone looking for reliable and quality website development."',
     name: 'Dr. N Sri Gowri',
     title: 'Prosthodontist & TMJ Specialist',
     avatarPosition: 'center 20%',
