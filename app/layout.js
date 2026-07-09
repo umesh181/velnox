@@ -7,8 +7,8 @@ import {
 } from '@/lib/seo/config';
 
 const title = {
-  default: `${SITE.name}® | ${SITE.tagline}`,
-  template: `%s | ${SITE.name}®`,
+  default: `Velnox Digital Agency | Web Design, Apps & SEO — velnox.work`,
+  template: `%s | Velnox®`,
 };
 
 export const metadata = {

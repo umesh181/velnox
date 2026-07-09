@@ -82,12 +82,12 @@ export default function Hero() {
 
       <div className="relative z-[1] flex flex-col items-center">
         <p className="hero__eyebrow eyebrow mb-[clamp(20px,4vh,40px)] opacity-0">
-          Digital agency · Worldwide
+          Velnox® · Digital Agency · velnox.work
         </p>
 
-        <h1 className="hero__title max-w-[18ch] text-[clamp(40px,6.4vw,96px)] font-bold uppercase leading-[0.98] tracking-[-0.045em] max-[900px]:text-[clamp(40px,10.4vw,64px)] max-[900px]:leading-[1.02]">
+        <h1 className="hero__title max-w-[20ch] text-[clamp(40px,6.4vw,96px)] font-bold uppercase leading-[0.98] tracking-[-0.045em] max-[900px]:text-[clamp(40px,10.4vw,64px)] max-[900px]:leading-[1.02]">
           <span className="mask-line">
-            <span>We craft digital</span>
+            <span>Velnox builds digital</span>
           </span>
           <span className="mask-line">
             <span>

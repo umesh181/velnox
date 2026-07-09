@@ -3,11 +3,12 @@
 # Domain: https://velnox.work
 # Last updated: 2026-07-09
 #
-# HOW TO EDIT:
-# - Allow/Disallow controls what search engines can crawl
-# - User-agent: * = all bots (Google, Bing, etc.)
-# - Sitemap line must point to your live sitemap URL
-# - After changes: redeploy the site (npm run build)
+# HOW TO GET ON GOOGLE (if not showing yet):
+# 1. Deploy latest build (npm run build -> upload out/ folder)
+# 2. Verify at https://search.google.com/search-console
+# 3. Submit sitemap: https://velnox.work/sitemap.xml
+# 4. Click "Request Indexing" on your homepage
+# New sites usually take 3-14 days to appear on Google.
 # ============================================================
 
 # --- All search engines (Google, Bing, DuckDuckGo, etc.) ---

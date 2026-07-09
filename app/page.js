@@ -15,11 +15,11 @@ import Footer from '@/components/layout/Footer';
 import { DEFAULT_DESCRIPTION, SITE } from '@/lib/seo/config';
 
 export const metadata = {
-  title: `${SITE.name}® | Web Design, App Development & SEO Agency`,
+  title: 'Velnox Digital Agency | Web Design, App Development & SEO',
   description: DEFAULT_DESCRIPTION,
   alternates: { canonical: '/' },
   openGraph: {
-    title: `${SITE.name}® | Web Design, App Development & SEO Agency`,
+    title: 'Velnox Digital Agency | Web Design, App Development & SEO',
     description: DEFAULT_DESCRIPTION,
     url: SITE.url,
   },
