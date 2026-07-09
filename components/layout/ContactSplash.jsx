@@ -82,17 +82,16 @@ const ContactSplash = forwardRef(function ContactSplash(_, ref) {
 
         tl.to(letters, {
           y: 0,
-          duration: 0.9,
-          stagger: 0.055,
-          ease: 'power4.out',
-          delay: 0.15,
+          duration: 0.35,
+          stagger: 0.02,
+          ease: 'power3.out',
         })
           .to(
             counter,
             {
               v: 100,
-              duration: 1.4,
-              ease: 'power2.inOut',
+              duration: 0.55,
+              ease: 'power2.out',
               onUpdate: () => {
                 if (countRef.current) {
                   countRef.current.textContent = `${Math.round(counter.v)}%`;
@@ -101,15 +100,15 @@ const ContactSplash = forwardRef(function ContactSplash(_, ref) {
             },
             '<'
           )
-          .to(reg, { opacity: 1, duration: 0.5, ease: 'power2.out' }, '<0.45')
-          .to(reg, { opacity: 0, duration: 0.3 }, '>0.75')
+          .to(reg, { opacity: 1, duration: 0.2, ease: 'power2.out' }, '<0.2')
+          .to(reg, { opacity: 0, duration: 0.15 }, '>0.25')
           .call(finishScroll)
           .to(
             letters,
             {
               y: '-110%',
-              duration: 0.7,
-              stagger: 0.04,
+              duration: 0.35,
+              stagger: 0.02,
               ease: 'power3.in',
             },
             '<'
@@ -118,10 +117,10 @@ const ContactSplash = forwardRef(function ContactSplash(_, ref) {
             root,
             {
               yPercent: -100,
-              duration: 0.9,
-              ease: 'power4.inOut',
+              duration: 0.5,
+              ease: 'power3.inOut',
             },
-            '-=0.35'
+            '-=0.2'
           );
       }),
   }));

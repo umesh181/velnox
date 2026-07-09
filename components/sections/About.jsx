@@ -48,13 +48,13 @@ export default function About() {
 
       gsap.to(words, {
         opacity: 1,
-        duration: 0.65,
-        stagger: 0.018,
-        ease: 'power2.out',
+        stagger: 0.1,
+        ease: 'none',
         scrollTrigger: {
-          trigger: root,
-          start: 'top 55%',
-          toggleActions: 'play none none none',
+          trigger: '.about__statement',
+          start: 'top 85%',
+          end: 'bottom 50%',
+          scrub: 0.8,
         },
       });
     }, root);

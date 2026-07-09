@@ -5,7 +5,6 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { PROJECTS } from '@/data/projects';
 import WorkProjectModal from '@/components/sections/WorkProjectModal';
-import ScrambleText from '@/components/ui/ScrambleText';
 import { onSectionGoto, revealElements } from '@/lib/sectionReveal';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -19,20 +18,20 @@ function WorkCardVisual({ project }) {
         className="relative h-full w-full overflow-hidden rounded-card"
         style={{ background: gradient }}
       >
-        <div className="absolute inset-[7%] sm:inset-[9%]">
+        <div className="absolute inset-[4%] sm:inset-[5%]">
           <img
             src={mockups.laptop}
             alt={`${project.name} laptop mockup`}
             loading="lazy"
             decoding="async"
-            className="work-card__img absolute left-[1%] top-[4%] h-auto w-[71%] object-contain drop-shadow-[0_32px_64px_rgba(17,56,47,0.14)]"
+            className="work-card__img absolute left-0 top-[4%] h-auto w-[68%] object-contain drop-shadow-[0_32px_64px_rgba(17,56,47,0.14)]"
           />
           <img
             src={mockups.mobile}
             alt={`${project.name} mobile mockup`}
             loading="lazy"
             decoding="async"
-            className="work-card__img work-card__img--mobile absolute bottom-[2%] right-[1%] z-[2] h-auto w-[27%] object-contain drop-shadow-[0_36px_48px_rgba(17,56,47,0.18)]"
+            className="work-card__img work-card__img--mobile absolute bottom-[2%] right-0 z-[2] h-auto w-[25%] object-contain drop-shadow-[0_36px_48px_rgba(17,56,47,0.18)]"
           />
         </div>
       </div>
@@ -102,20 +101,8 @@ function WorkShowcaseItem({ project, index, imageRight, onCardClick }) {
             }`}
           >
             <div className="mb-6 flex items-end justify-between gap-6">
-              <span className="work-card__index relative inline-block leading-none">
-                <span
-                  className="block text-[clamp(52px,6vw,88px)] font-bold tracking-[-0.05em] text-ink/[0.08]"
-                  aria-hidden="true"
-                >
-                  {indexLabel}
-                </span>
-                <span
-                  className="work-card__index-fill absolute inset-0 block overflow-hidden text-[clamp(52px,6vw,88px)] font-bold tracking-[-0.05em] text-ink"
-                  aria-hidden="true"
-                >
-                  <span className="work-card__index-fill-inner block">{indexLabel}</span>
-                </span>
-                <span className="sr-only">{indexLabel}</span>
+              <span className="text-[clamp(52px,6vw,88px)] font-bold tracking-[-0.05em] text-ink/[0.16] leading-none">
+                {indexLabel}
               </span>
               <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-ink-40">
                 {project.year || '2025'}
@@ -126,11 +113,9 @@ function WorkShowcaseItem({ project, index, imageRight, onCardClick }) {
               {project.tags}
             </p>
 
-            <ScrambleText
-              text={project.name}
-              as="h3"
-              className="mb-5 text-[clamp(28px,3.6vw,48px)] font-bold uppercase leading-[1.02] tracking-[-0.035em]"
-            />
+            <h3 className="mb-5 text-[clamp(28px,3.6vw,48px)] font-bold uppercase leading-[1.02] tracking-[-0.035em]">
+              {project.name}
+            </h3>
 
             <p className="mb-8 max-w-[38ch] text-[clamp(15px,1.25vw,17px)] leading-[1.7] text-ink-60">
               {project.description}
@@ -193,22 +178,6 @@ export default function Work() {
         scrollTrigger: { trigger: root, start: 'top 78%' },
       });
 
-      root.querySelectorAll('.work-card').forEach((card) => {
-        const fill = card.querySelector('.work-card__index-fill');
-        if (!fill) return;
-
-        gsap.set(fill, { clipPath: 'inset(100% 0% 0% 0%)' });
-        gsap.to(fill, {
-          clipPath: 'inset(0% 0% 0% 0%)',
-          ease: 'none',
-          scrollTrigger: {
-            trigger: card,
-            start: 'top 78%',
-            end: 'top 38%',
-            scrub: 0.85,
-          },
-        });
-      });
 
       root.querySelectorAll('.work-card__frame').forEach((frame) => {
         gsap.fromTo(

@@ -4,10 +4,10 @@ import { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 
 const LINKS = [
-  { label: 'Work', href: '#work' },
-  { label: 'Services', href: '#services' },
-  { label: 'Studio', href: '#studio' },
-  { label: 'Process', href: '#process' },
+  { label: 'Projects', href: '#work' },
+  { label: 'Expertise', href: '#services' },
+  { label: 'About', href: '#studio' },
+  { label: 'Approach', href: '#process' },
 ];
 
 export default function Nav() {

@@ -14,16 +14,16 @@ const TESTIMONIALS = [
   {
     avatar: '/images/star_test.webp',
     quote:
-      '"Specialized in Orthodontics & Comprehensive Dental Care. With 18+ years of clinical & academic experience, we are dedicated to crafting perfect smiles, providing advanced orthodontic treatments and personalized clinical care with the highest standards of safety and comfort for all our patients."',
-    name: 'Dr. Manjunath Reddy',
-    title: 'Orthodontist & Comprehensive Dental Care',
+      '"Great experience working with ARAVIND. They did a solid job building my website - the code is clean, the site is functional, and they were easy to communicate with throughout the development process. Very happy with the outcome and would work with them again."',
+    name: 'Dr. Manjunatha Reddy',
+    title: 'Orthodontist & Aligner Expert',
     avatarPosition: 'center 20%',
     bgPosition: 'center 20%',
   },
   {
     avatar: '/images/pratej_test.webp',
     quote:
-      '"Pediatric Dentist, Root canal specialist, Aligners provider. BDS, MDS (Paediatric Dentistry) providing gentle dental care. We specialize in child-friendly dentistry, advanced orthodontic aligners, and painless root canal treatments, ensuring your child\'s dental journey is positive, comfortable, and stress-free."',
+      '"A wonderful experience working with Mr.Aravind. He was attentive to every detail I mentioned, communicated clearly throughout the project, and delivered a professional, well-designed website that exceeded my expectations. I highly recommend their services."',
     name: 'Dr. K Pratej Kiran',
     title: 'Pediatric Dentist & Root Canal Specialist',
     avatarPosition: 'center top',
@@ -32,16 +32,16 @@ const TESTIMONIALS = [
   {
     avatar: '/images/sphoorthi_test.jpeg',
     quote:
-      '"Specialized in premium interior design, crafting bespoke and functional spatial layouts for modern living. We combine clean aesthetics, premium materials, and smart spacing solutions to design and transform your residential and commercial environments into stunning, personalized works of art."',
+      '"Highly impressed with Aravind and the team! They built a stunning, high-performance portfolio website for Sphoorthi Interiors. The layout is elegant, it presents our design work beautifully, and it has already started converting enquiries. Very professional, responsive, and highly recommended!"',
     name: 'Venkateshwarlu Kompelli',
-    title: 'Interior Designer',
+    title: 'Interior Designer · Sphoorthi Interiors',
     avatarPosition: 'center top',
     bgPosition: 'center top',
   },
   {
     avatar: '/images/gowri_test.webp',
     quote:
-      '"Prosthodontist and Implantologist, BPS Provider and TMJ Specialist. BDS, MDS restoring confident smiles with top precision. We focus on advanced dental implants, highly cosmetic BPS dentures, and therapeutic management of complex TMJ disorders, bringing back fully functional and beautiful smiles."',
+      '"Excellent service by Mr. Aravind! The whole team was very professional, responsive, and delivered a clean, modern website exactly as requested. They understood my requirements well, completed the project on time, and provided great support throughout. Highly recommended for anyone looking for reliable and quality website development."',
     name: 'Dr. N Sri Gowri',
     title: 'Prosthodontist & TMJ Specialist',
     avatarPosition: 'center 20%',
@@ -75,11 +75,11 @@ export default function Testimonials() {
           min-width: 0;
           background-color: #ffffff;
           border-radius: 20px;
-          padding: 32px;
+          padding: 32px 32px 20px 32px;
           display: flex;
           flex-direction: column;
           justify-content: space-between;
-          min-height: 340px;
+          min-height: 310px;
           transition: all 0.5s cubic-bezier(0.65, 0, 0.35, 1);
         }
         .testi-card__img {
@@ -174,8 +174,8 @@ export default function Testimonials() {
           {TESTIMONIALS.map((t, i) => (
             <div
               key={i}
-              className="testi-card flex-1 min-w-0 bg-white rounded-[20px] p-8 flex flex-col justify-between"
-              style={{ minHeight: '340px' }}
+              className="testi-card flex-1 min-w-0 bg-white rounded-[20px] pt-8 px-8 pb-5 flex flex-col justify-between"
+              style={{ minHeight: '310px' }}
             >
               {/* Hover bg image */}
               <img src={t.avatar} alt="" aria-hidden="true" className="testi-card__img" style={{ objectPosition: t.bgPosition || 'center top' }} />
@@ -187,7 +187,7 @@ export default function Testimonials() {
                 <div className="testi-card__avatar w-11 h-11 rounded-full overflow-hidden mb-7 border border-black/10" style={{ flexShrink: 0 }}>
                   <img src={t.avatar} alt={t.name} className="w-full h-full" style={{ objectFit: 'cover', objectPosition: t.avatarPosition || 'center top' }} />
                 </div>
-                <p className="testi-card__quote text-[14px] leading-[1.68]" style={{ color: 'rgba(20,20,18,0.72)' }}>
+                <p className="testi-card__quote text-[13px] leading-[1.62]" style={{ color: 'rgba(20,20,18,0.72)' }}>
                   {t.quote}
                 </p>
               </div>
@@ -195,12 +195,17 @@ export default function Testimonials() {
               {/* Bottom — stays on hover, turns white */}
               <div className="testi-card__bottom mt-6">
                 <p
-                  className="testi-card__name cursive leading-tight mb-[5px]"
-                  style={{ fontSize: 'clamp(18px,1.6vw,24px)', color: '#141412' }}
+                  className="testi-card__name cursive leading-tight mb-[4px] whitespace-nowrap overflow-hidden text-ellipsis"
+                  style={{ fontSize: 'clamp(17px,1.4vw,22px)', color: '#141412' }}
+                  title={t.name}
                 >
                   {t.name}
                 </p>
-                <p className="testi-card__role text-[13px]" style={{ color: 'rgba(20,20,18,0.48)' }}>
+                <p 
+                  className="testi-card__role text-[12px] leading-snug min-h-[32px] line-clamp-2" 
+                  style={{ color: 'rgba(20,20,18,0.48)' }}
+                  title={t.title}
+                >
                   {t.title}
                 </p>
               </div>

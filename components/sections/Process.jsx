@@ -86,16 +86,18 @@ export default function Process() {
           <div className="process__track flex gap-[clamp(20px,3vw,40px)] will-change-transform max-[900px]:flex-col">
             {PROCESS_STEPS.map((s, i) => (
               <div
-                className="process-card flex w-[clamp(300px,34vw,480px)] flex-none flex-col gap-[clamp(40px,8vh,120px)] rounded-card border border-line bg-bg p-[clamp(28px,3vw,44px)] max-[900px]:w-full max-[900px]:gap-8"
+                className="process-card flex w-[clamp(300px,34vw,480px)] min-h-[280px] flex-none flex-col rounded-card border border-line bg-bg p-[clamp(28px,3vw,44px)] max-[900px]:w-full max-[900px]:min-h-0"
                 key={s.title}
               >
-                <span className="text-[15px] font-semibold tabular-nums text-accent">
+                <span className="text-[15px] font-semibold tabular-nums text-accent mb-5">
                   {String(i + 1).padStart(2, '0')} / 04
                 </span>
-                <h3 className="text-[clamp(30px,3.4vw,52px)] font-bold uppercase leading-none tracking-[-0.03em]">
+                <h3 className="text-[clamp(22px,2.4vw,36px)] font-bold uppercase leading-[1.15] tracking-[-0.02em] mb-4">
                   {s.title}
                 </h3>
-                <p className="text-[15px] leading-[1.65] text-ink-60">{s.body}</p>
+                <p className="text-[14px] leading-[1.6] text-ink-60">
+                  {s.body}
+                </p>
               </div>
             ))}
           </div>

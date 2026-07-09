@@ -7,14 +7,14 @@ export const PROJECTS = [
     year: '2025',
     description:
       'A modern dental practice website with refined UI, responsive layouts, and a patient-first experience built to build trust from the first scroll.',
-    gradient: 'linear-gradient(165deg, #F4FBF9 0%, #E3F5F0 45%, #C8EBE2 100%)',
-    theme: 'light',
+    gradient: 'linear-gradient(165deg, #091a16 0%, #153b32 45%, #2d6e5e 100%)',
+    theme: 'dark',
     url: 'https://www.pratejdentalcare.com',
     designUrl:
       'https://www.figma.com/design/ypOC4RlHSaATp7YSPYvGVg/Untitled?node-id=0-1&p=f&t=JnV8xrq9hbMJQRxr-0',
     mockups: {
-      laptop: '/images/pratej_web_nobg_mock.png',
-      mobile: '/images/pratej_mobile_mock_removedbg.png',
+      laptop: '/images/pratej_webmock.png',
+      mobile: '/images/mobile_mockup.png',
     },
   },
   {

@@ -197,7 +197,7 @@ export default function Services() {
         <div className="services__list">
           {SERVICES.map((s, i) => (
             <div
-              className="service-row group relative grid grid-cols-[80px_1fr] items-center gap-6 overflow-hidden border-t border-[rgba(242,239,233,0.16)] py-[clamp(56px,7.5vh,88px)] last:border-b last:border-[rgba(242,239,233,0.16)] max-[900px]:grid-cols-[44px_1fr] max-[900px]:gap-[14px]"
+              className="service-row group relative grid grid-cols-[80px_1fr] items-center gap-6 overflow-hidden border-t border-[rgba(242,239,233,0.16)] py-[clamp(36px,5vh,54px)] last:border-b last:border-[rgba(242,239,233,0.16)] max-[900px]:grid-cols-[44px_1fr] max-[900px]:gap-[14px]"
               key={s.title}
             >
               <div className="service-row__bg absolute inset-0 origin-top scale-y-0 bg-accent" />
@@ -212,7 +212,7 @@ export default function Services() {
                     alt=""
                     loading="lazy"
                     decoding="async"
-                    className="h-full w-full object-cover"
+                    className="absolute left-1/2 top-1/2 h-[80%] w-[80%] -translate-x-1/2 -translate-y-1/2 object-contain"
                   />
                 ) : (
                   <span className="text-[12px] font-semibold uppercase tracking-[0.2em] text-[rgba(255,255,255,0.92)]">
@@ -224,7 +224,7 @@ export default function Services() {
                 {String(i + 1).padStart(2, '0')}
               </span>
               <span className="relative z-[1] flex flex-col gap-[10px]">
-                <span className="text-[clamp(30px,4.6vw,68px)] font-bold uppercase leading-none tracking-[-0.03em] transition-transform duration-500 ease-brand group-hover:translate-x-4">
+                <span className="text-[clamp(24px,3.6vw,44px)] font-semibold uppercase leading-none tracking-[-0.03em] transition-transform duration-500 ease-brand group-hover:translate-x-4">
                   {s.title}
                 </span>
                 <span className="text-[13px] tracking-[0.06em] text-[rgba(242,239,233,0.5)] transition-colors duration-[400ms] group-hover:text-[rgba(255,255,255,0.85)]">

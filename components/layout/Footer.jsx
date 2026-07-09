@@ -103,10 +103,10 @@ export default function Footer() {
         <div>
           <h5 className={heading}>Sitemap</h5>
           <a href="#top" className={link}>Home</a>
-          <a href="#work" className={link}>Work</a>
-          <a href="#services" className={link}>Services</a>
-          <a href="#studio" className={link}>Studio</a>
-          <a href="#process" className={link}>Process</a>
+          <a href="#work" className={link}>Projects</a>
+          <a href="#services" className={link}>Expertise</a>
+          <a href="#studio" className={link}>About</a>
+          <a href="#process" className={link}>Approach</a>
         </div>
         <div>
           <h5 className={heading}>Socials</h5>
