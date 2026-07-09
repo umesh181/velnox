@@ -110,7 +110,7 @@ export default function CTA() {
 
   return (
     <section
-      className="relative mx-auto w-full overflow-hidden px-gutter pt-[clamp(40px,6vh,72px)] pb-[clamp(48px,8vh,96px)] text-center"
+      className="relative mx-auto w-full overflow-hidden px-gutter pt-[clamp(40px,6vh,72px)] pb-[clamp(20px,3vh,40px)] text-center"
       id="contact"
       ref={rootRef}
     >

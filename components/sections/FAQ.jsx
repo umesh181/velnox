@@ -49,7 +49,7 @@ export default function FAQ() {
 
   return (
     <section
-      className="mx-auto w-full px-gutter py-[clamp(90px,14vh,180px)]"
+      className="mx-auto w-full px-gutter pt-[clamp(30px,4vh,60px)] pb-[clamp(90px,14vh,180px)]"
       id="faq"
       ref={rootRef}
       aria-labelledby="faq-heading"
