@@ -1,5 +1,5 @@
 # ============================================================
-# VELNOX — sitemap.txt (human-readable review copy)
+# VELNOX - sitemap.txt (human-readable review copy)
 # Domain: https://velnox.work
 # Last updated: 2026-07-09
 #
@@ -24,25 +24,25 @@ CHANGE: weekly
 LAST MODIFIED: 2026-07-09
 
 URL: https://velnox.work/#services
-TYPE: Services section
+TYPE: Expertise section
 PRIORITY: 0.9
 CHANGE: monthly
 LAST MODIFIED: 2026-07-09
 
 URL: https://velnox.work/#work
-TYPE: Portfolio / projects
+TYPE: Projects section
 PRIORITY: 0.85
 CHANGE: monthly
 LAST MODIFIED: 2026-07-09
 
 URL: https://velnox.work/#studio
-TYPE: About the studio
+TYPE: About section
 PRIORITY: 0.8
 CHANGE: monthly
 LAST MODIFIED: 2026-07-09
 
 URL: https://velnox.work/#process
-TYPE: How we work
+TYPE: Approach section
 PRIORITY: 0.8
 CHANGE: monthly
 LAST MODIFIED: 2026-07-09

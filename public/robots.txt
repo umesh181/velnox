@@ -1,5 +1,5 @@
 # ============================================================
-# VELNOX — robots.txt
+# VELNOX - robots.txt
 # Domain: https://velnox.work
 # Last updated: 2026-07-09
 #

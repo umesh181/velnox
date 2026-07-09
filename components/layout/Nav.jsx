@@ -4,9 +4,9 @@ import { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 
 const LINKS = [
-  { label: 'Projects', href: '#work' },
-  { label: 'Expertise', href: '#services' },
   { label: 'About', href: '#studio' },
+  { label: 'Expertise', href: '#services' },
+  { label: 'Projects', href: '#work' },
   { label: 'Approach', href: '#process' },
 ];
 

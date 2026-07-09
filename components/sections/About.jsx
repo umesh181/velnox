@@ -72,7 +72,7 @@ export default function About() {
       ref={rootRef}
     >
       <div className="mb-[clamp(28px,4vh,48px)] flex items-end justify-between gap-6">
-        <p className="eyebrow">The Studio</p>
+        <p className="eyebrow">About</p>
         <span className="text-[13px] tabular-nums text-ink-40 whitespace-nowrap">
           (01)
         </span>

@@ -151,6 +151,10 @@ export default function Testimonials() {
           .testi-card {
             width: 100%;
           }
+          .testi-card__img {
+            object-fit: contain !important;
+            background-color: #141412;
+          }
         }
       `}</style>
 

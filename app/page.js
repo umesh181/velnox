@@ -40,8 +40,8 @@ export default function Home() {
         <Work />
         <Process />
         <Testimonials />
-        <FAQ />
         <CTA />
+        <FAQ />
       </main>
       <Footer />
     </SmoothScroll>

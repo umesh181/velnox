@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { onSectionGoto, revealElements } from '@/lib/sectionReveal';
@@ -43,6 +43,7 @@ const SERVICES = [
 
 export default function Services() {
   const rootRef = useRef(null);
+  const [activeRow, setActiveRow] = useState(-1);
 
   useEffect(() => {
     const root = rootRef.current;
@@ -183,7 +184,7 @@ export default function Services() {
       <div className="mx-auto w-full px-gutter py-[clamp(90px,14vh,180px)]">
         <div className="mb-[clamp(48px,8vh,96px)] flex items-end justify-between gap-6">
           <div>
-            <p className="eyebrow mb-6 text-cream-55">What we do</p>
+            <p className="eyebrow mb-6 text-cream-55">Expertise</p>
             <h2 className="section__title max-w-[18ch] text-[clamp(32px,5vw,76px)] font-medium leading-[1.08] tracking-[-0.03em]">
               Every service your brand needs
             </h2>
@@ -197,8 +198,18 @@ export default function Services() {
         <div className="services__list">
           {SERVICES.map((s, i) => (
             <div
-              className="service-row group relative grid grid-cols-[80px_1fr] items-center gap-6 overflow-hidden border-t border-[rgba(242,239,233,0.16)] py-[clamp(36px,5vh,54px)] last:border-b last:border-[rgba(242,239,233,0.16)] max-[900px]:grid-cols-[44px_1fr] max-[900px]:gap-[14px]"
+              className="service-row group relative grid grid-cols-[80px_1fr] items-center gap-6 overflow-hidden border-t border-[rgba(242,239,233,0.16)] py-[clamp(36px,5vh,54px)] last:border-b last:border-[rgba(242,239,233,0.16)] max-[900px]:grid-cols-[44px_1fr] max-[900px]:gap-[14px] cursor-pointer"
               key={s.title}
+              role="button"
+              tabIndex={0}
+              onClick={() => {
+                setActiveRow(activeRow === i ? -1 : i);
+              }}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  setActiveRow(activeRow === i ? -1 : i);
+                }
+              }}
             >
               <div className="service-row__bg absolute inset-0 origin-top scale-y-0 bg-accent" />
               <div
@@ -231,6 +242,34 @@ export default function Services() {
                   {s.tags}
                 </span>
               </span>
+
+              {/* Mobile inline preview */}
+              <div
+                className="hidden max-[900px]:block overflow-hidden transition-all duration-[400ms] ease-brand"
+                style={{
+                  gridColumn: '2',
+                  maxHeight: activeRow === i ? '220px' : '0px',
+                  opacity: activeRow === i ? 1 : 0,
+                  marginTop: activeRow === i ? '12px' : '0px',
+                }}
+              >
+                <div
+                  className="relative aspect-[16/10] w-full max-w-[280px] rounded-lg overflow-hidden border border-[rgba(242,239,233,0.12)]"
+                  style={s.image ? undefined : { background: s.gradient }}
+                >
+                  {s.image ? (
+                    <img
+                      src={s.image}
+                      alt={s.title}
+                      className="absolute left-1/2 top-1/2 h-[80%] w-[80%] -translate-x-1/2 -translate-y-1/2 object-contain"
+                    />
+                  ) : (
+                    <div className="absolute inset-0 flex items-center justify-center text-[11px] font-semibold uppercase tracking-[0.2em] text-cream-55">
+                      {s.title}
+                    </div>
+                  )}
+                </div>
+              </div>
             </div>
           ))}
         </div>
