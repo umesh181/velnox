@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -19,6 +19,7 @@ const TESTIMONIALS = [
     title: 'Orthodontist & Aligner Expert',
     avatarPosition: 'center 20%',
     bgPosition: 'center 20%',
+    mobileBgPosition: 'center 28%',
   },
   {
     avatar: '/images/pratej_test.webp',
@@ -28,6 +29,7 @@ const TESTIMONIALS = [
     title: 'Pediatric Dentist & Root Canal Specialist',
     avatarPosition: 'center top',
     bgPosition: 'center top',
+    mobileBgPosition: 'center 22%',
   },
   {
     avatar: '/images/sphoorthi_test.jpeg',
@@ -37,6 +39,7 @@ const TESTIMONIALS = [
     title: 'Interior Designer · Sphoorthi Interiors',
     avatarPosition: 'center top',
     bgPosition: 'center top',
+    mobileBgPosition: 'center 38%',
   },
   {
     avatar: '/images/gowri_test.webp',
@@ -46,11 +49,17 @@ const TESTIMONIALS = [
     title: 'Prosthodontist & TMJ Specialist',
     avatarPosition: 'center 20%',
     bgPosition: 'center 20%',
+    mobileBgPosition: 'center 28%',
   },
 ];
 
 export default function Testimonials() {
   const rootRef = useRef(null);
+  const [activeIndex, setActiveIndex] = useState(null);
+  const handleCardToggle = (index) => {
+    if (!window.matchMedia('(hover: none)').matches) return;
+    setActiveIndex((current) => (current === index ? null : index));
+  };
 
   useEffect(() => {
     // No animations for now to guarantee rendering
@@ -81,6 +90,7 @@ export default function Testimonials() {
           justify-content: space-between;
           min-height: 310px;
           transition: all 0.5s cubic-bezier(0.65, 0, 0.35, 1);
+          -webkit-tap-highlight-color: transparent;
         }
         .testi-card__img {
           position: absolute;
@@ -92,6 +102,7 @@ export default function Testimonials() {
           opacity: 0;
           transition: opacity 0.5s cubic-bezier(0.65, 0, 0.35, 1);
           z-index: 0;
+          background-color: #141412;
         }
         .testi-card__overlay {
           position: absolute;
@@ -122,7 +133,7 @@ export default function Testimonials() {
           transition: color 0.4s ease;
         }
 
-        /* Hover — desktop only (touch tap was leaving black letterbox gaps) */
+        /* Hover — desktop only */
         @media (hover: hover) and (pointer: fine) {
           .testi-card:hover .testi-card__img {
             opacity: 1;
@@ -146,6 +157,39 @@ export default function Testimonials() {
           }
         }
 
+        /* Tap reveal — touch devices (avoids sticky :hover glitches) */
+        @media (hover: none) {
+          .testi-card {
+            cursor: pointer;
+          }
+          .testi-card--active {
+            aspect-ratio: 4 / 5;
+            min-height: 0;
+            width: 100%;
+            max-height: min(66vh, 500px);
+          }
+          .testi-card--active .testi-card__img {
+            opacity: 1;
+          }
+          .testi-card--active .testi-card__overlay {
+            opacity: 1;
+          }
+          .testi-card--active .testi-card__quote {
+            opacity: 0;
+            transform: translateY(-12px);
+          }
+          .testi-card--active .testi-card__avatar {
+            opacity: 0;
+            transform: translateY(-8px);
+          }
+          .testi-card--active .testi-card__name {
+            color: #ffffff !important;
+          }
+          .testi-card--active .testi-card__role {
+            color: rgba(255,255,255,0.65) !important;
+          }
+        }
+
         @media (max-width: 900px) {
           .testi-grid {
             flex-direction: column;
@@ -156,9 +200,20 @@ export default function Testimonials() {
             min-height: 0 !important;
             padding: 24px 22px 18px;
           }
-          .testi-card__img,
-          .testi-card__overlay {
-            display: none;
+          /* Portrait frame when image is revealed */
+          .testi-card--active {
+            aspect-ratio: 4 / 5;
+            min-height: 0 !important;
+            width: 100%;
+            max-height: min(66vh, 500px);
+            padding: 24px 22px 24px;
+          }
+          .testi-card--active .testi-card__img {
+            object-position: var(--bg-pos-mobile, center 30%);
+          }
+          .testi-card--active .testi-card__bottom {
+            margin-top: auto;
+            padding-top: 12px;
           }
           .testi-card__avatar {
             margin-bottom: 18px;
@@ -168,6 +223,22 @@ export default function Testimonials() {
           }
           .testi-card__name {
             white-space: normal;
+          }
+        }
+
+        @media (max-width: 900px) and (hover: hover) {
+          .testi-card:hover {
+            aspect-ratio: 4 / 5;
+            min-height: 0 !important;
+            max-height: min(66vh, 500px);
+            padding: 24px 22px 24px;
+          }
+          .testi-card:hover .testi-card__img {
+            object-position: var(--bg-pos-mobile, center 30%);
+          }
+          .testi-card:hover .testi-card__bottom {
+            margin-top: auto;
+            padding-top: 12px;
           }
         }
       `}</style>
@@ -192,7 +263,18 @@ export default function Testimonials() {
           {TESTIMONIALS.map((t, i) => (
             <div
               key={i}
-              className="testi-card flex-1 min-w-0 bg-white rounded-[20px] flex flex-col justify-between border border-line/60"
+              role="button"
+              tabIndex={0}
+              aria-pressed={activeIndex === i}
+              onClick={() => handleCardToggle(i)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  handleCardToggle(i);
+                }
+              }}
+              className={`testi-card flex-1 min-w-0 bg-white rounded-[20px] flex flex-col justify-between border border-line/60${activeIndex === i ? ' testi-card--active' : ''}`}
+              style={{ '--bg-pos-mobile': t.mobileBgPosition || t.bgPosition || 'center 30%' }}
             >
               {/* Hover bg image */}
               <img src={t.avatar} alt="" aria-hidden="true" className="testi-card__img" style={{ objectPosition: t.bgPosition || 'center top' }} />
