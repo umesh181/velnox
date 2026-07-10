@@ -9,23 +9,15 @@ import { onSectionGoto, revealElements } from '@/lib/sectionReveal';
 
 gsap.registerPlugin(ScrollTrigger);
 
-/* Bento grid placement — grid-column / grid-row per project's `size` key
-   (see data/projects.js). Same 6-slot layout/order as main; only the first
-   3 slots (b1, s1, s2) are filled with real projects for now — s3/b2/s4
-   stay reserved as empty placeholders until more work is added. */
-const SPAN = {
-  b1: 'col-[1/8] row-[1/3]',
-  s1: 'col-[8/13] row-[1/2]',
-  s2: 'col-[8/13] row-[2/3]',
-  s3: 'col-[1/6] row-[3/4]',
-  b2: 'col-[6/13] row-[3/5]',
-  s4: 'col-[1/6] row-[4/5]',
+const CARD_ASPECT = {
+  featured: 'aspect-[4/3] min-[901px]:aspect-[1.9/1]',
+  default: 'aspect-[4/3] min-[901px]:aspect-[3/2]',
 };
-
-const PLACEHOLDER_SLOTS = ['s3', 'b2', 's4'];
 
 function WorkCardVisual({ project }) {
   const { mockups, gradient } = project;
+  const position = mockups?.position || 'center center';
+  const anchorRight = mockups?.anchor === 'right';
 
   if (mockups?.laptop) {
     return (
@@ -54,32 +46,26 @@ function WorkCardVisual({ project }) {
   }
 
   return (
-    <div className="relative h-full w-full overflow-hidden rounded-card bg-ink" style={{ background: gradient }}>
+    <div
+      className="relative h-full w-full overflow-hidden rounded-card bg-ink"
+      style={{ background: gradient }}
+    >
       <img
         src={mockups.single}
         alt={`${project.name} mockup`}
         loading="lazy"
         decoding="async"
-        className={`work-card__img absolute inset-0 h-full w-full ${
-          mockups.cover
-            ? 'object-cover object-center'
-            : 'object-contain object-top p-5 sm:p-8'
+        className={`work-card__img absolute top-0 h-full object-cover ${
+          anchorRight ? 'right-0 w-[108%] max-w-none' : 'inset-0 w-full'
         }`}
+        style={{ objectPosition: position }}
       />
     </div>
   );
 }
 
-function WorkPlaceholderCard({ size }) {
-  return (
-    <div
-      aria-hidden="true"
-      className={`work-card__placeholder rounded-card border border-dashed border-line/60 bg-ink/[0.03] ${SPAN[size]} max-[900px]:hidden`}
-    />
-  );
-}
-
 function WorkGridCard({ project, index, onCardClick }) {
+  const featured = index === 0;
   const isExternal = !!project.url;
   const hasMultipleOptions = project.mockups && project.url && project.designUrl;
   const badgePathId = `work-badge-path-${index}`;
@@ -97,24 +83,24 @@ function WorkGridCard({ project, index, onCardClick }) {
       target={isExternal && !hasMultipleOptions ? '_blank' : undefined}
       rel={isExternal && !hasMultipleOptions ? 'noopener noreferrer' : undefined}
       onClick={handleClick}
-      className={`work-card group block [perspective:1000px] ${SPAN[project.size]} max-[900px]:col-[1/-1] max-[900px]:row-auto`}
+      className={`work-card group block min-w-0 [perspective:1000px]${featured ? ' min-[901px]:col-span-2' : ''}`}
     >
       {/* Rounding + clipping live on this static frame, never the transformed
           layer below — clip-masking a 3D-rotated element flashes square
           corners for a frame before the mask catches up. */}
-      <div className="work-card__frame relative h-full overflow-hidden rounded-card max-[900px]:aspect-[4/3] max-[900px]:h-auto">
+      <div className={`work-card__frame relative w-full ${featured ? CARD_ASPECT.featured : CARD_ASPECT.default} overflow-hidden rounded-card`}>
         <div className="work-card__media absolute inset-0 will-change-transform [transform-style:preserve-3d]">
-          <div className="absolute inset-0 transition-transform duration-700 [transition-timing-function:cubic-bezier(0.25,1,0.3,1)] group-hover:scale-[1.04]">
+          <div className="absolute inset-0">
             <WorkCardVisual project={project} />
           </div>
         </div>
 
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 z-[2] bg-gradient-to-t from-black/80 via-black/30 to-transparent px-[22px] pb-[18px] pt-16">
-          <div className="flex items-end justify-between gap-4 text-white">
-            <span className="text-[clamp(18px,1.8vw,26px)] font-bold tracking-[-0.02em]">
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 z-[2] bg-gradient-to-t from-black/95 via-black/55 to-transparent px-5 pb-5 pt-20 sm:px-[22px] sm:pb-[18px] sm:pt-16">
+          <div className="flex flex-col gap-1.5 sm:flex-row sm:items-end sm:justify-between sm:gap-4 text-white">
+            <span className="text-[clamp(17px,1.6vw,24px)] font-bold leading-tight tracking-[-0.02em]">
               {project.name}
             </span>
-            <span className="text-right text-[12px] text-[rgba(255,255,255,0.75)]">
+            <span className="text-[11px] leading-snug text-white/75 sm:max-w-[42%] sm:text-right sm:text-[12px]">
               {project.tags}
             </span>
           </div>
@@ -197,6 +183,7 @@ export default function Work() {
     if (canHover) {
       root.querySelectorAll('.work-card').forEach((card) => {
         const media = card.querySelector('.work-card__media');
+        if (!media) return;
         gsap.set(media, { transformPerspective: 900 });
         const rxTo = gsap.quickTo(media, 'rotationX', {
           duration: 0.5,
@@ -269,7 +256,7 @@ export default function Work() {
       </div>
 
       {/* work__grid + work-card + work-card__media are GSAP reveal / 3D-tilt hooks */}
-      <div className="work__grid mx-auto grid max-w-[min(1280px,100%)] grid-cols-12 auto-rows-[clamp(170px,26vh,260px)] gap-[clamp(14px,1.6vw,24px)] max-[900px]:auto-rows-auto">
+      <div className="work__grid mx-auto grid w-full max-w-[min(1400px,100%)] grid-cols-1 gap-[clamp(14px,1.8vw,26px)] min-[901px]:grid-cols-2">
         {PROJECTS.map((project, index) => (
           <WorkGridCard
             key={project.name}
@@ -278,12 +265,6 @@ export default function Work() {
             onCardClick={handleCardClick}
           />
         ))}
-        {/* Reserved bento slots (s3, b2, s4) for future projects — commented
-            out for now since they're empty; uncomment when more work lands.
-        {PLACEHOLDER_SLOTS.map((size) => (
-          <WorkPlaceholderCard key={size} size={size} />
-        ))}
-        */}
       </div>
 
       <div className="mt-[clamp(40px,6vh,64px)] flex justify-center">
