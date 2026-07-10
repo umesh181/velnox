@@ -12,31 +12,31 @@ const SERVICES = [
     title: 'Web Development',
     tags: 'ERP Solutions · CRM · Web Apps · Landing Pages',
     gradient: 'linear-gradient(135deg, #3440f0 0%, #8f9bff 60%, #d8dcff 100%)',
-    image: '/images/dev_service.webp',
+    image: '/images/webdev_ser.webp',
   },
   {
     title: 'Mobile Applications',
     tags: 'Android · iOS · Cross-Platform · Business Apps',
     gradient: 'linear-gradient(135deg, #14231c 0%, #3f6b4f 60%, #a8c8a0 100%)',
-    image: '/images/app_service.webp',
+    image: '/images/mob_ser.webp',
   },
   {
     title: 'UI/UX Design',
     tags: 'Wireframes · Prototypes · Design Systems · User Experience',
     gradient: 'linear-gradient(135deg, #c2410c 0%, #f97316 60%, #fed7aa 100%)',
-    image: '/images/web_design_service.webp',
+    image: '/images/uiux_ser.webp',
   },
   {
     title: 'AI & Automations',
     tags: 'AI Chatbots · AI Agents · Custom AI Apps',
     gradient: 'linear-gradient(135deg, #1a1a1a 0%, #4a4a52 60%, #b9b9c4 100%)',
-    image: '/images/commerce_serv.webp',
+    image: '/images/ai_ser.webp',
   },
   {
     title: 'Digital Marketing',
     tags: 'SEO · Social Media · Google Ads · Performance Marketing',
     gradient: 'linear-gradient(135deg, #4c1d95 0%, #7c3aed 60%, #ddd6fe 100%)',
-    image: '/images/seo_3d_image_thumb.webp',
+    image: '/images/digi_ser.webp',
   },
 ];
 
@@ -202,7 +202,7 @@ export default function Services() {
             >
               <div className="service-row__bg absolute inset-0 origin-top scale-y-0 bg-accent" />
               <div
-                className="service-row__media pointer-events-none absolute left-0 top-1/2 z-[2] grid w-[clamp(220px,19vw,300px)] place-items-center rounded-[14px] opacity-0 will-change-transform max-[900px]:hidden [@media(hover:none)]:hidden"
+                className="service-row__media pointer-events-none absolute left-0 top-1/2 z-[2] grid w-[clamp(190px,15vw,250px)] place-items-center rounded-[14px] opacity-0 will-change-transform max-[900px]:hidden [@media(hover:none)]:hidden"
                 style={s.image ? undefined : { background: s.gradient, aspectRatio: '4 / 3' }}
                 aria-hidden="true"
               >

@@ -2,23 +2,16 @@
 
 import { forwardRef } from 'react';
 
-const SHOWREEL_SRC = '/media/velnox_video.mp4';
+const SHOWREEL_SRC = 'https://player.cloudinary.com/embed/?cloud_name=dnf6zexsv&public_id=velnox_video_rtud9u&player[autoplay]=true&player[muted]=true&player[loop]=true&player[controls]=false';
 
 const MediaVideo = forwardRef(function MediaVideo({ className = '', ...props }, ref) {
   return (
-    <video
+    <iframe
       ref={ref}
       src={SHOWREEL_SRC}
-      loop
-      muted
-      playsInline
-      preload="none"
-      className={className}
-      onClick={(e) => e.stopPropagation()}
-      onError={(e) => {
-        // Prevent media error events from bubbling into React's runtime overlay.
-        e.stopPropagation();
-      }}
+      className={`${className} pointer-events-none`}
+      allow="autoplay; fullscreen"
+      frameBorder="0"
       {...props}
     />
   );

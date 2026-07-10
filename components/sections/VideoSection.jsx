@@ -22,12 +22,16 @@ export default function VideoSection() {
     const playVideo = () => {
       const video = videoRef.current;
       if (!video || !isPlaying) return;
+      if (typeof video.play !== 'function') return;
       if (video.readyState < 2) video.load();
       void video.play().catch(() => {});
     };
 
     const pauseVideo = () => {
-      videoRef.current?.pause();
+      const video = videoRef.current;
+      if (video && typeof video.pause === 'function') {
+        video.pause();
+      }
     };
 
     const ctx = gsap.context(() => {
@@ -101,7 +105,7 @@ export default function VideoSection() {
     e?.stopPropagation?.();
 
     const video = videoRef.current;
-    if (!video) return;
+    if (!video || typeof video.play !== 'function') return;
 
     if (isPlaying) {
       video.pause();
@@ -121,8 +125,7 @@ export default function VideoSection() {
       id="showreel"
     >
       <div
-        onClick={(e) => handlePlayPause(e)}
-        className="video-card group relative flex w-full cursor-pointer flex-col overflow-hidden rounded-[24px] border border-line/10 bg-black shadow-2xl will-change-[transform,opacity] h-[clamp(560px,88vh,1080px)] max-[900px]:h-auto"
+        className="video-card group relative flex w-full flex-col overflow-hidden rounded-[24px] border border-line/10 bg-black shadow-2xl will-change-[transform,opacity] h-[clamp(560px,88vh,1080px)] max-[900px]:h-auto"
       >
         <div className="relative min-h-0 flex-1 max-[900px]:h-[clamp(300px,52vh,420px)] max-[900px]:flex-none">
           <MediaVideo
@@ -141,25 +144,6 @@ export default function VideoSection() {
               Design Showreel // 2026
             </span>
           </div>
-
-          <button
-            onClick={(e) => {
-              e.stopPropagation();
-              handlePlayPause();
-            }}
-            className="absolute top-5 right-5 z-[3] pointer-events-auto flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-black/40 text-white backdrop-blur-md select-none transition-all duration-300 hover:bg-white hover:text-black hover:scale-105 sm:top-8 sm:right-8"
-            title={isPlaying ? 'Pause Video' : 'Play Video'}
-          >
-            {isPlaying ? (
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
-              </svg>
-            ) : (
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 24 24" className="translate-x-0.5">
-                <path d="M8 5v14l11-7z" />
-              </svg>
-            )}
-          </button>
 
           {/* Desktop: overlay caption on video */}
           <div className="pointer-events-none absolute inset-x-0 bottom-0 z-[2] max-[900px]:hidden">
