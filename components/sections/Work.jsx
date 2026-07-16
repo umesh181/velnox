@@ -65,7 +65,7 @@ function WorkCardVisual({ project }) {
 }
 
 function WorkGridCard({ project, index, onCardClick }) {
-  const featured = index === 0;
+  const featured = !!project.featured;
   const isExternal = !!project.url;
   const hasMultipleOptions = project.mockups && project.url && project.designUrl;
   const badgePathId = `work-badge-path-${index}`;
@@ -90,7 +90,7 @@ function WorkGridCard({ project, index, onCardClick }) {
           corners for a frame before the mask catches up. */}
       <div className={`work-card__frame relative w-full ${featured ? CARD_ASPECT.featured : CARD_ASPECT.default} overflow-hidden rounded-card`}>
         <div className="work-card__media absolute inset-0 will-change-transform [transform-style:preserve-3d]">
-          <div className="absolute inset-0 transition-transform duration-700 [transition-timing-function:cubic-bezier(0.25,1,0.3,1)] group-hover:scale-[1.04]">
+          <div className="absolute inset-0">
             <WorkCardVisual project={project} />
           </div>
         </div>
@@ -251,7 +251,7 @@ export default function Work() {
           <p className="eyebrow">Projects</p>
         </div>
         <span className="text-[13px] tabular-nums text-ink-40 whitespace-nowrap">
-          (03)
+          (0{PROJECTS.length})
         </span>
       </div>
 

@@ -59,7 +59,7 @@ export const metadata = {
         width: 1200,
         height: 630,
         alt: `${SITE.name} — Web design, app development & SEO agency`,
-        type: 'image/png',
+        type: 'image/webp',
       },
     ],
   },
@@ -72,9 +72,14 @@ export const metadata = {
     images: [SITE.defaultOgImage],
   },
   icons: {
-    icon: [{ url: '/icon.svg', type: 'image/svg+xml' }],
-    apple: '/icon.svg',
-    shortcut: '/icon.svg',
+    icon: [
+      { url: '/favicon.ico', sizes: '48x48', type: 'image/x-icon' },
+      { url: '/icon.png', sizes: '512x512', type: 'image/png' },
+    ],
+    apple: [
+      { url: '/apple-icon.png', sizes: '180x180', type: 'image/png' },
+    ],
+    shortcut: '/favicon.ico',
   },
   manifest: '/manifest.webmanifest',
   ...(SITE.googleSiteVerification

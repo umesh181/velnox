@@ -1,4 +1,4 @@
-/* Selected client work — three featured projects. */
+/* Selected client work — featured projects. */
 export const PROJECTS = [
   {
     name: 'Pratej Dental Care',
@@ -12,6 +12,7 @@ export const PROJECTS = [
     url: 'https://www.pratejdentalcare.com',
     designUrl:
       'https://www.figma.com/design/ypOC4RlHSaATp7YSPYvGVg/Untitled?node-id=0-1&p=f&t=JnV8xrq9hbMJQRxr-0',
+    featured: true,
     mockups: {
       single: '/images/pratej_lifestyle.webp',
       fit: 'cover',
@@ -49,6 +50,23 @@ export const PROJECTS = [
       single: '/images/gowri_mock.webp',
       fit: 'cover',
       position: 'center top',
+    },
+  },
+  {
+    name: 'Aurelia',
+    mark: 'AU',
+    tags: 'Website Development · Real Estate',
+    year: '2026',
+    description:
+      'A luxury real estate landing experience for Aurelia — premium 2, 3 & 4 BHK apartments in Kokapet, Hyderabad — designed for clarity, trust, and high-intent enquiries.',
+    gradient: 'linear-gradient(165deg, #0c1f1c 0%, #1a4540 48%, #3d7a70 100%)',
+    theme: 'dark',
+    url: 'https://real-estate-self-eight-60.vercel.app/',
+    featured: true,
+    mockups: {
+      single: '/images/realestate.webp',
+      fit: 'cover',
+      position: 'center center',
     },
   },
 ];
