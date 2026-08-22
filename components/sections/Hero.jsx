@@ -95,7 +95,7 @@ export default function Hero() {
 
         <h1 className="hero__title max-w-[20ch] text-[clamp(40px,6.4vw,96px)] font-bold uppercase leading-[0.98] tracking-[-0.045em] max-[900px]:text-[clamp(40px,10.4vw,64px)] max-[900px]:leading-[1.02]">
           <span className="mask-line">
-            <span>We builds digital</span>
+            <span>We build digital</span>
           </span>
           <span className="mask-line">
             <span>experiences that</span>
