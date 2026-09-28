@@ -94,23 +94,23 @@ export default function Footer() {
           <h5 className={heading}>Sitemap</h5>
           <a href="#top" className={link}>Home</a>
           <a href="#studio" className={link}>About</a>
-          <a href="#services" className={link}>Expertise</a>
-          <a href="#work" className={link}>Projects</a>
+          <a href="#services" className={link}>Services</a>
+          <a href="#work" className={link}>Work & Gallery</a>
           <a href="#process" className={link}>Approach</a>
           <a href="#faq" className={link}>FAQ</a>
         </div>
         <div>
-          <h5 className={heading}>Socials</h5>
-          <a href="https://instagram.com" target="_blank" rel="noreferrer" className={link}>Instagram</a>
-          <a href="https://linkedin.com" target="_blank" rel="noreferrer" className={link}>LinkedIn</a>
-          <a href="https://x.com" target="_blank" rel="noreferrer" className={link}>Twitter / X</a>
-          <a href="https://dribbble.com" target="_blank" rel="noreferrer" className={link}>Dribbble</a>
+          <h5 className={heading}>Services</h5>
+          <a href="#services" className={link}>Web Development</a>
+          <a href="#services" className={link}>Mobile Applications</a>
+          <a href="#services" className={link}>UI/UX Design</a>
+          <a href="#services" className={link}>AI & Automations</a>
+          <a href="#services" className={link}>Digital Marketing & SEO</a>
         </div>
         <div>
           <h5 className={heading}>Contact</h5>
-          <a href="mailto:agencyvelnox@gmail.com" className={link}>agencyvelnox@gmail.com</a>
-          <a href="tel:+918121821738" className={link}>+91 81218 21738</a>
-          <a href="tel:+917995619431" className={link}>+91 79956 19431</a>
+          <a href="mailto:velnox.work@gmail.com" className={link}>velnox.work@gmail.com</a>
+          <a href="tel:+918897552877" className={link}>+91 88975 52877</a>
           <a href="#contact" className={link}>Start a project</a>
         </div>
       </div>

@@ -1,7 +1,7 @@
 /* TEAM */
 Agency: Velnox Digital Agency
 Site: https://velnox.work
-Contact: agencyvelnox@gmail.com
+Contact: velnox.work@gmail.com
 Location: Worldwide (remote)
 
 /* THANKS */

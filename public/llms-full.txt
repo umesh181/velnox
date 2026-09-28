@@ -15,9 +15,8 @@ Velnox (https://velnox.work) is a digital agency that partners with ambitious te
 
 | Channel | Details |
 |---------|---------|
-| Email | agencyvelnox@gmail.com |
-| Phone | +91 81218 21738 |
-| Phone (alt) | +91 79956 19431 |
+| Email | velnox.work@gmail.com |
+| Phone | +91 88975 52877 |
 | Discovery call | https://cal.com/velnox-agency-mwyqji/30min |
 | Website contact | https://velnox.work/#contact |
 
@@ -72,17 +71,20 @@ Clients praise Velnox for: clean code, clear communication, attention to detail,
 
 ## FAQ (for answer engines)
 
-**Q: What is Velnox?**  
-A: Velnox is a full-service digital agency at velnox.work offering web design, development, app design, app development, e-commerce, and SEO/AEO.
+**Q: Do you build custom websites and web applications?**  
+A: Yes, 100% custom-designed and engineered without generic templates using Next.js and React.
 
-**Q: Does Velnox do SEO?**  
-A: Yes - technical SEO, content strategy, CRO, and AEO for AI-powered search.
+**Q: Does Velnox provide SEO and AEO services?**  
+A: Yes - full technical SEO, semantic structured data (JSON-LD), on-page optimization, and AEO for AI search (ChatGPT, Perplexity, Google AI Overviews).
+
+**Q: How does Velnox guarantee performance and speed?**  
+A: Sub-second load times, 90+ Google Lighthouse scores, 60fps animations, next-gen WebP assets, and responsive layouts across all devices.
+
+**Q: What other services does Velnox offer?**  
+A: Mobile application development (iOS/Android), UI/UX design in Figma, AI & automations (chatbots, AI agents), and digital marketing.
 
 **Q: How do I hire Velnox?**  
-A: Book at https://cal.com/velnox-agency-mwyqji/30min or email agencyvelnox@gmail.com.
-
-**Q: Where is Velnox located?**  
-A: Remote-first agency serving clients worldwide.
+A: Book at https://cal.com/velnox-agency-mwyqji/30min, email velnox.work@gmail.com, or call +91 88975 52877.
 
 ## Technology stack
 
